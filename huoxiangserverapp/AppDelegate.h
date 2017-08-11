@@ -16,7 +16,11 @@
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;
-
-
+/*
+ @相册显示视频
+ @允许网络下载图片
+ */
+//#warning mark - xxoo PHAssetMediaTypeVideo
+//networkAccessAllowed
 @end
 

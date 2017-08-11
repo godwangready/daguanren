@@ -1,0 +1,196 @@
+//
+//  PrefixHeader.pch
+//  huoxiangserverapp
+//
+//  Created by mc on 17/7/19.
+//  Copyright © 2017年 huoxiangTongWang. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "CMMUtility.h"
+#import "UIColor+Hex.h"
+#import <UIKit/UIKit.h>
+#import "WTMD5.h"
+#import "NSString+QT.h"
+#import <AFNetworking.h>
+#import "WTCJson.h"
+#import "TimeGet.h"
+#import "WTBase64.h"
+#import "WTNetRequest.h"
+#import "WTNewRequest.h"
+#import <MJRefresh.h>
+#import "SGLNavigationViewController.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define KscreeWidth [UIScreen mainScreen].bounds.size.width
+#define KscreeHeight [UIScreen  mainScreen].bounds.size.height
+
+//huoxiangkeji.1.V接口数据
+//#define RequestHeader @"http://47.92.127.101/raeapp/" 
+//#define RequestHeader @"http://192.168.0.100:8080"
+//#define RequestHeader @"http://47.92.127.101:8080/raeapp/"
+#define RequestHeader @"http://192.168.0.108:8080"
+
+//高德定位KEY
+#define GaoDeKey @"986ec71ce6bd89a82a9382207252e049"
+
+//固定接口参数
+#define AppKEY @"58dea4809353ed54"
+#define AppSecret @"fff9f5b258dea4809353ed54f0b538a8"
+
+//ali云服务器上传地址
+//#define ALIpullImageAndVideo @"http://192.168.0.100:8080/statics/uploadresource"
+#define ALIpullImageAndVideo @"http://192.168.0.108:8080/statics/uploadresource"
+
+//宏
+//认证状态
+#define CredentialsidentifyStatus @"identifyStatus"
+
+
+//注册
+#define RegistUrl @"/app/regist"
+//发送验证码
+#define SendMessage @"/app/securitycode"
+//修改密码
+#define ChangePW @"/app/changepwd"
+//忘记密码
+#define Forgetpwd @"/app/forgetpwd"
+//登录
+#define LoginUrl @"/app/login"
+//立即认证
+#define ApproveUrl @"/app/merchant/approve"
+//认证详情
+#define Credentials @"/app/merchant/credentials"
+//旧密码修改密码
+#define ChangePWWithOdlPW @"/app/changepwd"
+//修改营业时间
+#define Alterbusinesstime @"/app/merchant/alterbusinesstime"
+//修改门店信息
+#define Alterstore @"/app/merchant/alterstore"
+//查看所有产品
+#define Produclist @"/app/merchant/product/productlist"
+//查看所有下架产品
+#define Deleteproduct @"/app/merchant/product/deleteproduct"
+//店家添加商品
+#define Redactproduct @"/app/merchant/product/redactproduct"
+//修改昵称
+#define Changenickname @"/app/changenickname"
+//技师管理统一接口
+#define TeacherList @"/app/merchant/server/bindinglist"
+//商家推荐取消推荐
+#define RecommendTeacher @"/app/merchant/server/recommendserver"
+//修改技师编号
+#define Alterservernamer @"/app/merchant/server/alterservernamer"
+//商家绑定技师解绑
+#define Bindingstatus @"/app/merchant/server/bindingstatus"
+//删除技师申请列表
+#define Hideshow @"/app/merchant/server/hideshow"
+
+
+
+//注册通知
+//技师推荐
+#define NsnotficationJiShiTuiJian @"jishituijian"
+//技师取消推荐
+#define NsnotficationJishiCancleTuijian @"canclejishituijian"
+//技师编号
+#define NsNotficationJishibianhao @"jishibianhao"
+//添加商品成功
+#define NsNotficationAddProduct @"addproduct"
+//更新昵称
+#define NsNotficationRefreshName @"refreshname"
+//删除门店认证多余图片
+#define NsNotficationDeleteImage @"deleteimage"
+//技师绑定同意
+#define NsnotificationAgreeTeacherBinding @"agreeteacherbinding"
+//技师绑定同意成功
+#define NsnotificationAgreeTeacherBindingSuccess @"agreeteacherbindingsuccess"
+//详细地址页面
+#define NsnotificationDetailAddress @"detailaddress"
+
+
+// 错误信息
+#define kNetWorErrorMsg      @"message"
+
+// 判断对象是否为空
+// 字符串
+#define QM_IS_STR_NIL(objStr) (![objStr isKindOfClass:[NSString class]] || objStr == nil || [objStr length] <= 0)
+// 字典
+#define QM_IS_DICT_NIL(objDict) (![objDict isKindOfClass:[NSDictionary class]] || objDict == nil || [objDict count] <= 0)
+// 数组
+#define QM_IS_ARRAY_NIL(objArray) (![objArray isKindOfClass:[NSArray class]] || objArray == nil || [objArray count] <= 0)
+// float
+#define QM_IS_FLOAT_NIL(objFloat) (objFloat == nil)
+// 判断delegate是否响应某个selector
+#define QM_IS_DELEGATE_RSP_SEL(iDel, iSel) (iDel != nil && [iDel respondsToSelector:@selector(iSel)])
+
+
+//相对于5s的宽高比例缩放基数
+#define k5sVersusWidth [UIScreen mainScreen].bounds.size.width/320
+#define k5sVersusHight [UIScreen mainScreen].bounds.size.hight/568
+//相对于6s的宽高等比例缩放基数
+#define k6sVersusWidth [UIScreen mainScreen].bounds.size.width/375
+#define k6sVersusHight [UIScreen mainScreen].bounds.size.hight/667
+//相对于6splus的宽高等比例缩放基数
+#define k6splusVersusWidth [UIScreen mainScreen].bounds.size.width/414
+#define k6splusVersusHight [UIScreen mainScreen].bounds.size.hight/736
+
+//手机序列号
+#define kidentifierNumber  [UIDevice currentDevice].identifierForVendor.UUIDString
+//[[UIDevice currentDevice].identifierForVendor UUIDString] ;
+//手机别名： 用户定义的名称
+#define kuserPhoneName  [[UIDevice currentDevice] name];
+
+//设备名称
+#define kdeviceName  [[UIDevice currentDevice] systemName];
+
+//手机系统版本
+#define kphoneVersion  [[UIDevice currentDevice] systemVersion];
+
+//手机型号
+#define kphoneModel  [[UIDevice currentDevice] model];
+
+//地方型号  （国际化区域名称）
+#define klocalPhoneModel  [[UIDevice currentDevice] localizedModel];
+
+// 当前应用名称
+#define kappCurName  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+
+// 当前应用软件版本  比如：1.0.1
+#define kappCurVersion  [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+
+// 当前应用版本号码   int类型
+#define kappCurVersionNum  [infoDictionary objectForKey:@"CFBundleVersion"];
+
+
+//每页数据量
+#define kpageMum @"20"
+
+//评论页数据量
+#define kcommentPageNum @"10"
+
+//微信社会化分享
+#define kwechatId @"wx75bfc339a351c507"
+#define kwechatSecret @"22a92e11a8105a235d4c74a059b1b347"
+
+//新浪社会化分享
+#define ksinaId @"3634924672"
+#define ksinaSecret @"289d8ca33b979fc2f28db472611239bc"
+
+//QQ社会化分享
+#define kqqId @"1105240841"
+#define kqqKey @"zRIAqpIU19lyagGQ"
+//友盟
+//#define kumengKey @"5806ed8067e58ea052000a59"
+//wtc是加在后面测试用的
+#define kumengKey @"5704a626e0f55a250300155fwtc"
+
+//个推
+#define kGtAppId           @"Pijfa8aYRH68P5Lj6tHuL1"
+#define kGtAppKey          @"UP70smL7P99d9Meju7wFj8"
+#define kGtAppSecret       @"mbPzsrQ0o1A7BWFffgZVU6"
+
+#endif /* PrefixHeader_pch */
