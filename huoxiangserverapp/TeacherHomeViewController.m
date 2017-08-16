@@ -38,6 +38,7 @@
 - (void) startPlay {
 //    [self choosevideo];
     [self readyGo];
+//    [self startvideo];
 }
 - (void)readyGo {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -142,6 +143,8 @@
 //录制视频
 - (void)startvideo
 {
+    //Privacy - Camera Usage Description
+    //NSMicrophoneUsageDescription
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
     NSArray *availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];//Camera所支持的Media格式都有哪些,共有两个分别是@"public.image",@"public.movie"

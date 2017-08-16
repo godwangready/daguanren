@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 
+//typedef void(^backValue)(NSDictionary *dict);
 @interface AddCommityViewController : BaseViewController
 @property (nonatomic, strong) NSString *productID;
+//@property (nonatomic, copy) backValue backvalue;
 @end

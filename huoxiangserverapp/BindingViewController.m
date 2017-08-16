@@ -87,7 +87,7 @@ static NSString *cellid = @"bindingcell";
         });
         NSLog(@"%@", data);
     } failure:^(NSError *error) {
-        
+        [listTV.mj_header endRefreshing];
     }];
     
 }
@@ -131,7 +131,7 @@ static NSString *cellid = @"bindingcell";
                   });
                 }
     } failure:^(NSError *error) {
-        
+        [listTV.mj_header endRefreshing];
     }];
 }
 #pragma mark - UITableViewDelegate , UITableViewDataSource

@@ -22,8 +22,14 @@
 #import "WTNewRequest.h"
 #import <MJRefresh.h>
 #import "SGLNavigationViewController.h"
+#import <UIImageView+WebCache.h>
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+/*
+ NSCameraUsageDescription
+ */
 
 #define KscreeWidth [UIScreen mainScreen].bounds.size.width
 #define KscreeHeight [UIScreen  mainScreen].bounds.size.height
@@ -88,6 +94,16 @@
 #define Bindingstatus @"/app/merchant/server/bindingstatus"
 //删除技师申请列表
 #define Hideshow @"/app/merchant/server/hideshow"
+//消息类型统一接口
+#define Messagetype @"/app/message/messagetype"
+//增值服务类型
+#define Chargestype @"/app/charges/chargestype"
+//增值服务详情
+#define Chargeslist @"/app/charges/chargeslist"
+
+
+
+
 
 
 
@@ -110,6 +126,10 @@
 #define NsnotificationAgreeTeacherBindingSuccess @"agreeteacherbindingsuccess"
 //详细地址页面
 #define NsnotificationDetailAddress @"detailaddress"
+//开始购买服务
+#define NsnotificationStartPayServices @"StartPayServices"
+
+
 
 
 // 错误信息

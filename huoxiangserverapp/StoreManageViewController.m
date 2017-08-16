@@ -179,6 +179,26 @@ static NSString *cellid = @"pickcell";
 }
 #pragma mark - 循环发送图片
 - (void)postStoreMessagehahha {
+    if (nameTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入店铺名称"];
+        return;
+    }
+    if (phoneTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入手机号码"];
+        return;
+    }
+    if (noteTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入店铺公告"];
+        return;
+    }
+    if ([self.tapMapLabel.text isEqualToString:@"点我选择地址"]) {
+        [CMMUtility showFailureWith:@"请选择地址"];
+        return;
+    }
+    if (self.dataArray.count < 2) {
+        [CMMUtility showFailureWith:@"请上传至少一张商品展示图"];
+        return;
+    }
     sendbutton.userInteractionEnabled = NO;
     for (int i = 0; i < _dataArray.count - 1; i++) {
 //        UIImage *image = [UIImage imageNamed:@"one.png"];
@@ -252,7 +272,7 @@ static NSString *cellid = @"pickcell";
                     break;
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
+            [CMMUtility showFailureWith:@"上传失败服务器故障"];
         }];
     }
 }
@@ -270,10 +290,16 @@ static NSString *cellid = @"pickcell";
         [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
         [WTNewRequest postWithURLString:[self createRequestUrl:Alterstore] parameters:outDict success:^(NSDictionary *data) {
             sendbutton.userInteractionEnabled = YES;
-            if ([data objectForKey:@"resCode"]) {
+            if ([[data objectForKey:@"resCode"] integerValue] == 100) {
                 _imageAdress = nil;
                 _index = 0;
                 [CMMUtility showSucessWith:@"上传成功"];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setObject:[NSString stringWithFormat:@"%@", nameTF.text] forKey:@"nickname"];
+                [user synchronize];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NsNotficationRefreshName object:nil];
+                self.pullIconImage([self.dataArray firstObject]);
+                [self.navigationController popViewControllerAnimated:YES];
             }else {
                 _imageAdress = nil;
                 _index = 0;
@@ -282,7 +308,7 @@ static NSString *cellid = @"pickcell";
 
         } failure:^(NSError *error) {
             sendbutton.userInteractionEnabled = YES;
-            [CMMUtility showFailureWith:@"请检查网络"];
+            [CMMUtility showFailureWith:@"服务器故障"];
         }];
 }
 #pragma mark - 赋值location
@@ -467,8 +493,8 @@ static NSString *cellid = @"pickcell";
 #warning mark -
 - (void) imagePickAction {
     LLImagePickerController *navigationController = [[LLImagePickerController alloc] init];
-    navigationController.autoJumpToPhotoSelectPage = YES;
-    navigationController.allowSelectReturnType = YES;
+    navigationController.autoJumpToPhotoSelectPage = NO;
+    navigationController.allowSelectReturnType = NO;
     navigationController.maxSelectedCount = 4;
     if (iOS8Upwards) {
         [navigationController getSelectedPHAssetsWithBlock:^(NSArray<UIImage *> *imageArray, NSArray<PHAsset *> *assetsArray) {

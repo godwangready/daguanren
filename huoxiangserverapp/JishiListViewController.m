@@ -69,7 +69,7 @@ static NSString *cellid = @"jishilistcell";
         });
         NSLog(@"%@", data);
     } failure:^(NSError *error) {
-        
+        [listTV.mj_header endRefreshing];
     }];
 
 }
@@ -100,7 +100,7 @@ static NSString *cellid = @"jishilistcell";
         });
         NSLog(@"%@", data);
     } failure:^(NSError *error) {
-        
+        [listTV.mj_header endRefreshing];
     }];
 }
 - (void) agreeTeacherBinding {

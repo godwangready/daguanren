@@ -11,7 +11,8 @@
 
 
 @interface DetailCommityViewController : BaseViewController
-typedef void(^byValue)(NSString *string);
+typedef void(^byValue)(NSDictionary *dict);
 @property (nonatomic, copy) byValue passValue;
 
+@property (nonatomic, strong) NSDictionary *valueDict;
 @end

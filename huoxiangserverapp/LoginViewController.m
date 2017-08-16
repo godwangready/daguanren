@@ -105,6 +105,7 @@
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"userId"]] forKey:@"userid"];
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"appToken"]] forKey:@"apptoken"];
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"nickName"]] forKey:@"nickname"];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"headPortrait"]] forKey:@"headimage"];
             [userID synchronize];
             if ([[dataDict objectForKey:@"roleId"] integerValue] == 2) {
                 /*

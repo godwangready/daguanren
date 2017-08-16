@@ -163,7 +163,7 @@ static NSString *cellid = @"managementcell";
     UITableViewRowAction *change = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"修改" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         ManageModel *model = _dataSource[indexPath.row];
         AddCommityViewController *vc = [[AddCommityViewController alloc] init];
-        vc.productID = model.productId;
+        vc.productID = [NSString stringWithFormat:@"%@", model.productId];
         [self.navigationController pushViewController:vc animated:YES];
 //        change.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     }];

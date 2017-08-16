@@ -12,6 +12,7 @@
 #import "JishiViewController.h"
 #import "StoreManagementViewController.h"
 #import "StoreManageViewController.h"
+#import "AddServicesViewController.h"
 
 #import "WSDatePickerView.h"
 #define UpButtonTag 10000
@@ -20,7 +21,7 @@
 //#define ButtonSizeHW
 @interface HomeViewController () {
     UIView *topView;
-    UIImageView *iconImage;
+    
     UILabel *nameLabel;
     UILabel *timeLable;
     UIButton *timeButton;
@@ -35,6 +36,7 @@
 @property (nonatomic, strong) NSString *endTime;
 @property (nonatomic, strong) NSString *postStartTime;
 @property (nonatomic, strong) NSString *postEndTime;
+@property (nonatomic, strong) UIImageView *iconImage;;
 @end
 
 @implementation HomeViewController
@@ -43,20 +45,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"f0f2f8"]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNameAction) name:NsNotficationRefreshName object:nil];
     [self setTopView];
     [self setlayout];    
+}
+- (void) changeNameAction {
+    NSUserDefaults *userDF = [NSUserDefaults standardUserDefaults];
+        nameLabel.text = [NSString stringWithFormat:@"%@", [userDF objectForKey:@"nickname"]];
 }
 - (void) setTopView {
     topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KscreeWidth, 200)];
     topView.backgroundColor = [UIColor colorWithHexString:@"ff8042"];
     [self.view addSubview:topView];
-    iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(KscreeWidth / 2 - 30, 45, 60, 60)];
-    iconImage.image = [UIImage imageNamed:@"删除"];
-    iconImage.layer.masksToBounds = YES;
-    iconImage.layer.cornerRadius = 30;
-    [topView addSubview:iconImage];
+    _iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(KscreeWidth / 2 - 30, 45, 60, 60)];
+    NSUserDefaults *userDF = [NSUserDefaults standardUserDefaults];
+    [_iconImage sd_setImageWithURL:[NSURL URLWithString:[userDF objectForKey:@"headimage"]] placeholderImage:[UIImage imageNamed:@"删除"]];
+//    iconImage.image = [UIImage imageNamed:@"删除"];
+    _iconImage.layer.masksToBounds = YES;
+    _iconImage.layer.cornerRadius = 30;
+    [topView addSubview:_iconImage];
     nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, KscreeWidth, 30)];
-    nameLabel.text = @"天天足浴点";
+    if ([NSString stringWithFormat:@"%@", [userDF objectForKey:@"nickname"]].length != 0) {
+        nameLabel.text = [NSString stringWithFormat:@"%@", [userDF objectForKey:@"nickname"]];
+    }else {
+        nameLabel.text = @"天天足浴点";
+    }
     nameLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
@@ -259,6 +272,10 @@
         case 10000:
         {
             StoreManageViewController *vc = [[StoreManageViewController alloc] init];
+            __weak HomeViewController *weakself = self;
+            vc.pullIconImage = ^(UIImage *image) {
+                weakself.iconImage.image = image;
+            };
 //            StoreManagementViewController *vc = [[StoreManagementViewController alloc] initWithNibName:@"StoreManagementViewController" bundle:nil];
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -283,7 +300,8 @@
             break;
         case 20001:
         {
-            
+            AddServicesViewController *vc = [[AddServicesViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 20002:

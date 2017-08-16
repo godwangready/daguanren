@@ -298,6 +298,9 @@
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"userId"]] forKey:@"userid"];
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"appToken"]] forKey:@"apptoken"];
         [userID setObject:phoneNumber.text forKey:@"telephone"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"identifyStatus"]] forKey:CredentialsidentifyStatus];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"nickName"]] forKey:@"nickname"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"headPortrait"]] forKey:@"headimage"];
         [userID synchronize];
         
         if (_identityID.integerValue == 2) {

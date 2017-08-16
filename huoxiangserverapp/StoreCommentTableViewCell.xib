@@ -25,7 +25,7 @@
                             <constraint firstAttribute="width" constant="50" id="Sri-kt-QC3"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9月10号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxE-lM-PE4">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9月10号" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxE-lM-PE4">
                         <rect key="frame" x="358" y="15" width="100" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="ehb-5I-SgK"/>
@@ -50,8 +50,8 @@
                             <constraint firstAttribute="height" constant="21" id="49E-97-5Nt"/>
                             <constraint firstAttribute="width" constant="42" id="6FO-cw-DbB"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="星" translatesAutoresizingMaskIntoConstraints="NO" id="EWA-Sb-xvp">
@@ -89,20 +89,20 @@
                             <constraint firstAttribute="width" constant="15" id="RIY-Q8-dlu"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="装修不错" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIR-3Y-skf">
-                        <rect key="frame" x="80" y="90" width="378" height="97"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺环节不错，装修不错，物有所值，下次还来，超级棒,哈哈哈哈哈" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIR-3Y-skf">
+                        <rect key="frame" x="80" y="90" width="378" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t61-E7-UFH">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浏览200次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t61-E7-UFH">
                         <rect key="frame" x="80" y="207" width="100" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Lff-fE-raS"/>
                             <constraint firstAttribute="width" constant="100" id="SRq-sH-jPa"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zL-up-Tee">
@@ -111,7 +111,13 @@
                             <constraint firstAttribute="width" constant="60" id="JKo-hn-Zn7"/>
                             <constraint firstAttribute="height" constant="30" id="qEn-kQ-jmo"/>
                         </constraints>
-                        <state key="normal" title="回复"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="回复">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="replyAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KIP-Ww-RmI"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -139,15 +145,25 @@
                     <constraint firstItem="DIR-3Y-skf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="80" id="jR7-HN-Raj"/>
                     <constraint firstItem="2qC-Rl-Rje" firstAttribute="top" secondItem="spC-yg-ha9" secondAttribute="bottom" constant="2" id="k05-eN-1dB"/>
                     <constraint firstItem="QXL-uG-L35" firstAttribute="leading" secondItem="kwN-8f-XO7" secondAttribute="trailing" constant="20" id="muW-b7-G7J"/>
-                    <constraint firstItem="4zL-up-Tee" firstAttribute="top" secondItem="DIR-3Y-skf" secondAttribute="bottom" constant="20" id="vuj-pQ-l8B"/>
                     <constraint firstItem="QXL-uG-L35" firstAttribute="top" secondItem="spC-yg-ha9" secondAttribute="bottom" id="wKQ-3d-nCQ"/>
                     <constraint firstItem="xxE-lM-PE4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="ySh-OF-txL"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="iconImage" destination="kwN-8f-XO7" id="HMR-6M-wfb"/>
+                <outlet property="markImage1" destination="EWA-Sb-xvp" id="4HL-Sz-51N"/>
+                <outlet property="markImage2" destination="12V-zM-FPu" id="VbW-Z4-Jbx"/>
+                <outlet property="markImage3" destination="fdH-By-bIz" id="PyN-kJ-pgi"/>
+                <outlet property="markImage4" destination="2qC-Rl-Rje" id="fu6-Sa-c1V"/>
+                <outlet property="markImage5" destination="m9d-Gv-MZ2" id="YMU-jo-Nd8"/>
+                <outlet property="markLabel" destination="QXL-uG-L35" id="r7S-3J-Bs6"/>
+                <outlet property="nameLabel" destination="spC-yg-ha9" id="dFJ-EF-YAH"/>
+                <outlet property="replyButton" destination="4zL-up-Tee" id="shc-Kn-sS7"/>
+                <outlet property="selectLabel" destination="t61-E7-UFH" id="qty-Dg-taG"/>
+                <outlet property="timeLabel" destination="xxE-lM-PE4" id="dNt-wX-pct"/>
                 <outlet property="usercomment" destination="DIR-3Y-skf" id="5e2-SY-GcE"/>
             </connections>
-            <point key="canvasLocation" x="104" y="69"/>
+            <point key="canvasLocation" x="-196" y="-112"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -62,7 +62,7 @@ static NSString *cellid = @"recordcell";
         });
         NSLog(@"%@", data);
     } failure:^(NSError *error) {
-        
+        [listTV.mj_header endRefreshing];
     }];
     
 }
@@ -79,7 +79,7 @@ static NSString *cellid = @"recordcell";
         //        }
         NSLog(@"%@", data);
     } failure:^(NSError *error) {
-        
+        [listTV.mj_header endRefreshing];
     }];
 }
 - (void)didReceiveMemoryWarning {

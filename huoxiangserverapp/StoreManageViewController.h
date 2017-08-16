@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
+typedef void(^changeIconImage)(UIImage *);
 @interface StoreManageViewController : BaseViewController
-
+@property (nonatomic, copy) changeIconImage pullIconImage;
 @end

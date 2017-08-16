@@ -78,6 +78,9 @@
     NSUserDefaults *userdef = [NSUserDefaults standardUserDefaults];
     [userdef setObject:@"" forKey:@"userid"];
     [userdef setObject:@"" forKey:@"apptoken"];
+    [userdef setObject:@"" forKey:CredentialsidentifyStatus];
+    [userdef setObject:@"" forKey:@"headimage"];
+    [userdef setObject:@"" forKey:@"nickName"];
     [userdef synchronize];
     LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     SGLNavigationViewController *nav = [[SGLNavigationViewController alloc] initWithRootViewController:login];

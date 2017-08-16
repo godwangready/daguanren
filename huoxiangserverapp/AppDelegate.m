@@ -42,10 +42,12 @@
  [self.window makeKeyAndVisible];
  */
     
+    //轮播
     LaunchIntroductionView *firstView = [LaunchIntroductionView sharedWithImages:@[@"one", @"two",@"one",@"two"] buttonImage:@"" buttonFrame:CGRectMake(KscreeWidth / 2, 400, 100, 30)];
 //    firstView.currentColor = [UIColor yellowColor];
 //    firstView.nomalColor = [UIColor orangeColor];
     
+    //判断是否永久登录
     NSUserDefaults *userid = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *apptoken = [NSUserDefaults standardUserDefaults];
     if ([NSString stringWithFormat:@"%@", [userid objectForKey:@"userid"]].length != 0 && [NSString stringWithFormat:@"%@", [apptoken objectForKey:@"apptoken"]] != 0) {

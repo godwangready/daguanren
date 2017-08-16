@@ -47,7 +47,7 @@
         [backbutton setImage:[UIImage imageNamed:@"返回-"] forState:UIControlStateNormal];
         [_clickBar addSubview:backbutton];
         storebutton = [UIButton buttonWithType:UIButtonTypeCustom];
-        storebutton.frame = CGRectMake((KscreeWidth / 2) - width - (width / 2), 24, width, height);
+        storebutton.frame = CGRectMake((KscreeWidth / 2) - width - (width / 2) + 8, 24, width, height);
         [storebutton addTarget:self action:@selector(setTopViewAction:) forControlEvents:UIControlEventTouchUpInside];
         [storebutton setBackgroundColor:[UIColor colorWithHexString:@"ff8042"]];
         storebutton.layer.masksToBounds = YES;
@@ -61,7 +61,7 @@
         storebutton.tag = _tag;
         [_clickBar addSubview:storebutton];
         userbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-        userbutton.frame = CGRectMake((KscreeWidth / 2) - (width / 2) - 2, 24, width, height);
+        userbutton.frame = CGRectMake((KscreeWidth / 2) - (width / 2) + 4, 24, width, height);
         [userbutton addTarget:self action:@selector(setTopViewAction:) forControlEvents:UIControlEventTouchUpInside];
         [userbutton setTitle:@"申请绑定" forState:UIControlStateNormal];
         userbutton.layer.masksToBounds = YES;
@@ -77,7 +77,7 @@
         threebutton = [UIButton buttonWithType:UIButtonTypeCustom];
          [threebutton addTarget:self action:@selector(setTopViewAction:) forControlEvents:UIControlEventTouchUpInside];
         [threebutton setTitle:@"解绑记录" forState:UIControlStateNormal];
-        threebutton.frame = CGRectMake((KscreeWidth / 2) + (width / 2) - 4, 24, width, height);
+        threebutton.frame = CGRectMake((KscreeWidth / 2) + (width / 2) , 24, width, height);
         [threebutton setBackgroundColor:[UIColor colorWithHexString:@"ffffff"]];
         [threebutton setTitleColor:[UIColor colorWithHexString:@"ff8042"] forState:UIControlStateNormal];
         threebutton.tag = _tag + 2;

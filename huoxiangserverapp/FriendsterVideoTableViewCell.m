@@ -1,14 +1,14 @@
 //
-//  StoreCommentTableViewCell.m
+//  FriendsterVideoTableViewCell.m
 //  huoxiangserverapp
 //
-//  Created by mc on 17/7/31.
+//  Created by mc on 17/8/14.
 //  Copyright © 2017年 huoxiangTongWang. All rights reserved.
 //
 
-#import "StoreCommentTableViewCell.h"
+#import "FriendsterVideoTableViewCell.h"
 
-@implementation StoreCommentTableViewCell
+@implementation FriendsterVideoTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,8 +19,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-- (IBAction)replyAction:(UIButton *)sender {
 }
 
 @end

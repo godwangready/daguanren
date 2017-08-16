@@ -56,6 +56,9 @@ static NSString *cellid = @"pickcell";
 }
 @property (nonatomic, copy) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITextField *locationTF;
+@property (nonatomic, strong) NSDictionary *detailDict;
+@property (nonatomic, strong) NSString *imageAdress;
+
 @end
 
 @implementation AddCommityViewController
@@ -63,7 +66,11 @@ static NSString *cellid = @"pickcell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
-    [self wtTopViewWithBackString:@"返回-" andTitlestring:@"新增商品"];
+    if (self.productID.length == 0) {
+        [self wtTopViewWithBackString:@"返回-" andTitlestring:@"新增商品"];
+    }else {
+        [self wtTopViewWithBackString:@"返回-" andTitlestring:@"修改商品"];
+    }
     // Do any additional setup after loading the view.
     [self setLayOut];
     postButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -237,11 +244,11 @@ static NSString *cellid = @"pickcell";
     return 1;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_dataArray.count >2) {
-        [CMMUtility showFailureWith:@"最多上传四张"];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_dataArray.count >=2) {
+        [CMMUtility showFailureWith:@"最多上传一张"];
         return;
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ((indexPath.row + 1) == _dataArray.count) {
         [self presentViewController:alert animated:YES completion:nil];
     }
@@ -302,18 +309,6 @@ static NSString *cellid = @"pickcell";
     //    }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 }
-//- (void) imagePiCK {
-//    for (int i = 0; i < _dataArray.count + 1; i++) {
-//        UIButton *imagePick = [UIButton buttonWithType:UIButtonTypeCustom];
-//        imagePick.frame = CGRectMake(120 + 40 * i + i * 10 , 155, 40, 40);
-//        [imagePick setBackgroundImage:[UIImage imageNamed:[_dataArray objectAtIndex:i]] forState:UIControlStateNormal];
-//        if (i == _dataArray.count) {
-//            [imagePick setBackgroundImage:[UIImage imageNamed:@"添加"] forState:UIControlStateNormal];
-//            [imagePick addTarget:self action:@selector(imagePickAction) forControlEvents:UIControlEventTouchUpInside];
-//        }
-//        [downView addSubview:imagePick];
-//    }
-//}
 #pragma pickimageDelegate
 //PickerImage完成后的代理方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
@@ -366,8 +361,8 @@ static NSString *cellid = @"pickcell";
 #warning mark -
 - (void) imagePickAction {
     LLImagePickerController *navigationController = [[LLImagePickerController alloc] init];
-    navigationController.autoJumpToPhotoSelectPage = YES;
-    navigationController.allowSelectReturnType = YES;
+    navigationController.autoJumpToPhotoSelectPage = NO;
+    navigationController.allowSelectReturnType = NO;
     navigationController.maxSelectedCount = 1;
     if (iOS8Upwards) {
         [navigationController getSelectedPHAssetsWithBlock:^(NSArray<UIImage *> *imageArray, NSArray<PHAsset *> *assetsArray) {
@@ -404,9 +399,11 @@ static NSString *cellid = @"pickcell";
 - (void)tapImageDetailAction {
     DetailCommityViewController *vc = [[DetailCommityViewController alloc] initWithNibName:@"DetailCommityViewController" bundle:nil];
     __weak AddCommityViewController *weakself = self;
-    vc.passValue = ^(NSString *str) {
-        weakself.locationTF.text = str;
+    vc.passValue = ^(NSDictionary *dict) {
+        NSLog(@"%@", dict);
+        weakself.detailDict = [NSDictionary dictionaryWithDictionary:dict];
     };
+    vc.valueDict = self.detailDict;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -418,46 +415,69 @@ static NSString *cellid = @"pickcell";
 - (void) detailAction {
     DetailCommityViewController *vc = [[DetailCommityViewController alloc] initWithNibName:@"DetailCommityViewController" bundle:nil];
     __weak AddCommityViewController *weakself = self;
-    vc.passValue = ^(NSString *str) {
-        weakself.locationTF.text = str;
+    vc.passValue = ^(NSDictionary *dict) {
+        NSLog(@"%@", dict);
+        weakself.detailDict = [NSDictionary dictionaryWithDictionary:dict];
     };
+    vc.valueDict = self.detailDict;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) saveAction {
-    postButton.userInteractionEnabled = NO;
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [dict setObject:@"" forKey:@"productId"];
-    if (_productID) {
-        [dict setObject:_productID forKey:@"productId"];
+    /*
+     取出商品详情参数
+     NSUserDefaults *userstoremessage = [NSUserDefaults standardUserDefaults];
+     [userstoremessage setObject:_startTime.titleLabel.text forKey:@"storestarttime"];
+     [userstoremessage setObject:_endTime.titleLabel.text forKey:@"storeendtime"];
+     [userstoremessage setObject:_fuwuTime.titleLabel.text forKey:@"storefuwutime"];
+     [userstoremessage setObject:_fuwuEndTime.titleLabel.text forKey:@"storefuwuendtime"];
+     [userstoremessage setObject:[NSString stringWithFormat:@"%@", _yuyueTF.text] forKey:@"storeyuyuemessage"];
+     [userstoremessage setObject:[NSString stringWithFormat:@"%@", _guizeTF.text] forKey:@"storerulemessage"];
+     [userstoremessage synchronize];
+     */
+//    NSUserDefaults *userdetailmessage = [NSUserDefaults standardUserDefaults];
+//    NSString *effectiveTimes = [NSString stringWithFormat:@"%@%@", [userdetailmessage objectForKey:@"storestarttime"], [userdetailmessage objectForKey:@"storeendtime"]];
+//    NSString *serviceTimes = [NSString stringWithFormat:@"%@%@",[userdetailmessage objectForKey:@"storefuwutime"],[userdetailmessage objectForKey:@"storefuwuendtime"]];
+//    NSString *appointment = [NSString stringWithFormat:@"%@", [userdetailmessage objectForKey:@"storeyuyuemessage"]];
+//    NSString *rule = [NSString stringWithFormat:@"%@", [userdetailmessage objectForKey:@"storerulemessage"]];
+
+    if (nameTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入商品名称"];
+        return;
     }
-    [dict setObject:[NSString stringWithFormat:@"%@", nameTF.text] forKey:@"productName"];
-    [dict setObject:[NSString stringWithFormat:@"%@", imageTF.text] forKey:@"price"];
-    [dict setObject:@"http:\\" forKey:@"productPicture"];
-    [dict setObject:@"1" forKey:@"productDetails"];
-    NSMutableDictionary *outDict = [self makeDict];
-    [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
-    [WTNewRequest postWithURLString:[self createRequestUrl:Redactproduct] parameters:outDict success:^(NSDictionary *data) {
-        postButton.userInteractionEnabled = YES;
-        NSLog(@"%@", data);
-        if (([[data objectForKey:@"resCode"] integerValue] == 100)) {
-            [CMMUtility showSucessWith:@"添加成功"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NsNotficationAddProduct object:nil];
-        }else {
-            [CMMUtility showFailureWith:@"添加失败"];
-        }
-//        [self.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSError *error) {
-        [CMMUtility showFailureWith:@"添加失败"];
-        postButton.userInteractionEnabled = YES;
-    }];
-    for (int i = 0; i < _dataArray.count; i++) {
-//        UIImage *imagee = [UIImage imageNamed:@"one.png"];
-//    UIImage *imageee = [UIImage imageNamed:@"two.png"];
-        NSData *data = UIImagePNGRepresentation([_dataArray objectAtIndex:i]);
-//        NSData *dataa = UIImageJPEGRepresentation([_dataArray objectAtIndex:i], .1);
-//    NSData *data = UIImagePNGRepresentation(imagee);
+    if (phoneTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入商品类型"];
+        return;
+    }
+    if (imageTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入简介"];
+        return;
+    }
+    if (noteTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入门店价"];
+        return;
+    }
+    if (_locationTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入平台价"];
+        return;
+    }
+    if (self.detailDict) {
+        NSLog(@"一切正常");
+    }else {
+        [CMMUtility showFailureWith:@"请填写商品详细信息"];
+        return;
+    }
+    if (self.dataArray.count < 2) {
+        [CMMUtility showFailureWith:@"请上传一张商品展示图"];
+        return;
+    }
+    NSLog(@"%@~%@", [self.detailDict objectForKey:@"message"], [self.detailDict objectForKey:@"rule"]);
+    postButton.userInteractionEnabled = NO;
+        NSData *data = UIImagePNGRepresentation([_dataArray objectAtIndex:0]);
+//    NSData *dataa = UIImageJPEGRepresentation([_dataArray objectAtIndex:i], .1);
 //    NSData *dataa = UIImagePNGRepresentation(imageee);
         AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+        manage.responseSerializer = [AFHTTPResponseSerializer serializer];
+        manage.requestSerializer = [AFHTTPRequestSerializer serializer];
 //        NSString *url = @"http://192.168.0.100:8080/statics/uploadresource";
         [manage POST:ALIpullImageAndVideo parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:data name:@"file" fileName:@"one.png" mimeType:@"png"];
@@ -467,10 +487,41 @@ static NSString *cellid = @"pickcell";
             NSLog(@"%@", uploadProgress);
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSLog(@"%@", responseObject);
+            NSString *body = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            _imageAdress = [NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:body] objectForKey:@"url"]];
+            [self saveTotleStoreMessage];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@", error.userInfo);
         }];
+}
+- (void) saveTotleStoreMessage {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dict setObject:@"" forKey:@"productId"];
+    if (_productID) {
+        [dict setObject:_productID forKey:@"productId"];
     }
+    [dict setObject:[NSString stringWithFormat:@"%@", nameTF.text] forKey:@"productName"];
+    [dict setObject:[NSString stringWithFormat:@"%@", imageTF.text] forKey:@"price"];
+    [dict setObject:[NSString stringWithFormat:@"%@", _imageAdress] forKey:@"productPicture"];
+    [dict setObject:[WTCJson dictionaryToJson:self.detailDict] forKey:@"productDetails"];
+    NSMutableDictionary *outDict = [self makeDict];
+    [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [WTNewRequest postWithURLString:[self createRequestUrl:Redactproduct] parameters:outDict success:^(NSDictionary *data) {
+        postButton.userInteractionEnabled = YES;
+        NSLog(@"%@", data);
+        if (([[data objectForKey:@"resCode"] integerValue] == 100)) {
+            [CMMUtility showSucessWith:@"添加成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NsNotficationAddProduct object:nil];
+            self.productID = @"";
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resCode"]]];
+        }
+        //        [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
+        [CMMUtility showFailureWith:@"服务器发生故障"];
+        postButton.userInteractionEnabled = YES;
+    }];
 
 }
 - (void)viewWillAppear:(BOOL)animated {

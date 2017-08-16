@@ -1,24 +1,25 @@
 //
-//  MessageViewController.m
+//  MessageDetailViewController.m
 //  huoxiangserverapp
 //
-//  Created by mc on 17/7/19.
+//  Created by mc on 17/8/14.
 //  Copyright © 2017年 huoxiangTongWang. All rights reserved.
 //
 
-#import "MessageViewController.h"
+#import "MessageDetailViewController.h"
 #import "MessageTableViewCell.h"
 #import "MessageView.h"
-#import "MessageDetailViewController.h"
 
 static NSString *cellid = @"messagecell";
-@interface MessageViewController ()<UITableViewDelegate, UITableViewDataSource> {
+
+@interface MessageDetailViewController ()<UITableViewDelegate, UITableViewDataSource> {
     UITableView *messageTableView;
 }
 @property (nonatomic, assign) NSInteger index;
+
 @end
 
-@implementation MessageViewController
+@implementation MessageDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,11 +31,15 @@ static NSString *cellid = @"messagecell";
     [self.view addSubview:topView];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((KscreeWidth / 2) - 50, 30, 100, 20)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = @"消息";
+    titleLabel.text = [NSString stringWithFormat:@"%@", _messageType];
     titleLabel.font = [UIFont fontWithName:@"PingFang Regular.ttf" size:18];
     titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [topView addSubview:titleLabel];
-    messageTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, KscreeHeight - 64 - 48 - 20)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 30, 30, 18)];
+    [backButton setImage:[UIImage imageNamed:@"返回-"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [topView addSubview:backButton];
+    messageTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, KscreeHeight - 64 - 20)];
     messageTableView.delegate = self;
     messageTableView.dataSource = self;
     messageTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -59,7 +64,10 @@ static NSString *cellid = @"messagecell";
         
     }];
 }
-#pragma mark - 
+- (void) backAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma mark -
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
     if (!cell) {
@@ -72,13 +80,18 @@ static NSString *cellid = @"messagecell";
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return 20;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MessageDetailViewController *vc = [[MessageDetailViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    //点击
+    //弹出
+    MessageView *alert = [[MessageView alloc] initWithFrame:CGRectMake(20, 88, KscreeWidth - 40, KscreeHeight - 176)];
+    alert.backgroundColor = [UIColor whiteColor];
+    alert.layer.masksToBounds = YES;
+    alert.layer.cornerRadius = 10;
+    alert.titleLabel.text = @"系统消息";
+    [alert showInWindowWithMode:CustomAnimationModeDrop];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -97,10 +110,12 @@ static NSString *cellid = @"messagecell";
 }
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self hideTabBar];
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self showTabBar];
     [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {

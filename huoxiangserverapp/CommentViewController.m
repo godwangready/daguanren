@@ -48,14 +48,14 @@
         storebutton.layer.masksToBounds = YES;
         storebutton.layer.cornerRadius = 3;
         storebutton.layer.borderWidth = 1;
-        storebutton.layer.borderColor = [UIColor colorWithHexString:@"8042"].CGColor;
+        storebutton.layer.borderColor = [UIColor colorWithHexString:@"ff8042"].CGColor;
         [storebutton setTitle:@"店铺评论" forState:UIControlStateNormal];
         [storebutton.titleLabel setFont:[UIFont fontWithName:@"PingFang Medium.ttf" size:13]];
         [storebutton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
         storebutton.tag = _tag;
         [_clickBar addSubview:storebutton];
         userbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-        userbutton.frame = CGRectMake((KscreeWidth / 2) - 3, 24, width, height);
+        userbutton.frame = CGRectMake((KscreeWidth / 2) - 6, 24, width, height);
         [userbutton addTarget:self action:@selector(setTopViewAction:) forControlEvents:UIControlEventTouchUpInside];
         [userbutton setTitle:@"技师评论" forState:UIControlStateNormal];
         userbutton.layer.masksToBounds = YES;
@@ -93,10 +93,10 @@
     return _controllerArray;
 }
 - (void) addChildControllers {
-    StoreCommentViewController *storevc = [[StoreCommentViewController alloc] init];
-    [self addChildViewController:storevc];
     UserCommentViewController *uservc = [[UserCommentViewController alloc] init];
     [self addChildViewController:uservc];
+    StoreCommentViewController *storevc = [[StoreCommentViewController alloc] init];
+    [self addChildViewController:storevc];
     [self scrollViewDidEndDecelerating:self.contentView];
 }
 - (void) initScrollViewContainer {
@@ -153,6 +153,7 @@
             [storebutton setTitleColor:[UIColor colorWithHexString:@"ff8042"] forState:UIControlStateNormal];
             [userbutton setBackgroundColor:[UIColor colorWithHexString:@"ff8042"]];
             [userbutton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+            
         }
             break;
         default:

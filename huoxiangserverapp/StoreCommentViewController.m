@@ -37,9 +37,6 @@ static NSString *cellcommentlistid = @"commentlistcell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
 }
-
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     /*
      messageLabel.textColor = [UIColor colorWithHexString:@"666666"];
@@ -62,9 +59,6 @@ static NSString *cellcommentlistid = @"commentlistcell";
     return cell;
     
 }
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -72,14 +66,16 @@ static NSString *cellcommentlistid = @"commentlistcell";
     if (indexPath.row == 1 || indexPath.row == 5 || indexPath.row == 6) {
         return 190;
     }
-    return 260;
+    return 260 + 30;
     //手动计算
     /*
      NSString *messageString = @"尊敬的各位领导，各位来宾，女士们，先生们大家下午好！很高兴能够在这个生机勃勃的春天里，和大家相约在唐山创造力沙龙成立唐山创造力沙龙成立仪式暨第三届房地产业界营销精英论坛，本次活动由共青团唐山市委和唐山市文化广播电视新闻出版局主办，唐山电台，唐山电视台，唐山广播电视报社联合承办的。";
      CGSize messagesize = [messageString boundingRectWithSize:CGSizeMake(frame.size.width - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
      */
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

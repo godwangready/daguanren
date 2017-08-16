@@ -1,14 +1,14 @@
 //
-//  StoreCommentTableViewCell.m
+//  AddServicesTableViewCell.m
 //  huoxiangserverapp
 //
-//  Created by mc on 17/7/31.
+//  Created by mc on 17/8/14.
 //  Copyright © 2017年 huoxiangTongWang. All rights reserved.
 //
 
-#import "StoreCommentTableViewCell.h"
+#import "AddServicesTableViewCell.h"
 
-@implementation StoreCommentTableViewCell
+@implementation AddServicesTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -20,7 +20,9 @@
 
     // Configure the view for the selected state
 }
-- (IBAction)replyAction:(UIButton *)sender {
+- (IBAction)payServiesAction:(UIButton *)sender {
+    NSDictionary *dict = @{@"1":@"1"};
+    [[NSNotificationCenter defaultCenter] postNotificationName:NsnotificationStartPayServices object:nil userInfo:dict];
 }
 
 @end
