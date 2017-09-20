@@ -34,6 +34,14 @@
     _fuwuEndTime.titleLabel.text = [self.valueDict objectForKey:@"endHM"];
     _yuyueTF.text = [self.valueDict objectForKey:@"message"];
     _guizeTF.text = [self.valueDict objectForKey:@"rule"];
+    if (self.managemodel) {
+        _startTime.titleLabel.text = [NSString stringWithFormat:@"%@", self.managemodel.detailModle.startYMD];
+        _endTime.titleLabel.text = [NSString stringWithFormat:@"%@", self.managemodel.detailModle.endYMD];
+        _fuwuTime.titleLabel.text = [NSString stringWithFormat:@"%@", self.managemodel.detailModle.startHM];
+        _fuwuEndTime.titleLabel.text = [NSString stringWithFormat:@"%@", self.managemodel.detailModle.endHM];
+        _yuyueTF.text = [NSString stringWithFormat:@"%@", self.managemodel.detailModle.rule];
+        _guizeTF.text = [NSString stringWithFormat:@"%@", self.managemodel.detailModle.message];
+    }
 }
 - (IBAction)startTimeAction:(UIButton *)sender {
     WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDay CompleteBlock:^(NSDate *startDate) {

@@ -34,7 +34,12 @@ static NSString *cellid = @"recordcell";
     listTV.mj_footer.automaticallyHidden = YES;
     [listTV.mj_header beginRefreshing];
     [self.view addSubview:listTV];
-    [self requestData];
+}
+- (NSMutableArray *)datasource {
+    if (!_datasource) {
+        _datasource = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _datasource;
 }
 - (void) downRefresh {
     [self requestData];
@@ -51,35 +56,63 @@ static NSString *cellid = @"recordcell";
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:TeacherList] parameters:outDict success:^(NSDictionary *data) {
         [listTV.mj_footer endRefreshing];
-        NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
-        for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
-            TeacherListModel *model = [[TeacherListModel alloc] init];
-            [model setValuesForKeysWithDictionary:dict];
-            [self.datasource addObject:model];
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+        
+            }else {
+                NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    TeacherListModel *model = [[TeacherListModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.datasource addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [listTV reloadData];
+                });
+                NSLog(@"%@", data);
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [listTV reloadData];
-        });
-        NSLog(@"%@", data);
     } failure:^(NSError *error) {
-        [listTV.mj_header endRefreshing];
+        [listTV.mj_footer endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
     
 }
 
 - (void)requestData {
+    [self.datasource removeAllObjects];
+    [listTV reloadData];
     NSMutableDictionary *outDict = [self makeDict];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
     [dict setObject:@"2" forKey:@"bindingStatus"];
+    [dict setObject:@"" forKey:@"currentPage"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:TeacherList] parameters:outDict success:^(NSDictionary *data) {
         [listTV.mj_header endRefreshing];
-        //        if ([data objectForKey:@""]) {
-        //
-        //        }
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+        
+            }else {
+                NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    TeacherListModel *model = [[TeacherListModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.datasource addObject:model];
+                    self.index = model.currentPage.integerValue;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [listTV reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
         NSLog(@"%@", data);
     } failure:^(NSError *error) {
         [listTV.mj_header endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 }
 - (void)didReceiveMemoryWarning {
@@ -88,12 +121,23 @@ static NSString *cellid = @"recordcell";
 }
 #pragma mark - UITableViewDelegate , UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.datasource.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RecordTableViewCell" owner:nil options:nil] lastObject];
+    }
+    cell.iconImage.layer.masksToBounds = YES;
+    cell.iconImage.layer.cornerRadius = 3;
+    TeacherListModel *model = self.datasource[indexPath.row];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", model.nickName];
+    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.headPortrait]]];
+    cell.ageLabel.text = [NSString stringWithFormat:@"%@", model.age];
+    if (model.serverNamer == nil) {
+        cell.numberLabel.text = @"";
+    }else {
+        cell.numberLabel.text = [NSString stringWithFormat:@"%@", model.serverNamer];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

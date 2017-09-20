@@ -17,8 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIButton *test = [UIButton buttonWithType:UIButtonTypeSystem];
+    test.frame = CGRectMake(0, 0, KscreeWidth, 150);
+    [test setTitle:@"技师测试退出" forState:UIControlStateNormal];
+    [test addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.view addSubview:test];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

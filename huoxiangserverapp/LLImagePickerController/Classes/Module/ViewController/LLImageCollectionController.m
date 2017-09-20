@@ -26,11 +26,12 @@ static NSString *const reUse = @"reUse";
 @property (nonatomic, copy) NSArray <PHAsset *>*phAssetsArray;
 @property (nonatomic, assign) NSInteger lastSelectedIndex;
 @property (nonatomic, strong) PHCachingImageManager *cachingImageManager;
-
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation LLImageCollectionController
 
+#warning mark - pop
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.collectionView reloadData];
@@ -43,6 +44,19 @@ static NSString *const reUse = @"reUse";
     [self buildingUI];
     [self addObserver];
     [self loadingPhotos];
+    // 获取当前应用对照片的访问授权状态
+    if ([PHPhotoLibrary authorizationStatus] != PHAuthorizationStatusAuthorized)
+    {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(observeAuthrizationStatusChange:) userInfo:nil repeats:YES];
+    }
+}
+- (void)observeAuthrizationStatusChange:(NSTimer *)timer {
+    /** 当用户已授权 */
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+        [timer invalidate];
+        self.timer = nil;
+        [self loadingPhotos];
+    }
 }
 
 #pragma mark -

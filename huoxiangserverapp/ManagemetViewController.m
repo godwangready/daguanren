@@ -28,8 +28,6 @@ static NSString *cellid = @"managementcell";
     [self requestData];
     // Do any additional setup after loading the view.
     self.dataSource = [[NSMutableArray alloc] init];
-//    _dataSource = [NSMutableArray arrayWithObjects:@1,@2,@3,@4,@5,@6,@7,@8,@9, nil];
-    detailArray = [NSMutableArray arrayWithObjects:@"111111111",@"222222",@"333333",@"44444",@"5555555", nil];
     [self wtTopViewWithBackString:@"返回-" andTitlestring:@"商品管理" andrighttitle:@"新增商品"];
     wtTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, KscreeHeight - 64 - 20)];
     [wtTableView registerNib:[UINib nibWithNibName:@"ManagementTableViewCell" bundle:nil] forCellReuseIdentifier:cellid];
@@ -41,6 +39,7 @@ static NSString *cellid = @"managementcell";
 }
 - (void) addproduct {
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.dataSource removeAllObjects];
         [self requestData];
         NSLog(@"%@", wtTableView);
     });
@@ -55,20 +54,40 @@ static NSString *cellid = @"managementcell";
     [CMMUtility postWait];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
     NSMutableDictionary *outDict = [self makeDict];
+    NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+    [dict setObject:[NSString stringWithFormat:@"%@", [userdf objectForKey:@"storeId"]] forKey:@"storeId"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_package_manage" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:Produclist] parameters:outDict success:^(NSDictionary *data) {
         [CMMUtility hideWaitingAlertView];
-        NSLog(@"%@--%@",data, [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
-        for (NSDictionary *dicttt in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
-            ManageModel *model = [[ManageModel alloc] init];
-            [model setValuesForKeysWithDictionary:dicttt];
-            [self.dataSource addObject:model];
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                //请求成功数据为空
+            }else {
+                NSLog(@"%@--%@",data, [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                for (NSDictionary *dicttt in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    ManageModel *model = [[ManageModel alloc] init];
+                    model.detailModle = [[ManageDetailModel alloc] init];
+                    NSLog(@"%@", [WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]]);
+                    [model.detailModle setValue:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]] objectForKey:@"startYMD"]] forKey:@"startYMD"];
+                    [model.detailModle setValue:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]] objectForKey:@"message"]] forKey:@"message"];
+                    [model.detailModle setValue:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]] objectForKey:@"endYMD"]] forKey:@"endYMD"];
+                    [model.detailModle setValue:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]] objectForKey:@"rule"]] forKey:@"rule"];
+                    [model.detailModle setValue:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]] objectForKey:@"startHM"]] forKey:@"startHM"];
+                    [model.detailModle setValue:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[dicttt objectForKey:@"productDetails"]] objectForKey:@"endHM"]] forKey:@"endHM"];
+                    [model setValuesForKeysWithDictionary:dicttt];
+                    [self.dataSource addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [wtTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMeg"]]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [wtTableView reloadData];
-        });
     } failure:^(NSError *error) {
         [CMMUtility hideWaitingAlertView];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 }
 - (void) wtTopViewWithBackString:(NSString *)backstring andTitlestring:(NSString *)titlestring andrighttitle:(NSString *)righttitle {
@@ -110,7 +129,9 @@ static NSString *cellid = @"managementcell";
     }
     ManageModel *model = self.dataSource[indexPath.row];
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", model.productName];
-    cell.priceLabel.text = [NSString stringWithFormat:@"%@", model.price];
+    cell.priceLabel.text = [NSString stringWithFormat:@"参考价:%@元", model.price];
+    cell.priceLabel.adjustsFontSizeToFitWidth = YES;
+    [cell.userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.productPicture]] placeholderImage:[UIImage imageNamed:@"logo"]];
     return cell;
 }
 
@@ -123,12 +144,19 @@ static NSString *cellid = @"managementcell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ManageModel *model = self.dataSource[indexPath.row];
     //弹出
     dadadadadad *alert = [[dadadadadad alloc] initWithFrame:CGRectMake(20, 88, KscreeWidth - 40, KscreeHeight - 176)];
     alert.backgroundColor = [UIColor whiteColor];
     alert.layer.masksToBounds = YES;
     alert.layer.cornerRadius = 10;
-    alert.titleLabel.text = [NSString stringWithFormat:@"%@", detailArray[indexPath.row]];
+    alert.titleLabel.text = [NSString stringWithFormat:@"%@",model.productName];
+    alert.nameLabel.text = [NSString stringWithFormat:@"商品:%@",model.productName];
+    alert.numpayLabel.text = [NSString stringWithFormat:@"%@元", model.price];
+//    alert.dateNumLabel.text = [NSString stringWithFormat:@"%@至%@", model.detailModle.startYMD, model.detailModle.endYMD];
+//    alert.timeNumLabel.text = [NSString stringWithFormat:@"%@-%@", model.detailModle.startHM,model.detailModle.endHM];
+    alert.messageStringLabel.text = [NSString stringWithFormat:@"%@", model.productDetails];
+//    alert.ruleStringLabel.text = [NSString stringWithFormat:@"%@", model.detailModle.rule];
     [alert showInWindowWithMode:CustomAnimationModeDrop];
 }
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -149,6 +177,8 @@ static NSString *cellid = @"managementcell";
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
         NSMutableDictionary *outDict = [self makeDict];
         [dict setObject:model.productId forKey:@"productId"];
+        NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+        [dict setObject:[userdf objectForKey:@"storeId"] forKey:@"storeId"];
         [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
         [WTNewRequest postWithURLString:[self createRequestUrl:Deleteproduct] parameters:outDict success:^(NSDictionary *data) {
             NSLog(@"%@", data);
@@ -164,6 +194,7 @@ static NSString *cellid = @"managementcell";
         ManageModel *model = _dataSource[indexPath.row];
         AddCommityViewController *vc = [[AddCommityViewController alloc] init];
         vc.productID = [NSString stringWithFormat:@"%@", model.productId];
+        vc.managemodel = model;
         [self.navigationController pushViewController:vc animated:YES];
 //        change.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     }];

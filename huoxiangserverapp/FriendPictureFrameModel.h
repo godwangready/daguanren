@@ -9,9 +9,26 @@
 #import "BaseModel.h"
 
 @interface FriendPictureFrameModel : BaseModel
-@property (nonatomic, assign) CGRect nameFrame;
 @property (nonatomic, assign) CGRect iconFrame;
+@property (nonatomic, assign) CGRect nameFrame;
+//@property (nonatomic, assign) CGRect markFrame;
+//@property (nonatomic, assign) CGRect markStarFrame;
+@property (nonatomic, assign) CGRect timeFrame;
 @property (nonatomic, assign) CGRect contentFrame;
-@property (nonatomic, assign) CGRect arrimage;
-
+//@property (nonatomic, assign) CGRect selectFrame;
+//@property (nonatomic, assign) CGRect replyFrame;
+//@property (nonatomic, assign) CGRect lineFrame;
+//@property (nonatomic, assign) CGRect replyLablelFrame;
+@property (nonatomic, assign) CGRect replyImageFrame;
+@property (nonatomic, assign) CGRect replyImageFrame1;
+@property (nonatomic, assign) CGRect replyImageFrame2;
+@property (nonatomic, assign) CGRect replyImageFrame3;
+@property (nonatomic, assign) CGRect replyImageFrame4;
+@property (nonatomic, assign) CGRect replyImageFrame5;
+@property (nonatomic, assign) CGRect replyImageFrame6;
+@property (nonatomic, assign) CGRect replyImageFrame7;
+@property (nonatomic, assign) CGRect replyImageFrame8;
+@property (nonatomic, assign) CGRect replyImageFrame9;
+@property (nonatomic, assign) CGRect replayDownViewFrame;
+@property (nonatomic, assign) CGRect replayTableViewFrame;
 @end

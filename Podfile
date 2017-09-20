@@ -7,6 +7,7 @@ pod 'SVProgressHUD'
 pod 'AMapLocation'
 pod 'AMapSearch'
 pod 'AMap2DMap'
+pod 'XLPhotoBrowser+CoderXL'
 
 target 'huoxiangserverapp' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks

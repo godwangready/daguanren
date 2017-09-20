@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface NowCertificationViewController : BaseViewController
-
+@property (weak, nonatomic) IBOutlet UIButton *clanceButton;
+@property (nonatomic, strong) NSString *clanceID;
 @end

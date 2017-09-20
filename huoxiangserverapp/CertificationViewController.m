@@ -15,45 +15,35 @@ static NSString *cellid = @"callcell";
     UITableView *listTab;
 }
 @property (nonatomic, strong) NSMutableArray *datasource;
+
+//@property (nonatomic, strong) NSString *name;
+//@property (nonatomic, strong) NSString *phone;
+//@property (nonatomic, strong) NSString *personcard;
+//@property (nonatomic, strong) NSString *bussion;
+//@property (nonatomic, strong) NSString *nowtime;
 @end
 
 @implementation CertificationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _datasource = [NSMutableArray arrayWithCapacity:0];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
     [self requestData];
     [self setLayOut];
     // Do any additional setup after loading the view.
 }
-/*
- {
- auditTime = 1501556726000;
- businessLicense = 8;
- cardId = 8;
- currentPage = 0;
- id = 3;
- identifyStatus = 1;
- identifyVerifyTime = 1501556511000;
- limit = 20;
- maxRows = 5000;
- operatorId = 1;
- pages = 0;
- principalName = 8;
- resMsg = "\U4e0d\U884c";
- start = 0;
- telephone = 8;
- total = 0;
- userId = 9;
- }
- */
+- (NSMutableArray *)datasource {
+    if (!_datasource) {
+        _datasource = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _datasource;
+}
 - (void) requestData {
     [WTNewRequest postWithURLString:[self createRequestUrl:Credentials] parameters:[self makeDict] success:^(NSDictionary *data) {
         NSDictionary *dictt = [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]];
         CertificationModel *model = [[CertificationModel alloc] init];
         [model setValuesForKeysWithDictionary:dictt];
-        [_datasource addObject:model];
+        [self.datasource addObject:model];
         dispatch_async(dispatch_get_main_queue(), ^{
             [listTab reloadData];
         });
@@ -97,41 +87,37 @@ static NSString *cellid = @"callcell";
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"CallMeTableViewCell" owner:nil options:nil] lastObject];
     }
-    if (_datasource.count == 0) {
-        return cell;
-    }
-        CertificationModel *model = [_datasource firstObject];
-    NSLog(@"2333%@%@%@", model.principalName, model.telephone, model.cardId);
+        CertificationModel *model = [self.datasource firstObject];
         switch (indexPath.row) {
             case 0:
                 cell.leftLabel.text = @"店主";;
                 cell.rightLabel.textAlignment = NSTextAlignmentRight;
                 cell.rightLabel.adjustsFontSizeToFitWidth = YES;
-                cell.rightLabel.text = model.principalName;
+                cell.rightLabel.text = [NSString stringWithFormat:@"%@", model.principalName];
                 break;
             case 1:
                 cell.leftLabel.text = @"手机号码";
                 cell.rightLabel.textAlignment = NSTextAlignmentRight;
                 cell.rightLabel.adjustsFontSizeToFitWidth = YES;
-                cell.rightLabel.text = model.telephone;
+                cell.rightLabel.text = [NSString stringWithFormat:@"%@", model.telephone];
                 break;
             case 2:
                 cell.leftLabel.text = @"身份证号";
                 cell.rightLabel.textAlignment = NSTextAlignmentRight;
                 cell.rightLabel.adjustsFontSizeToFitWidth = YES;
-                cell.rightLabel.text = model.cardId;
+                cell.rightLabel.text = [NSString stringWithFormat:@"%@", model.cardId];
                 break;
             case 3:
                 cell.leftLabel.text = @"营业执照";
                 cell.rightLabel.textAlignment = NSTextAlignmentRight;
                 cell.rightLabel.adjustsFontSizeToFitWidth = YES;
-                cell.rightLabel.text = model.businessLicense;
+                cell.rightLabel.text = [NSString stringWithFormat:@"%@", model.businessLicense];
                 break;
             case 4:
                 cell.leftLabel.text = @"认证时间";
                 cell.rightLabel.textAlignment = NSTextAlignmentRight;
                 cell.rightLabel.adjustsFontSizeToFitWidth = YES;
-                cell.rightLabel.text = model.businessLicense;
+                cell.rightLabel.text = [NSString stringWithFormat:@"%@", [self timeToDeadline:model.auditTime]];
                 break;
             default:
                 break;
@@ -143,7 +129,19 @@ static NSString *cellid = @"callcell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
-
+- (NSString *)timeToDeadline:(NSString *)timedate {
+    NSTimeInterval time= ([timedate doubleValue]+28800) / 1000.0;//因为时差问题要加8小时 == 28800 sec
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    NSLog(@"date:%@",[detaildate description]);
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,设置需要的格式
+//    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
+    NSLog(@"%@", currentDateStr);
+    return currentDateStr;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

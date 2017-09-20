@@ -7,7 +7,7 @@
 //
 
 #import "ChangePassWordViewController.h"
-
+#import "LoginViewController.h"
 @interface ChangePassWordViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *oldPasswordTF;
 @property (weak, nonatomic) IBOutlet UITextField *replaceNewPasswordTF;
@@ -28,6 +28,9 @@
     self.replaceNewPasswordTF.secureTextEntry = YES;
     // Do any additional setup after loading the view from its nib.
 }
+- (IBAction)backAction:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (IBAction)changeAction:(UIButton *)sender {
     if (_oldPasswordTF.text.length == 0 || _nowPasswordTF.text.length == 0 || _replaceNewPasswordTF.text.length == 0) {
         [CMMUtility showFailureWith:@"请填写密码"];
@@ -35,6 +38,15 @@
     }
     if (![_nowPasswordTF.text isEqualToString:_replaceNewPasswordTF.text]) {
         [CMMUtility showFailureWith:@"密码不一致"];
+        return;
+    }
+    //6-12位数字和字母组成
+    NSString *regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([pred evaluateWithObject:self.oldPasswordTF.text]) {
+        
+    }else {
+        [CMMUtility showFailureWith:@"密码必须是6到12位字母与数字组成"];
         return;
     }
     //WTMD5
@@ -47,17 +59,32 @@
 //    [dict setObject:@"2" forKey:@"roleId"];
     NSString *postdatastring = [WTCJson dictionaryToJson:dict];
     [outDict setObject:postdatastring forKey:@"postDate"];
+    [outDict setObject:@"store_secure_set" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:ChangePWWithOdlPW] parameters:outDict success:^(NSDictionary *data) {
         NSLog(@"%@", data);
         if ([[data objectForKey:@"resCode"] integerValue] == 100) {
             [CMMUtility showSucessWith:@"修改成功"];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self quitAction];
         }else {
             [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
         }
     } failure:^(NSError *error) {
         NSLog(@"%@", error.userInfo);
-        [CMMUtility showFailureWith:@"修改失败"];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
+}
+- (void) quitAction {
+    NSUserDefaults *userdef = [NSUserDefaults standardUserDefaults];
+    [userdef setObject:@"" forKey:@"userid"];
+    [userdef setObject:@"" forKey:@"apptoken"];
+    [userdef setObject:@"" forKey:CredentialsidentifyStatus];
+    [userdef setObject:@"" forKey:@"headimage"];
+    [userdef setObject:@"" forKey:@"nickName"];
+    [userdef synchronize];
+    LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    SGLNavigationViewController *nav = [[SGLNavigationViewController alloc] initWithRootViewController:login];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];

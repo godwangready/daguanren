@@ -27,18 +27,40 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
+//if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+//    if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+//        
+//    }else {
+//        
+//    }
+//}else {
+//    [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+//}
+
 /*
  NSCameraUsageDescription
  */
 
+/*
+ 日志输出
+ */
+#ifdef DEBUG
+#define WTlog(...) NSLog(__VA_ARGS__)
+#else
+#define WTlog(...)
+#endif
+
 #define KscreeWidth [UIScreen mainScreen].bounds.size.width
 #define KscreeHeight [UIScreen  mainScreen].bounds.size.height
+#define kScreen_Bounds [UIScreen mainScreen].bounds
+
+//服务区tel
+#define HXtel @"12345678901"
 
 //huoxiangkeji.1.V接口数据
-//#define RequestHeader @"http://47.92.127.101/raeapp/" 
 //#define RequestHeader @"http://192.168.0.100:8080"
-//#define RequestHeader @"http://47.92.127.101:8080/raeapp/"
-#define RequestHeader @"http://192.168.0.108:8080"
+#define RequestHeader @"http://47.92.127.101:8080"
+//#define RequestHeader @"http://192.168.0.108:8080"
 
 //高德定位KEY
 #define GaoDeKey @"986ec71ce6bd89a82a9382207252e049"
@@ -50,12 +72,18 @@
 //ali云服务器上传地址
 //#define ALIpullImageAndVideo @"http://192.168.0.100:8080/statics/uploadresource"
 #define ALIpullImageAndVideo @"http://192.168.0.108:8080/statics/uploadresource"
-
+#define ALIpullImageAndVideo47 @"http://47.92.127.101/statics/uploadresource"
+//http://47.92.127.101/statics/uploadresource
+//http://192.168.0.108:8080/statics/uploadresource
 //宏
 //认证状态
 #define CredentialsidentifyStatus @"identifyStatus"
 
 
+//用户基本信息
+#define Userdetail @"/app/user/userdetail"
+//修改头像
+#define Changeheadportrait @"/app/user/changeheadportrait"
 //注册
 #define RegistUrl @"/app/regist"
 //发送验证码
@@ -71,7 +99,7 @@
 //认证详情
 #define Credentials @"/app/merchant/credentials"
 //旧密码修改密码
-#define ChangePWWithOdlPW @"/app/changepwd"
+#define ChangePWWithOdlPW @"/app/user/changepwd"
 //修改营业时间
 #define Alterbusinesstime @"/app/merchant/alterbusinesstime"
 //修改门店信息
@@ -83,7 +111,7 @@
 //店家添加商品
 #define Redactproduct @"/app/merchant/product/redactproduct"
 //修改昵称
-#define Changenickname @"/app/changenickname"
+#define Changenickname @"/app/user/changenickname"
 //技师管理统一接口
 #define TeacherList @"/app/merchant/server/bindinglist"
 //商家推荐取消推荐
@@ -94,16 +122,42 @@
 #define Bindingstatus @"/app/merchant/server/bindingstatus"
 //删除技师申请列表
 #define Hideshow @"/app/merchant/server/hideshow"
-//消息类型统一接口
+//消息所有类型
 #define Messagetype @"/app/message/messagetype"
+//消息类型
+#define Messagelist @"/app/message/messagelist"
+//消息详情
+#define Message @"/app/message/message"
 //增值服务类型
 #define Chargestype @"/app/charges/chargestype"
 //增值服务详情
 #define Chargeslist @"/app/charges/chargeslist"
+//店铺评论list
+#define Usercomment @"/app/comment/usercomment"
+//店铺评论detail和发布
+#define Commentdetail @"/app/comment/commentdetail"
+//技师发表评论
+#define PostComment @"/app/comment/postcomment"
+//店铺回复
+#define Revertcomment @"/app/comment/revertcomment"
 
 
 
-
+/*
+技师
+ */
+//技师店家列表
+#define Selectstore @"/app/server/selectstore"
+//技师绑定店家
+#define Bindingstore @"/app/server/bindingstore"
+//店家详情
+#define Storedetail @"/app/consumer/storedetail"//@"/app/server/storedetail"
+//技师发表动态
+#define Releasedynamic @"/app/server/dynamic/releasedynamic"
+//技师动态list
+#define Selfdynamiclist @"/app/server/dynamic/selfdynamiclist"
+//技师删除动态
+#define Deletedynamic @"/app/server/dynamic/deletedynamic"
 
 
 
@@ -128,9 +182,22 @@
 #define NsnotificationDetailAddress @"detailaddress"
 //开始购买服务
 #define NsnotificationStartPayServices @"StartPayServices"
+//回复评论
+#define NsnotificationReplyComment @"ReplyComment"
+//技师删除动态
+#define NsnotificationDeleteTeacherFriendster @"deleteTeacherFriendster"
+//技师发送动态成功
+#define Nsnotificationsuccesspostfriendster @"successpostfriendster"
+//播放技师动态视频
+#define Nsnotificationplayfriendsterplayer @"playfriendsterplayer"
 
 
 
+
+
+/*
+ 也许现在是有上帝知道了吧
+*/
 
 // 错误信息
 #define kNetWorErrorMsg      @"message"

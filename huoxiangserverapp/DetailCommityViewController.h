@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "ManageModel.h"
 
 
 @interface DetailCommityViewController : BaseViewController
@@ -15,4 +15,5 @@ typedef void(^byValue)(NSDictionary *dict);
 @property (nonatomic, copy) byValue passValue;
 
 @property (nonatomic, strong) NSDictionary *valueDict;
+@property (nonatomic, strong) ManageModel *managemodel;
 @end

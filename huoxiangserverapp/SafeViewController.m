@@ -84,12 +84,19 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self hideTabBar];
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self showTabBar];
     [super viewWillDisappear:animated];
 }
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    [self showTabBar];
+//    [super viewWillDisappear:animated];
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

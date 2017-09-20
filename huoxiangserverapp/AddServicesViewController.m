@@ -8,17 +8,21 @@
 
 #import "AddServicesViewController.h"
 #import "AddServicesTableViewCell.h"
+#import "AddServicesModel.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 static NSString *cellId = @"addmessagecell";
 @interface AddServicesViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *wtTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSString *indexPage;
 @end
 
 @implementation AddServicesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self requestData];
     // Do any additional setup after loading the view.
     [self wtTopViewWithBackString:@"返回-" andTitlestring:@"增值服务"];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
@@ -47,6 +51,9 @@ static NSString *cellId = @"addmessagecell";
 - (void) payAction:(NSNotification *)notification {
     NSDictionary *dict  = notification.userInfo;
     NSLog(@"%@", dict);
+    [[AlipaySDK defaultService] payOrder:@"s" fromScheme:@"s" callback:^(NSDictionary *resultDic) {
+        NSLog(@"%@", resultDic);
+    }];
 }
 - (void) downRefresh {
     [self requestData];
@@ -59,17 +66,34 @@ static NSString *cellId = @"addmessagecell";
     NSMutableDictionary *outDict = [self makeDict];
     NSMutableDictionary *dict  = [NSMutableDictionary dictionaryWithCapacity:0];
     [dict setObject:@"2" forKey:@"roleId"];
-    [dict setObject:@"" forKey:@"currentPage"];
+    [dict setObject:[NSString stringWithFormat:@"%ld", self.indexPage.integerValue + 1] forKey:@"currentPage"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:Chargestype] parameters:outDict success:^(NSDictionary *data) {
         [_wtTableView.mj_footer endRefreshing];
-
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [data objectForKey:@"resDate"]) {
+                    AddServicesModel *model = [[AddServicesModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:model];
+                    self.indexPage = [NSString stringWithFormat:@"%@", model.currentPage];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.wtTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
     } failure:^(NSError *error) {
         [_wtTableView.mj_footer endRefreshing];
 
     }];
 }
 - (void)requestData {
+    self.indexPage = @"";
     [self.dataSource removeAllObjects];
     NSMutableDictionary *outDict = [self makeDict];
     NSMutableDictionary *dict  = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -78,8 +102,25 @@ static NSString *cellId = @"addmessagecell";
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:Chargestype] parameters:outDict success:^(NSDictionary *data) {
         [_wtTableView.mj_header endRefreshing];
-        NSLog(@"%@", data);
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    AddServicesModel *model = [[AddServicesModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:model];
+                    self.indexPage = [NSString stringWithFormat:@"%@", model.currentPage];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.wtTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
     } failure:^(NSError *error) {
+        [CMMUtility showFailureWith:@"服务器故障"];
         [_wtTableView.mj_header endRefreshing];
 
     }];

@@ -12,7 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "PKFullScreenPlayerViewController.h"
 #import "UIImage+PKShortVideoPlayer.h"
-
+#import "HProgressView.h"
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
@@ -20,7 +20,7 @@ static CGFloat PKOtherButtonVarticalHeight = 0;
 static CGFloat PKRecordButtonVarticalHeight = 0;
 static CGFloat PKPreviewLayerHeight = 0;
 
-static CGFloat const PKRecordButtonWidth = 90;
+static CGFloat const PKRecordButtonWidth = 50;
 
 @interface PKRecordShortVideoViewController() <PKShortVideoRecorderDelegate>
 
@@ -39,6 +39,7 @@ static CGFloat const PKRecordButtonWidth = 90;
 @property (nonatomic, strong) PKShortVideoProgressBar *progressBar;
 @property (nonatomic, strong) PKShortVideoRecorder *recorder;
 
+@property (nonatomic, strong) HProgressView *progressView;
 @end
 
 @implementation PKRecordShortVideoViewController
@@ -52,7 +53,7 @@ static CGFloat const PKRecordButtonWidth = 90;
         _themeColor = themeColor;
         _outputFilePath = outputFilePath;
         _outputSize = outputSize;
-        _videoMaximumDuration = 6;
+        _videoMaximumDuration = 10;
         _videoMinimumDuration = 1;
     }
     return self;
@@ -76,45 +77,64 @@ static CGFloat const PKRecordButtonWidth = 90;
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-    toolbar.barTintColor = [UIColor blackColor];
-    toolbar.translucent = NO;
-    [self.view addSubview:toolbar];
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancelShoot)];
-    cancelItem.tintColor = [UIColor whiteColor];
-    
-    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    
-    UIBarButtonItem *transformItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"PK_Camera_Turn"] style:UIBarButtonItemStyleDone target:self action:@selector(swapCamera)];
-    transformItem.tintColor = [UIColor whiteColor];
-    
-    [toolbar setItems:@[cancelItem,flexible,transformItem]];
+//    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+//    toolbar.barTintColor = [UIColor blackColor];
+//    toolbar.translucent = NO;
+//    [self.view addSubview:toolbar];
+//    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancelShoot)];
+//    cancelItem.tintColor = [UIColor whiteColor];
+//    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+//    UIBarButtonItem *transformItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"PK_Camera_Turn"] style:UIBarButtonItemStyleDone target:self action:@selector(swapCamera)];
+//    transformItem.tintColor = [UIColor whiteColor];
+//    [toolbar setItems:@[cancelItem,flexible,transformItem]];
+    self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.backButton.frame = CGRectMake(60, KscreeHeight - 82, 50, 50);
+    [self.backButton setImage:[UIImage imageNamed:@"下拉"] forState:UIControlStateNormal];
+    [self.backButton addTarget:self action:@selector(cancelShoot) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.backButton];
+    self.overturnButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.overturnButton.frame = CGRectMake(KscreeWidth - 25 - 30, 25, 30, 30);
+    [self.overturnButton setImage:[UIImage imageNamed:@"湖畔－相机切换"] forState:UIControlStateNormal];
+    [self.overturnButton addTarget:self action:@selector(swapCamera) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.overturnButton];
     
     //创建视频录制对象
     self.recorder = [[PKShortVideoRecorder alloc] initWithOutputFilePath:self.outputFilePath outputSize:self.outputSize];
+//    self.recorder = [[PKShortVideoRecorder alloc] initWithOutputFilePath:self.outputFilePath outputSize:CGSizeMake(KscreeWidth, KscreeHeight)];
     //通过代理回调
     self.recorder.delegate = self;
     //录制时需要获取预览显示的layer，根据情况设置layer属性，显示在自定义的界面上
     AVCaptureVideoPreviewLayer *previewLayer = [self.recorder previewLayer];
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    previewLayer.frame = CGRectMake(0, 44, kScreenWidth, PKPreviewLayerHeight);
+//    previewLayer.frame = CGRectMake(0, 44, kScreenWidth, PKPreviewLayerHeight);
+    previewLayer.frame = CGRectMake(0, 0, KscreeWidth, KscreeHeight);
     [self.view.layer insertSublayer:previewLayer atIndex:0];
     
-    self.progressBar = [[PKShortVideoProgressBar alloc] initWithFrame:CGRectMake(0, 44 + PKPreviewLayerHeight - 5, kScreenWidth, 5) themeColor:self.themeColor duration:self.videoMaximumDuration];
-    [self.view addSubview:self.progressBar];
+//    self.progressBar = [[PKShortVideoProgressBar alloc] initWithFrame:CGRectMake(0, 44 + PKPreviewLayerHeight - 5, kScreenWidth, 5) themeColor:self.themeColor duration:self.videoMaximumDuration];
+//    [self.view addSubview:self.progressBar];
+    self.progressView = [[HProgressView alloc] initWithFrame:CGRectMake(KscreeWidth / 2 - 40, KscreeHeight - 10 - 60 - 50 + 20 - 10, 80, 80)];
+    self.progressView.backgroundColor = [UIColor colorWithHexString:@"9f9f9f"];
+    self.progressView.layer.cornerRadius = self.progressView.frame.size.width/2;
+    self.progressView.layer.masksToBounds = YES;
+    [self.view addSubview:self.progressView];
+
+#warning
     
     self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.recordButton setTitle:@"按住录" forState:UIControlStateNormal];
-    [self.recordButton setTitleColor:self.themeColor forState:UIControlStateNormal];
-    self.recordButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-    self.recordButton.frame = CGRectMake(0, 0, PKRecordButtonWidth, PKRecordButtonWidth);
-    self.recordButton.center = CGPointMake(kScreenWidth/2, PKRecordButtonVarticalHeight);
-    self.recordButton.layer.cornerRadius = PKRecordButtonWidth/2;
-    self.recordButton.layer.borderWidth = 3;
-    self.recordButton.layer.borderColor = self.themeColor.CGColor;
+//    [self.recordButton setTitle:@"按住录" forState:UIControlStateNormal];
+//    [self.recordButton setTitleColor:self.themeColor forState:UIControlStateNormal];
+//    self.recordButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
+//    self.recordButton.frame = CGRectMake(kScreenWidth/2 - PKRecordButtonWidth / 2, KscreeHeight - 10 - 60 - 50, PKRecordButtonWidth, PKRecordButtonWidth);
+    self.recordButton.frame = CGRectMake(10, 10, 60, 60);
+    self.recordButton.backgroundColor = [UIColor whiteColor];
+//    self.recordButton.center = CGPointMake(kScreenWidth/2, PKRecordButtonVarticalHeight);
+    self.recordButton.layer.cornerRadius = 30;//PKRecordButtonWidth/2;
+//    self.recordButton.layer.borderWidth = 3;
+//    self.recordButton.layer.borderColor = self.themeColor.CGColor;
     self.recordButton.layer.masksToBounds = YES;
     [self recordButtonAction];
-    [self.view addSubview:self.recordButton];
+//    [self.view addSubview:self.recordButton];
+    [self.progressView addSubview:self.recordButton];
     
 //    dispatch_async(dispatch_get_main_queue(), ^{
         //开始预览摄像头工作
@@ -147,6 +167,7 @@ static CGFloat const PKRecordButtonWidth = 90;
 
 - (void)recordButtonAction {
     [self.recordButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//    [self.recordButton addTarget:self action:@selector(wtpickImage) forControlEvents:UIControlEventTouchUpInside];
     [self.recordButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchDown];
     [self.recordButton addTarget:self action:@selector(buttonStopRecording) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];
 }
@@ -160,8 +181,16 @@ static CGFloat const PKRecordButtonWidth = 90;
 
 - (void)refreshView {
     [[NSFileManager defaultManager] removeItemAtPath:self.outputFilePath error:nil];
-    [self.recordButton setTitle:@"按住录" forState:UIControlStateNormal];
-
+//    [self.recordButton setTitle:@"按住录" forState:UIControlStateNormal];
+    self.progressView = [[HProgressView alloc] initWithFrame:CGRectMake(KscreeWidth / 2 - 40, KscreeHeight - 10 - 60 - 50 + 20 - 10, 80, 80)];
+    self.progressView.backgroundColor = [UIColor colorWithHexString:@"9f9f9f"];
+    self.progressView.layer.cornerRadius = self.progressView.frame.size.width/2;
+    self.progressView.layer.masksToBounds = YES;
+    [self.view addSubview:self.progressView];
+    [self.progressView addSubview:self.recordButton];
+    
+    self.backButton.hidden = NO;
+    
     [self recordButtonAction ];
     [self.playButton removeFromSuperview];
     self.playButton = nil;
@@ -172,11 +201,16 @@ static CGFloat const PKRecordButtonWidth = 90;
 }
 
 - (void)playVideo {
-    UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:self.outputFilePath]];
-    PKFullScreenPlayerViewController *vc = [[PKFullScreenPlayerViewController alloc] initWithVideoPath:self.outputFilePath previewImage:image];
-    [self presentViewController:vc animated:NO completion:NULL];
+//    UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:self.outputFilePath]];
+//    PKFullScreenPlayerViewController *vc = [[PKFullScreenPlayerViewController alloc] initWithVideoPath:self.outputFilePath previewImage:image];
+//    [self presentViewController:vc animated:NO completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate didFinishRecordingToOutputFilePath:self.outputFilePath];
+    }];
 }
-
+- (void) wtpickImage {
+    NSLog(@"拍照");
+}
 - (void)toggleRecording {
     //静止自动锁屏
     [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -185,7 +219,9 @@ static CGFloat const PKRecordButtonWidth = 90;
     //开始录制视频
     [self.recorder startRecording];
     //进度条开始动
-    [self.progressBar play];
+//    [self.progressBar play];
+    [self.progressView setTimeMax:10];
+
 }
 
 - (void)buttonStopRecording {
@@ -240,7 +276,10 @@ static CGFloat const PKRecordButtonWidth = 90;
 //录制结束回调
 - (void)recorderDidEndRecording:(PKShortVideoRecorder *)recorder {
     //停止进度条
-    [self.progressBar stop];
+//    [self.progressBar stop];
+    [self.progressView removeFromSuperview];
+    self.progressView = nil;
+    self.backButton.hidden = YES;
 }
 
 //视频录制结束回调
@@ -253,29 +292,54 @@ static CGFloat const PKRecordButtonWidth = 90;
     if (error) {
         NSLog(@"视频拍摄失败: %@", error );
         [self endRecordingWithPath:outputFilePath failture:YES];
+//        self.progressView.hidden = NO;
+//        self.progressView.progressValue = 0;
+//        self.backButton.hidden = NO;
+        self.progressView = [[HProgressView alloc] initWithFrame:CGRectMake(KscreeWidth / 2 - 40, KscreeHeight - 10 - 60 - 50 + 20 - 10, 80, 80)];
+        self.progressView.backgroundColor = [UIColor colorWithHexString:@"9f9f9f"];
+        self.progressView.layer.cornerRadius = self.progressView.frame.size.width/2;
+        self.progressView.layer.masksToBounds = YES;
+        [self.view addSubview:self.progressView];
+        [self.progressView addSubview:self.recordButton];
+        self.backButton.hidden = NO;
     } else {
         //当前时间
         CFAbsoluteTime nowTime = CACurrentMediaTime();
         if (self.beginRecordTime != 0 && nowTime - self.beginRecordTime < self.videoMinimumDuration) {
+#warning 拍照片
+//            self.progressView.hidden = NO;
+//            self.progressView.progressValue = 0;
+//            self.backButton.hidden = NO;
+            self.progressView = [[HProgressView alloc] initWithFrame:CGRectMake(KscreeWidth / 2 - 40, KscreeHeight - 10 - 60 - 50 + 20 - 10, 80, 80)];
+            self.progressView.backgroundColor = [UIColor colorWithHexString:@"9f9f9f"];
+            self.progressView.layer.cornerRadius = self.progressView.frame.size.width/2;
+            self.progressView.layer.masksToBounds = YES;
+            [self.view addSubview:self.progressView];
+            [self.progressView addSubview:self.recordButton];
+            self.backButton.hidden = NO;
+
             [self endRecordingWithPath:outputFilePath failture:NO];
         } else {
             self.outputFilePath = outputFilePath;
             [self.recordButton setTitle:@"发送" forState:UIControlStateNormal];
             
             self.playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.playButton.tintColor = self.themeColor;
-            UIImage *playImage = [[UIImage imageNamed:@"PK_Play"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//            self.playButton.tintColor = self.themeColor;
+            UIImage *playImage = [UIImage imageNamed:@"钩"];
             [self.playButton setImage:playImage forState:UIControlStateNormal];
             [self.playButton sizeToFit];
-            self.playButton.center = CGPointMake((kScreenWidth-PKRecordButtonWidth)/2/2, PKOtherButtonVarticalHeight);
+//            self.playButton.center = CGPointMake((kScreenWidth-PKRecordButtonWidth)/2/2, PKOtherButtonVarticalHeight);
+            self.playButton.frame = CGRectMake(KscreeWidth / 2 + 50, KscreeHeight - 10 - 60 - 50, 50, 50);
             [self.view addSubview:self.playButton];
             
             self.refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.refreshButton.tintColor = self.themeColor;
-            UIImage *refreshImage = [[UIImage imageNamed:@"PK_Delete"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//            self.refreshButton.tintColor = self.themeColor;
+//            UIImage *refreshImage = [[UIImage imageNamed:@"叉"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            UIImage *refreshImage = [UIImage imageNamed:@"叉"];
             [self.refreshButton setImage:refreshImage forState:UIControlStateNormal];
             [self.refreshButton sizeToFit];
-            self.refreshButton.center = CGPointMake(kScreenWidth-(kScreenWidth-PKRecordButtonWidth)/2/2, PKOtherButtonVarticalHeight);
+//            self.refreshButton.center = CGPointMake(kScreenWidth-(kScreenWidth-PKRecordButtonWidth)/2/2, PKOtherButtonVarticalHeight);
+            self.refreshButton.frame = CGRectMake(KscreeWidth / 2 - 100, KscreeHeight - 10 - 60 - 50 , 50, 50);
             [self.view addSubview:self.refreshButton];
             
             [self sendButtonAction];

@@ -53,7 +53,7 @@
 }
 
 - (void)rightBarButton:(NSString *)aTitle selector:(SEL)sel delegate:(id)delegate {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:aTitle forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:16];

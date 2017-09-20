@@ -29,9 +29,10 @@
  }
  */
 @interface CertificationModel : BaseModel
-@property (nonatomic, strong) NSString *telephone;
+@property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *cardId;
 @property (nonatomic, strong) NSString *principalName;
 @property (nonatomic, strong) NSString *businessLicense;
 @property (nonatomic, strong) NSString *auditTime;
+@property (nonatomic, strong) NSString *telephone;
 @end

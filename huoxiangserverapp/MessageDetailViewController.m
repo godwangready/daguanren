@@ -9,18 +9,25 @@
 #import "MessageDetailViewController.h"
 #import "MessageTableViewCell.h"
 #import "MessageView.h"
+#import "MessageModel.h"
 
 static NSString *cellid = @"messagecell";
 
 @interface MessageDetailViewController ()<UITableViewDelegate, UITableViewDataSource> {
     UITableView *messageTableView;
 }
-@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, assign) NSString *indexPage;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
 @implementation MessageDetailViewController
-
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _dataSource;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -31,7 +38,7 @@ static NSString *cellid = @"messagecell";
     [self.view addSubview:topView];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((KscreeWidth / 2) - 50, 30, 100, 20)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = [NSString stringWithFormat:@"%@", _messageType];
+    titleLabel.text = [NSString stringWithFormat:@"%@", self.messageType];
     titleLabel.font = [UIFont fontWithName:@"PingFang Regular.ttf" size:18];
     titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [topView addSubview:titleLabel];
@@ -45,23 +52,82 @@ static NSString *cellid = @"messagecell";
     messageTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     messageTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downLoadingAction)];
     messageTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upLoadingAction)];
+    [messageTableView.mj_header beginRefreshing];
     [self.view addSubview:messageTableView];
 }
 - (void) downLoadingAction {
     [self requestData];
 }
 - (void) upLoadingAction {
-    
+    if (self.dataSource.count < 20) {
+        [messageTableView.mj_footer endRefreshing];
+        return;
+    }
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+    NSMutableDictionary *outDict = [self makeDict];
+    [dict setObject:[NSString stringWithFormat:@"%ld", self.indexPage.integerValue + 1] forKey:@"currentPage"];
+    [dict setObject:[NSString stringWithFormat:@"%@", self.messageId] forKey:@"typeId"];
+    [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_message_detail" forKey:@"logView"];
+    [WTNewRequest postWithURLString:[self createRequestUrl:Messagetype] parameters:outDict success:^(NSDictionary *data) {
+        NSLog(@"%@", data);
+        [messageTableView.mj_footer endRefreshing];
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [data objectForKey:@"resDate"]) {
+                    MessageModel *modle = [[MessageModel alloc] init];
+                    [modle setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:modle];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [messageTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
+        
+    } failure:^(NSError *error) {
+        [CMMUtility showFailureWith:@"服务器故障"];
+        [messageTableView.mj_footer endRefreshing];
+    }];
+
 }
 - (void) requestData {
+    self.indexPage = @"";
+    [self.dataSource removeAllObjects];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
     NSMutableDictionary *outDict = [self makeDict];
     [dict setObject:@"" forKey:@"currentPage"];
+    [dict setObject:[NSString stringWithFormat:@"%@", self.messageId] forKey:@"typeId"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
-    [WTNewRequest postWithURLString:[self createRequestUrl:Messagetype] parameters:outDict success:^(NSDictionary *data) {
+    [outDict setObject:@"store_message_detail" forKey:@"logView"];
+    [WTNewRequest postWithURLString:[self createRequestUrl:Messagelist] parameters:outDict success:^(NSDictionary *data) {
         NSLog(@"%@", data);
+        [messageTableView.mj_header endRefreshing];
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    MessageModel *modle = [[MessageModel alloc] init];
+                    [modle setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:modle];
+                    self.indexPage = [NSString stringWithFormat:@"%@", modle.currentPage];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [messageTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
+
     } failure:^(NSError *error) {
-        
+        [CMMUtility showFailureWith:@"服务器故障"];
+        [messageTableView.mj_header endRefreshing];
     }];
 }
 - (void) backAction {
@@ -73,25 +139,38 @@ static NSString *cellid = @"messagecell";
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageTableViewCell" owner:nil options:nil] lastObject];
     }
+    MessageModel *model = self.dataSource[indexPath.row];
     cell.messageImage.layer.masksToBounds = YES;
     cell.messageImage.layer.cornerRadius = 3;
-    cell.nameLabel.text = @"系统消息";
-    cell.bodyLabel.text = @"app维护公告";
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", model.title];
+    cell.bodyLabel.text = [NSString stringWithFormat:@"%@", model.content];
+    [cell.messageImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.pictureUrl]] placeholderImage:[UIImage imageNamed:@"logo"]];
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return self.dataSource.count;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //点击
-    //弹出
-    MessageView *alert = [[MessageView alloc] initWithFrame:CGRectMake(20, 88, KscreeWidth - 40, KscreeHeight - 176)];
-    alert.backgroundColor = [UIColor whiteColor];
-    alert.layer.masksToBounds = YES;
-    alert.layer.cornerRadius = 10;
-    alert.titleLabel.text = @"系统消息";
-    [alert showInWindowWithMode:CustomAnimationModeDrop];
+    MessageModel *model = self.dataSource[indexPath.row];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dict setObject:model.msgId forKey:@"msgId"];
+    NSMutableDictionary *outDict = [self makeDict];
+    [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [WTNewRequest postWithURLString:[self createRequestUrl:Message] parameters:outDict success:^(NSDictionary *data) {
+        //点击
+        //弹出
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kanle" object:nil];
+        MessageView *alert = [[MessageView alloc] initWithFrame:CGRectMake(20, 88, KscreeWidth - 40, KscreeHeight - 176)];
+        alert.backgroundColor = [UIColor whiteColor];
+        alert.layer.masksToBounds = YES;
+        alert.layer.cornerRadius = 10;
+        alert.titleLabel.text = [NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]] objectForKey:@"title"]];
+        alert.messageLabel.text = [NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]] objectForKey:@"content"]];
+        [alert showInWindowWithMode:CustomAnimationModeDrop];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

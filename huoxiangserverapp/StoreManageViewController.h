@@ -11,4 +11,12 @@
 typedef void(^changeIconImage)(UIImage *);
 @interface StoreManageViewController : BaseViewController
 @property (nonatomic, copy) changeIconImage pullIconImage;
+@property (nonatomic, strong) NSString *storenamels;
+@property (nonatomic, strong) NSString *storephones;
+@property (nonatomic, strong) NSString *storeadress;
+@property (nonatomic, strong) NSMutableArray *storepictureArray;
+@property (nonatomic, strong) NSString *storenotes;
+@property (nonatomic, strong) NSString *lats;
+@property (nonatomic, strong) NSString *lngs;
+@property (nonatomic, strong) NSString *adcodes;
 @end

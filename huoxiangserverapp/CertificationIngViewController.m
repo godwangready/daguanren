@@ -22,7 +22,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
     // Do any additional setup after loading the view.
-    [self wtTopViewWithBackString:@"返回-" andTitlestring:@"店家认证"];
+    [self cerwtTopViewWithBackString:@"返回-" andTitlestring:@"店家认证"];
     onelabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, KscreeWidth, 30)];
     onelabel.textColor = [UIColor colorWithHexString:@"666666"];
     onelabel.font = [UIFont systemFontOfSize:14];
@@ -42,14 +42,32 @@
     threelabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:threelabel];
 }
+- (void)cerwtTopViewWithBackString:(NSString *)backstring andTitlestring:(NSString *)titlestring {
+    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KscreeWidth, 64)];
+    topView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:topView];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 30, 30, 18)];
+    [backButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", backstring]] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [topView addSubview:backButton];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((KscreeWidth / 2) - 50, 30, 100, 20)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = [NSString stringWithFormat:@"%@", titlestring];
+    titleLabel.font = [UIFont fontWithName:@"PingFang Regular.ttf" size:18];
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [topView addSubview:titleLabel];
+}
+- (void) backAction {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-//    [self hideTabBar];
+    [self hideTabBar];
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-//    [self showTabBar];
+    [self showTabBar];
     [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {

@@ -10,20 +10,27 @@
 #import "MessageTableViewCell.h"
 #import "MessageView.h"
 #import "MessageDetailViewController.h"
+#import "MessageModel.h"
 
 static NSString *cellid = @"messagecell";
 @interface MessageViewController ()<UITableViewDelegate, UITableViewDataSource> {
     UITableView *messageTableView;
 }
-@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, assign) NSString *indexPage;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation MessageViewController
 
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _dataSource;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self requestData];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
     UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KscreeWidth, 64)];
     topView.backgroundColor = [UIColor whiteColor];
@@ -40,23 +47,76 @@ static NSString *cellid = @"messagecell";
     messageTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     messageTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downLoadingAction)];
     messageTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upLoadingAction)];
+    [messageTableView.mj_header beginRefreshing];
     [self.view addSubview:messageTableView];
 }
 - (void) downLoadingAction {
     [self requestData];
 }
 - (void) upLoadingAction {
-    
+    if (self.dataSource.count < 20) {
+        [messageTableView.mj_footer endRefreshing];
+        return;
+    }
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+    NSMutableDictionary *outDict = [self makeDict];
+    [dict setObject:[NSString stringWithFormat:@"%ld", self.indexPage.integerValue + 1] forKey:@"currentPage"];
+    [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_massage_list" forKey:@"logView"];
+    [WTNewRequest postWithURLString:[self createRequestUrl:Messagetype] parameters:outDict success:^(NSDictionary *data) {
+        NSLog(@"%@", data);
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [data objectForKey:@"resDate"]) {
+                    MessageModel *modle = [[MessageModel alloc] init];
+                    [modle setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:modle];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [messageTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 - (void) requestData {
+    self.indexPage = @"";
+    [self.dataSource removeAllObjects];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
     NSMutableDictionary *outDict = [self makeDict];
     [dict setObject:@"" forKey:@"currentPage"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_massage_list" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:Messagetype] parameters:outDict success:^(NSDictionary *data) {
+        [messageTableView.mj_header endRefreshing];
         NSLog(@"%@", data);
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    MessageModel *modle = [[MessageModel alloc] init];
+                    [modle setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:modle];
+                    self.indexPage = [NSString stringWithFormat:@"%@", modle.currentPage];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [messageTableView reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
     } failure:^(NSError *error) {
-        
+        [messageTableView.mj_header endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 }
 #pragma mark - 
@@ -65,18 +125,23 @@ static NSString *cellid = @"messagecell";
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageTableViewCell" owner:nil options:nil] lastObject];
     }
+    MessageModel *model = self.dataSource[indexPath.row];
     cell.messageImage.layer.masksToBounds = YES;
     cell.messageImage.layer.cornerRadius = 3;
-    cell.nameLabel.text = @"系统消息";
-    cell.bodyLabel.text = @"app维护公告";
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", model.typeName];
+    cell.bodyLabel.text = [NSString stringWithFormat:@"%@", model.content];
+    [cell.messageImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.pictureUrl]] placeholderImage:[UIImage imageNamed:@"logo"]];
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return self.dataSource.count;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MessageModel *model = self.dataSource[indexPath.row];
     MessageDetailViewController *vc = [[MessageDetailViewController alloc] init];
+    vc.messageId = [NSString stringWithFormat:@"%@", model.typeId];
+    vc.messageType = [NSString stringWithFormat:@"%@", model.typeName];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

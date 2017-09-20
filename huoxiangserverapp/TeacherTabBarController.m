@@ -11,7 +11,8 @@
 #import "TeacherPersonViewController.h"
 #import "TeacherMessageViewController.h"
 #import "SGLNavigationViewController.h"
-
+#import "PersonCenterViewController.h"
+#import "MessageViewController.h"
 @interface TeacherTabBarController ()
 
 @end
@@ -26,19 +27,21 @@
 - (void)setLayOutTeacherTabBar {
     TeacherHomeViewController *th = [[TeacherHomeViewController alloc] init];
     UINavigationController *navth = [[SGLNavigationViewController alloc] initWithRootViewController:th];
-    TeacherMessageViewController *tm = [[TeacherMessageViewController alloc] init];
+//    TeacherMessageViewController *tm = [[TeacherMessageViewController alloc] init];
+    MessageViewController *tm = [[MessageViewController alloc] init];
     UINavigationController *navtm = [[SGLNavigationViewController alloc] initWithRootViewController:tm];
-    TeacherPersonViewController *tp = [[TeacherPersonViewController alloc] init];
+//    TeacherPersonViewController *tp = [[TeacherPersonViewController alloc] init];
+    PersonCenterViewController *tp = [[PersonCenterViewController alloc] init];
     UINavigationController *navtp = [[SGLNavigationViewController alloc] initWithRootViewController:tp];
     navth.title = @"主页";
     navtm.title = @"消息";
     navtp.title = @"设置";
-    navth.tabBarItem.image = [UIImage imageNamed:@""];
-    navtm.tabBarItem.image = [UIImage imageNamed:@""];
-    navtp.tabBarItem.image = [UIImage imageNamed:@""];
-    navth.tabBarItem.selectedImage = [UIImage imageNamed:@""];
-    navtm.tabBarItem.selectedImage = [UIImage imageNamed:@""];
-    navtp.tabBarItem.selectedImage = [UIImage imageNamed:@""];
+    navth.tabBarItem.image = [UIImage imageNamed:@"首页line"];
+    navtm.tabBarItem.image = [UIImage imageNamed:@"消息line"];
+    navtp.tabBarItem.image = [UIImage imageNamed:@"设置line"];
+    navth.tabBarItem.selectedImage = [UIImage imageNamed:@"首页fill"];
+    navtm.tabBarItem.selectedImage = [UIImage imageNamed:@"消息fill"];
+    navtp.tabBarItem.selectedImage = [UIImage imageNamed:@"设置fill"];
     self.viewControllers = @[navth, navtm, navtp];
 }
 

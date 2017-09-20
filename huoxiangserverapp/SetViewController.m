@@ -11,10 +11,8 @@
 #import "SetNameViewController.h"
 
 static NSString *cellid = @"callcell";
-@interface SetViewController ()<UITableViewDelegate, UITableViewDataSource> {
-    UITableView *listTab;
-}
-
+@interface SetViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView *listTab;
 @end
 
 @implementation SetViewController
@@ -27,7 +25,7 @@ static NSString *cellid = @"callcell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshname) name:NsNotficationRefreshName object:nil];
 }
 - (void) refreshname {
-    [listTab reloadData];
+    [self.listTab reloadData];
 }
 - (void)setLayOut {
     UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KscreeWidth, 64)];
@@ -44,14 +42,18 @@ static NSString *cellid = @"callcell";
     titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
 
     [topView addSubview:titleLabel];
-    
-    listTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, 55)];
-    listTab.delegate = self;
-    listTab.dataSource = self;
-    listTab.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    listTab.scrollEnabled = NO;
-    [listTab registerNib:[UINib nibWithNibName:@"CallMeTableViewCell" bundle:nil] forCellReuseIdentifier:cellid];
-    [self.view addSubview:listTab];
+    [self.view addSubview:self.listTab];
+}
+- (UITableView *)listTab {
+    if (!_listTab) {
+        _listTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, 55)];
+        _listTab.delegate = self;
+        _listTab.dataSource = self;
+        _listTab.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        _listTab.scrollEnabled = NO;
+        [_listTab registerNib:[UINib nibWithNibName:@"CallMeTableViewCell" bundle:nil] forCellReuseIdentifier:cellid];
+    }
+    return _listTab;
 }
 - (void) backAction {
     [self.navigationController popViewControllerAnimated:YES];
@@ -70,7 +72,7 @@ static NSString *cellid = @"callcell";
         case 0:{
             NSUserDefaults *userID = [NSUserDefaults standardUserDefaults];//nickname
             cell.leftLabel.text = @"昵称";
-            cell.rightLabel.text = [userID objectForKey:@"nickname"];
+            cell.rightLabel.text = [userID objectForKey:@"nickName"];
             cell.rightLabel.textAlignment = NSTextAlignmentRight;
             cell.leftLabel.textColor = [UIColor colorWithHexString:@"333333"];
             cell.leftLabel.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
@@ -115,11 +117,14 @@ static NSString *cellid = @"callcell";
     return 55;
 }
 - (void)viewWillAppear:(BOOL)animated {
+//    [self.listTab reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self hideTabBar];
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self showTabBar];
     [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {

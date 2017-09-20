@@ -11,7 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NowCertificationViewController">
             <connections>
+                <outlet property="backButton" destination="RY0-ck-eoe" id="MM7-Jb-G6P"/>
                 <outlet property="certificationTF" destination="mJ3-e6-bbF" id="tAK-Ch-My5"/>
+                <outlet property="clanceButton" destination="3Kk-m8-JsO" id="W9W-lL-oAW"/>
                 <outlet property="nameTF" destination="dRH-iR-g6H" id="5eb-tO-isN"/>
                 <outlet property="personNumberTF" destination="vIC-bN-dHP" id="MGq-ED-NDa"/>
                 <outlet property="phoneTF" destination="csE-DR-irr" id="a6i-Gh-d6l"/>
@@ -48,12 +50,27 @@
                                 <action selector="backAction:" destination="-1" eventType="touchUpInside" id="2st-DA-f2u"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Kk-m8-JsO">
+                            <rect key="frame" x="318" y="25" width="42" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="42" id="BLz-Z3-lYs"/>
+                                <constraint firstAttribute="height" constant="30" id="es6-jv-9WT"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="dismissAction:" destination="-1" eventType="touchUpInside" id="0kn-Ao-vTM"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="3Kk-m8-JsO" secondAttribute="trailing" constant="15" id="2tF-bY-EW1"/>
                         <constraint firstItem="RY0-ck-eoe" firstAttribute="top" secondItem="Vhl-2U-16U" secondAttribute="top" constant="30" id="6Mx-Fk-96t"/>
                         <constraint firstItem="RY0-ck-eoe" firstAttribute="leading" secondItem="Vhl-2U-16U" secondAttribute="leading" constant="18" id="B1p-5I-3i8"/>
                         <constraint firstItem="lzQ-5j-0RN" firstAttribute="centerX" secondItem="Vhl-2U-16U" secondAttribute="centerX" id="JzS-bo-C4r"/>
+                        <constraint firstItem="3Kk-m8-JsO" firstAttribute="top" secondItem="Vhl-2U-16U" secondAttribute="top" constant="25" id="aUY-Xz-4UM"/>
                         <constraint firstAttribute="height" constant="64" id="cUc-b0-aDK"/>
                         <constraint firstItem="lzQ-5j-0RN" firstAttribute="top" secondItem="Vhl-2U-16U" secondAttribute="top" constant="25" id="lNz-hK-FiG"/>
                     </constraints>

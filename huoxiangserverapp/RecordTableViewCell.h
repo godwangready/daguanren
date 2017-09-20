@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface RecordTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
+@property (weak, nonatomic) IBOutlet UIImageView *sixImage;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 
 @end

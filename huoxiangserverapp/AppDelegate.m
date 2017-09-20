@@ -15,6 +15,9 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "MainViewController.h"
+#import "TeacherTabBarController.h"
+//Alipay
+#import <AlipaySDK/AlipaySDK.h>
 @interface AppDelegate ()
 
 @end
@@ -43,7 +46,6 @@
  */
     
     //轮播
-    LaunchIntroductionView *firstView = [LaunchIntroductionView sharedWithImages:@[@"one", @"two",@"one",@"two"] buttonImage:@"" buttonFrame:CGRectMake(KscreeWidth / 2, 400, 100, 30)];
 //    firstView.currentColor = [UIColor yellowColor];
 //    firstView.nomalColor = [UIColor orangeColor];
     
@@ -51,15 +53,33 @@
     NSUserDefaults *userid = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *apptoken = [NSUserDefaults standardUserDefaults];
     if ([NSString stringWithFormat:@"%@", [userid objectForKey:@"userid"]].length != 0 && [NSString stringWithFormat:@"%@", [apptoken objectForKey:@"apptoken"]] != 0) {
-        MainViewController *main = [[MainViewController alloc] init];
-        [main.tabBar setTintColor:[UIColor colorWithHexString:@"ff8042"]];
-        [main.tabBar setBarTintColor:[UIColor whiteColor]];
-        self.window.rootViewController = main;
-        [self.window makeKeyAndVisible];
+        if ([[NSString stringWithFormat:@"%@", [userid objectForKey:@"roleId"]] integerValue] == 2) {
+            MainViewController *main = [[MainViewController alloc] init];
+            [main.tabBar setTintColor:[UIColor colorWithHexString:@"ff8042"]];
+            [main.tabBar setBarTintColor:[UIColor whiteColor]];
+            self.window.rootViewController = main;
+            [self.window makeKeyAndVisible];
+        }else {
+            if ([[NSString stringWithFormat:@"%@", [userid objectForKey:@"roleId"]] integerValue] == 3) {
+                TeacherTabBarController *main = [[TeacherTabBarController alloc] init];
+                [main.tabBar setTintColor:[UIColor colorWithHexString:@"ff8042"]];
+                [main.tabBar setBarTintColor:[UIColor whiteColor]];
+                main.view.backgroundColor = [UIColor whiteColor];
+                [UITabBar appearance].translucent = NO;
+                self.window.rootViewController = main;
+                [self.window makeKeyAndVisible];
+            }else {
+                //
+                self.window.rootViewController = navigation;
+                [self.window makeKeyAndVisible];
+            }
+        }
+
     }else {
         self.window.rootViewController = navigation;
         [self.window makeKeyAndVisible];
     }
+    LaunchIntroductionView *firstView = [LaunchIntroductionView sharedWithImages:@[@"one", @"two",@"one",@"two"] buttonImage:@"" buttonFrame:CGRectMake(KscreeWidth / 2, 400, 100, 30)];
     //配置高德KEY
     [AMapServices sharedServices].apiKey = GaoDeKey;
     return YES;
@@ -113,7 +133,31 @@
  }
  }
  */
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    return YES;
+}
 
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    return YES;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

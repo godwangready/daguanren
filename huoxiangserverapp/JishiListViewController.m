@@ -41,7 +41,6 @@ static NSString *cellid = @"jishilistcell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jishibianhaoAction:) name:NsNotficationJishibianhao object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jishicancletuijianAction:) name:NsnotficationJishiCancleTuijian object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(agreeTeacherBinding) name:NsnotificationAgreeTeacherBindingSuccess object:nil];
-    [self requestData];
 }
 - (void) downRefresh {
     [self requestData];
@@ -56,20 +55,29 @@ static NSString *cellid = @"jishilistcell";
     [dict setObject:@"1" forKey:@"bindingStatus"];
     [dict setObject:[NSString stringWithFormat:@"%ld", (long)_index + 1] forKey:@"currentPage"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_server_manage" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:TeacherList] parameters:outDict success:^(NSDictionary *data) {
         [listTV.mj_footer endRefreshing];
-        NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
-        for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
-            TeacherListModel *model = [[TeacherListModel alloc] init];
-            [model setValuesForKeysWithDictionary:dict];
-            [self.datasource addObject:model];
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    TeacherListModel *model = [[TeacherListModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.datasource addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [listTV reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [listTV reloadData];
-        });
-        NSLog(@"%@", data);
     } failure:^(NSError *error) {
         [listTV.mj_header endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 
 }
@@ -86,21 +94,30 @@ static NSString *cellid = @"jishilistcell";
     [dict setObject:@"1" forKey:@"bindingStatus"];
     [dict setObject:@"" forKey:@"currentPage"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_server_manage" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:TeacherList] parameters:outDict success:^(NSDictionary *data) {
         [listTV.mj_header endRefreshing];
-        NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
-        for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
-            TeacherListModel *model = [[TeacherListModel alloc] init];
-            [model setValuesForKeysWithDictionary:dict];
-            [self.datasource addObject:model];
-            _index = model.currentPage.integerValue;
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    TeacherListModel *model = [[TeacherListModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.datasource addObject:model];
+                    self.index = model.currentPage.integerValue;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [listTV reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [listTV reloadData];
-        });
-        NSLog(@"%@", data);
     } failure:^(NSError *error) {
         [listTV.mj_header endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 }
 - (void) agreeTeacherBinding {
@@ -113,6 +130,7 @@ static NSString *cellid = @"jishilistcell";
     [dict setObject:[userinfo.userInfo objectForKey:@"mainkey"] forKey:@"bindingId"];
     [dict setObject:@"0" forKey:@"recommend"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_server_manage" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:RecommendTeacher] parameters:outDict success:^(NSDictionary *data) {
         if ([[data objectForKey:@"resCode"] integerValue] == 100) {
             [CMMUtility showSucessWith:@"取消成功!"];
@@ -131,6 +149,7 @@ static NSString *cellid = @"jishilistcell";
     [dict setObject:[userinfo.userInfo objectForKey:@"mainkey"] forKey:@"bindingId"];
     [dict setObject:@"1" forKey:@"recommend"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+    [outDict setObject:@"store_server_manage" forKey:@"logView"];
     [WTNewRequest postWithURLString:[self createRequestUrl:RecommendTeacher] parameters:outDict success:^(NSDictionary *data) {
         if ([[data objectForKey:@"resCode"] integerValue] == 100) {
             [CMMUtility showSucessWith:@"推荐成功!"];
@@ -161,6 +180,7 @@ static NSString *cellid = @"jishilistcell";
         [dict setObject:[NSString stringWithFormat:@"%@", [notification.userInfo objectForKey:@"mainkey"]] forKey:@"bindingId"];
         [dict setObject:[NSString stringWithFormat:@"%@", weakAlert.textFields.firstObject.text] forKey:@"serverNamer"];
         [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+        [outDict setObject:@"store_server_manage" forKey:@"logView"];
         [WTNewRequest postWithURLString:[self createRequestUrl:Alterservernamer] parameters:outDict success:^(NSDictionary *data) {
             if ([[data objectForKey:@"resCode"] integerValue] == 100) {
                 [CMMUtility showSucessWith:@"修改成功!"];
@@ -203,7 +223,14 @@ static NSString *cellid = @"jishilistcell";
         }
         cell.nameLable.text = [NSString stringWithFormat:@"%@", model.nickName];
         cell.ageLable.text = [NSString stringWithFormat:@"%@", model.age];
-        cell.numberLable.text = [NSString stringWithFormat:@"%@", model.serverNamer];
+        if (model.serverNamer == nil) {
+            cell.numberLable.text = @"";
+        }else {
+            cell.numberLable.text = [NSString stringWithFormat:@"%@号", model.serverNamer];
+        }
+        cell.iconImage.layer.masksToBounds = YES;
+        cell.iconImage.layer.cornerRadius = 3;
+        [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.headPortrait]]];
         cell.mainkey = [NSString stringWithFormat:@"%@", model.bindingId];
         cell.cancleTuijian.layer.masksToBounds = YES;
         cell.cancleTuijian.layer.cornerRadius = 2;
@@ -216,9 +243,17 @@ static NSString *cellid = @"jishilistcell";
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"JiShiListTableViewCell" owner:nil options:nil] lastObject];
     }
+    cell.iconImage.layer.masksToBounds = YES;
+    cell.iconImage.layer.cornerRadius = 3;
+    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.headPortrait]]];
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", model.nickName];
     cell.ageLabel.text = [NSString stringWithFormat:@"%@", model.age];
-    cell.bianhaoLabel.text = [NSString stringWithFormat:@"%@", model.serverNamer];
+    if (model.serverNamer == nil) {
+        cell.bianhaoLabel.text = @"";
+    }else {
+        cell.bianhaoLabel.text = [NSString stringWithFormat:@"%@号", model.serverNamer];
+    }
+//    cell.bianhaoLabel.text = [NSString stringWithFormat:@"%@", model.serverNamer];
     cell.mainkey = [NSString stringWithFormat:@"%@", model.bindingId];
     cell.tuijian.layer.masksToBounds = YES;
     cell.tuijian.layer.cornerRadius = 2;

@@ -58,24 +58,28 @@ static NSString *cellid = @"pickcell";
 @property (nonatomic, strong) UITextField *locationTF;
 @property (nonatomic, strong) NSDictionary *detailDict;
 @property (nonatomic, strong) NSString *imageAdress;
-
+@property (nonatomic, strong) UITextField *detailStoreTF;
 @end
 
 @implementation AddCommityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setLayOut];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
     if (self.productID.length == 0) {
         [self wtTopViewWithBackString:@"返回-" andTitlestring:@"新增商品"];
     }else {
         [self wtTopViewWithBackString:@"返回-" andTitlestring:@"修改商品"];
+        nameTF.text = [NSString stringWithFormat:@"%@", self.managemodel.productName] ;
+        imageTF.text = [NSString stringWithFormat:@"%@", self.managemodel.price];
+        _detailStoreTF.text = [NSString stringWithFormat:@"%@", self.managemodel.productDetails];
+        self.locationTF.text = [NSString stringWithFormat:@"%@", self.managemodel.productIntro];
     }
     // Do any additional setup after loading the view.
-    [self setLayOut];
     postButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [postButton addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-    postButton.frame = CGRectMake(KscreeWidth / 2 - 140, 484, 280, 45);//
+    postButton.frame = CGRectMake(KscreeWidth / 2 - 140, 310 + 50, 280, 45);//
     [postButton setBackgroundColor:[UIColor colorWithHexString:@"ff8042"]];
     [postButton setTitle:@"保存商品" forState:UIControlStateNormal];
     postButton.layer.masksToBounds = YES;
@@ -100,7 +104,7 @@ static NSString *cellid = @"pickcell";
 }
 - (void) setLayOut {
 
-        downView = [[UIView alloc] initWithFrame:CGRectMake(0, 84, KscreeWidth, 350)];
+        downView = [[UIView alloc] initWithFrame:CGRectMake(0, 84, KscreeWidth, 250)];
         downView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
         [self.view addSubview:downView];
     
@@ -121,39 +125,39 @@ static NSString *cellid = @"pickcell";
         phoneLable.text = @"商品类型";
     phoneLable.textColor = [UIColor colorWithHexString:@"333333"];
     phoneLable.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
-        [downView addSubview:phoneLable];
+//        [downView addSubview:phoneLable];
     phoneTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 62, KscreeWidth - 140, 30)];
     phoneTF.placeholder = @"请输入商品类型";
     phoneTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
-    [downView addSubview:phoneTF];
+//    [downView addSubview:phoneTF];
         twoView = [[UIView alloc] initWithFrame:CGRectMake(0, 100, KscreeWidth, 1)];
         twoView.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
-        [downView addSubview:twoView];
-        
-        locationLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 30)];
+//        [downView addSubview:twoView];
+    
+        locationLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 200 + 10, 100, 30)];
         locationLable.text = @"商品简介";
     locationLable.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
     locationLable.textColor = [UIColor colorWithHexString:@"333333"];
         [downView addSubview:locationLable];
-    _locationTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 112, KscreeWidth - 140, 30)];
+    _locationTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 212, KscreeWidth - 140, 30)];
     _locationTF.placeholder = @"简介";
     _locationTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
     [downView addSubview:_locationTF];
-        threeView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, KscreeWidth, 1)];
+        threeView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, KscreeWidth, 1)];
         threeView.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
         [downView addSubview:threeView];
-        
-        imageLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 30)];
-        imageLable.text = @"门店价";
+    
+        imageLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 30)];
+        imageLable.text = @"参考价";
     imageLable.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
     imageLable.textColor = [UIColor colorWithHexString:@"333333"];
         [downView addSubview:imageLable];
-    imageTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 162, KscreeWidth - 140, 30)];
-    imageTF.placeholder = @"请输入门店价";
+    imageTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 62, KscreeWidth - 140, 30)];
+    imageTF.placeholder = @"请输入参考价";
     imageTF.keyboardType = UIKeyboardTypeDecimalPad;
     imageTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
     [downView addSubview:imageTF];
-        fourView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, KscreeWidth, 1)];
+        fourView = [[UIView alloc] initWithFrame:CGRectMake(0, 100, KscreeWidth, 1)];
         fourView.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
         [downView addSubview:fourView];
         
@@ -161,28 +165,35 @@ static NSString *cellid = @"pickcell";
         noteLable.text =@"平台价";
     noteLable.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
     noteLable.textColor = [UIColor colorWithHexString:@"333333"];
-        [downView addSubview:noteLable];
+//        [downView addSubview:noteLable];
     noteTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 212, KscreeWidth - 140, 30)];
     noteTF.placeholder = @"请输入平台价";
     noteTF.keyboardType = UIKeyboardTypeDecimalPad;
     noteTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
-    [downView addSubview:noteTF];
+//    [downView addSubview:noteTF];
     fiveView = [[UIView alloc] initWithFrame:CGRectMake(0, 250, KscreeWidth, 1)];
     fiveView.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"];
-    [downView addSubview:fiveView];
+//    [downView addSubview:fiveView];
     
-    trueImageLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 260, 100, 30)];
+    trueImageLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 30)];
     trueImageLable.textColor = [UIColor colorWithHexString:@"333333"];
     trueImageLable.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
     trueImageLable.text = @"商品图";
     [downView addSubview:trueImageLable];
-    sixView = [[UIView alloc] initWithFrame:CGRectMake(0, 300, KscreeWidth, 1)];
+    sixView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, KscreeWidth, 1)];
     sixView.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"];
     [downView addSubview:sixView];
     
-    detailLale = [[UILabel alloc] initWithFrame:CGRectMake(20, 310, 100, 30)];
+    detailLale = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 30)];
     detailLale.text = @"商品详情";
+    detailLale.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
+    detailLale.textColor = [UIColor colorWithHexString:@"333333"];
     [downView addSubview:detailLale];
+    self.detailStoreTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 160, KscreeWidth - 140, 30)];
+    self.detailStoreTF.placeholder = @"请填写商品详情";
+    self.detailStoreTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
+    [downView addSubview:self.detailStoreTF];
+    
     detail = [UIButton buttonWithType:UIButtonTypeCustom];
     [detail setTitle:@"请填写商品信息" forState:UIControlStateNormal];
     detail.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -193,17 +204,17 @@ static NSString *cellid = @"pickcell";
     [detail.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [detail setTitleColor:[UIColor colorWithHexString:@"cccccc"] forState:UIControlStateNormal];
     [detail addTarget:self action:@selector(detailAction) forControlEvents:UIControlEventTouchUpInside];
-    [downView addSubview:detail];
+//    [downView addSubview:detail];
     //width == 40
     detailImageView = [UIButton buttonWithType:UIButtonTypeCustom];
     detailImageView.frame = CGRectMake(KscreeWidth - 60, 312, 40, 30);
     [detailImageView setImage:[UIImage imageNamed:@"进入"] forState:UIControlStateNormal];
     [detailImageView addTarget:self action:@selector(tapImageDetailAction) forControlEvents:UIControlEventTouchUpInside];
-    [downView addSubview:detailImageView];
+//    [downView addSubview:detailImageView];
     
     imageTV = [[UITableView alloc] init];
     imageTV.transform = CGAffineTransformMakeRotation(-M_PI / 2);
-    imageTV.frame = CGRectMake(120, 255, KscreeWidth - 120 - 20, 40);
+    imageTV.frame = CGRectMake(120, 110, KscreeWidth - 120 - 20, 40);
     [imageTV registerNib:[UINib nibWithNibName:@"ImagePickTableViewCell" bundle:nil] forCellReuseIdentifier:cellid];
     imageTV.delegate = self;
     imageTV.dataSource = self;
@@ -361,7 +372,7 @@ static NSString *cellid = @"pickcell";
 #warning mark -
 - (void) imagePickAction {
     LLImagePickerController *navigationController = [[LLImagePickerController alloc] init];
-    navigationController.autoJumpToPhotoSelectPage = NO;
+    navigationController.autoJumpToPhotoSelectPage = YES;
     navigationController.allowSelectReturnType = NO;
     navigationController.maxSelectedCount = 1;
     if (iOS8Upwards) {
@@ -403,6 +414,7 @@ static NSString *cellid = @"pickcell";
         NSLog(@"%@", dict);
         weakself.detailDict = [NSDictionary dictionaryWithDictionary:dict];
     };
+    vc.managemodel = self.managemodel;
     vc.valueDict = self.detailDict;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -411,6 +423,8 @@ static NSString *cellid = @"pickcell";
     [phoneTF resignFirstResponder];
     [imageTF resignFirstResponder];
     [noteTF resignFirstResponder];
+    [self.detailStoreTF resignFirstResponder];
+    [self.locationTF resignFirstResponder];
 }
 - (void) detailAction {
     DetailCommityViewController *vc = [[DetailCommityViewController alloc] initWithNibName:@"DetailCommityViewController" bundle:nil];
@@ -420,6 +434,7 @@ static NSString *cellid = @"pickcell";
         weakself.detailDict = [NSDictionary dictionaryWithDictionary:dict];
     };
     vc.valueDict = self.detailDict;
+    vc.managemodel = self.managemodel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) saveAction {
@@ -444,42 +459,50 @@ static NSString *cellid = @"pickcell";
         [CMMUtility showFailureWith:@"请输入商品名称"];
         return;
     }
-    if (phoneTF.text.length == 0) {
-        [CMMUtility showFailureWith:@"请输入商品类型"];
+//    if (phoneTF.text.length == 0) {
+//        [CMMUtility showFailureWith:@"请输入商品类型"];
+//        return;
+//    }
+    if (imageTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入参考价"];
         return;
     }
-    if (imageTF.text.length == 0) {
+    if (self.detailStoreTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入商品详情"];
+        return;
+    }
+    if (self.locationTF.text.length == 0) {
         [CMMUtility showFailureWith:@"请输入简介"];
         return;
     }
-    if (noteTF.text.length == 0) {
-        [CMMUtility showFailureWith:@"请输入门店价"];
-        return;
-    }
-    if (_locationTF.text.length == 0) {
-        [CMMUtility showFailureWith:@"请输入平台价"];
-        return;
-    }
-    if (self.detailDict) {
-        NSLog(@"一切正常");
-    }else {
-        [CMMUtility showFailureWith:@"请填写商品详细信息"];
-        return;
-    }
+//    if (noteTF.text.length == 0) {
+//        [CMMUtility showFailureWith:@"请输入门店价"];
+//        return;
+//    }
+//    if (_locationTF.text.length == 0) {
+//        [CMMUtility showFailureWith:@"请输入平台价"];
+//        return;
+//    }
+//    if (self.detailDict) {
+//        NSLog(@"一切正常");
+//    }else {
+//        [CMMUtility showFailureWith:@"请填写商品详细信息"];
+//        return;
+//    }
     if (self.dataArray.count < 2) {
         [CMMUtility showFailureWith:@"请上传一张商品展示图"];
         return;
     }
     NSLog(@"%@~%@", [self.detailDict objectForKey:@"message"], [self.detailDict objectForKey:@"rule"]);
     postButton.userInteractionEnabled = NO;
-        NSData *data = UIImagePNGRepresentation([_dataArray objectAtIndex:0]);
-//    NSData *dataa = UIImageJPEGRepresentation([_dataArray objectAtIndex:i], .1);
+//        NSData *data = UIImagePNGRepresentation([_dataArray objectAtIndex:0]);
+    NSData *data = UIImageJPEGRepresentation([_dataArray objectAtIndex:0], 0.5);
 //    NSData *dataa = UIImagePNGRepresentation(imageee);
         AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
         manage.responseSerializer = [AFHTTPResponseSerializer serializer];
         manage.requestSerializer = [AFHTTPRequestSerializer serializer];
 //        NSString *url = @"http://192.168.0.100:8080/statics/uploadresource";
-        [manage POST:ALIpullImageAndVideo parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [manage POST:ALIpullImageAndVideo47 parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:data name:@"file" fileName:@"one.png" mimeType:@"png"];
 //            [formData appendPartWithFileData:dataa name:@"file" fileName:@"two.png" mimeType:@"png"];
             NSLog(@"%@", _dataArray);
@@ -503,7 +526,10 @@ static NSString *cellid = @"pickcell";
     [dict setObject:[NSString stringWithFormat:@"%@", nameTF.text] forKey:@"productName"];
     [dict setObject:[NSString stringWithFormat:@"%@", imageTF.text] forKey:@"price"];
     [dict setObject:[NSString stringWithFormat:@"%@", _imageAdress] forKey:@"productPicture"];
-    [dict setObject:[WTCJson dictionaryToJson:self.detailDict] forKey:@"productDetails"];
+    [dict setObject:[NSString stringWithFormat:@"%@", self.detailStoreTF.text] forKey:@"productDetails"];
+    [dict setObject:[NSString stringWithFormat:@"%@", self.locationTF.text] forKey:@"productIntro"];
+    NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+    [dict setObject:[userdf objectForKey:@"storeId"] forKey:@"storeId"];
     NSMutableDictionary *outDict = [self makeDict];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:Redactproduct] parameters:outDict success:^(NSDictionary *data) {
@@ -515,7 +541,7 @@ static NSString *cellid = @"pickcell";
             self.productID = @"";
             [self.navigationController popViewControllerAnimated:YES];
         }else {
-            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resCode"]]];
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
         }
         //        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {

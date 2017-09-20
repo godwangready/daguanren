@@ -7,14 +7,39 @@
 //
 
 #import "BaseModel.h"
-
+#import "CommentCellModel.h"
+#import "CommentCellFrameModel.h"
 @interface CommentModel : BaseModel
-@property (nonatomic, strong) NSString *iconImageURLs;
-@property (nonatomic, strong) NSString *names;
-@property (nonatomic, strong) NSString *marks;
-@property (nonatomic, strong) NSString *times;
-@property (nonatomic, strong) NSString *contents;
-@property (nonatomic, strong) NSString *selects;
-@property (nonatomic, strong) NSString *replys;
-@property (nonatomic, strong) NSArray *replyImagesArray;
+/*
+ 基础信息
+ */
+@property (nonatomic, strong) NSString *commentId;
+@property (nonatomic, strong) NSString *starLevel;
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *picture_url;
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString *userNickName;
+@property (nonatomic, strong) NSString *userHeadPortrait;
+@property (nonatomic, strong) NSString *currentPage;
+@property (nonatomic, strong) NSString *deleteRemarks;
+@property (nonatomic, strong) NSString *deleteSysUserId;
+@property (nonatomic, strong) NSString *deleteUserId;
+
+@property (nonatomic, strong) NSString *pictureUrl;
+/*
+ 是否有评论
+ @0无评论
+ @1有评论
+ */
+@property (nonatomic, strong) NSString *iscomment;
+/*
+ @存储 cell的数据量
+ @存储 cell的数据高度(回复)
+ @存储 cell的
+ */
+@property (nonatomic, strong) NSMutableArray *commentArray;
+@property (nonatomic, strong) NSMutableArray *commentFrameArray;
+@property (nonatomic, strong) NSMutableArray *replyImagesArray;
 @end
+
+

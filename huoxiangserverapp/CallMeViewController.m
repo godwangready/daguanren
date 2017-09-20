@@ -70,7 +70,7 @@ static NSString *cellid = @"callcell";
             cell.rightLabel.font = [UIFont fontWithName:@"PingFang Light.ttf" size:14];
             cell.rightLabel.textAlignment = NSTextAlignmentRight;
             cell.leftLabel.text = @"联系电话";
-            cell.rightLabel.text = @"12345678901";
+            cell.rightLabel.text = HXtel;
             break;
         default:
             break;
@@ -89,7 +89,7 @@ static NSString *cellid = @"callcell";
         {
            //打电话
             UIWebView *phoneWeb = [[UIWebView alloc] init];
-            NSURL *url = [[NSURL alloc] initWithString:@"tel:10086"];
+            NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"tel:%@", HXtel]];
             [phoneWeb loadRequest:[NSURLRequest requestWithURL:url]];
             [self.view addSubview:phoneWeb];
         }
@@ -113,10 +113,12 @@ static NSString *cellid = @"callcell";
 }
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self hideTabBar];
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self showTabBar];
     [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {

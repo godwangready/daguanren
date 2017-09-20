@@ -11,6 +11,7 @@
 #import "NewPasswordViewController.h"
 #import "SafeViewController.h"
 #import "SetViewController.h"
+#import "SetServerNameViewController.h"
 #import "CallMeViewController.h"
 #import "CertificationViewController.h"
 #import "NoCertificationViewController.h"
@@ -18,6 +19,8 @@
 #import "CertificationIngViewController.h"
 #import "LoginViewController.h"
 #import "SGLNavigationViewController.h"
+#import "NowCertificationViewController.h"
+#import "CaoCertificationingViewController.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate, UITableViewDataSource> {
     UITableView *listTab;
@@ -34,11 +37,6 @@
     [self setLayOut];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(100, 100, 100, 100);
-    [button setBackgroundColor:[UIColor redColor]];
-    [button addTarget:self action:@selector(uibuttonceshi) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:button];
 }
 - (void)setLayOut {
     
@@ -57,7 +55,12 @@
     [topView addSubview:titleLabel];
     
 //    listTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, 55 * 4) style:UITableViewStylePlain];
-    listTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, 55 * 4)];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+        listTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, 55 * 4)];
+    }else {
+        listTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 20, KscreeWidth, 55 * 3 - 1)];
+    }
     listTab.delegate = self;
     listTab.dataSource = self;
     listTab.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -91,7 +94,13 @@
 }
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+        return 4;
+
+    }else {
+        return 3;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,55 +138,111 @@
     switch (indexPath.row) {
         case 0:
         {
-            SetViewController *vc = [[SetViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+//dianpu
+                    NSUserDefaults *userdef = [NSUserDefaults standardUserDefaults];
+                    if ([[NSString stringWithFormat:@"%@", [userdef objectForKey:CredentialsidentifyStatus]] integerValue] == 1) {
+                        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                        if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+                            SetViewController *vc = [[SetViewController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else {
+                            SetServerNameViewController *vc = [[SetServerNameViewController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }else {
+                        if ([[NSString stringWithFormat:@"%@", [userdef objectForKey:CredentialsidentifyStatus]] integerValue] == 2) {
+                            
+                            CaoCertificationingViewController *vc =[[CaoCertificationingViewController  alloc] init];
+                            [self presentViewController:vc animated:YES completion:nil];
+                        }else {
+                            NowCertificationViewController *vc = [[NowCertificationViewController alloc] initWithNibName:@"NowCertificationViewController" bundle:nil];
+                            vc.clanceID = @"0";
+                            [self presentViewController:vc animated:YES completion:nil];
+                            return;
+                        }
+
+                    }
+                }else {
+//jishi
+                    if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+                        SetViewController *vc = [[SetViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else {
+                        SetServerNameViewController *vc = [[SetServerNameViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+//                    SetViewController *vc = [[SetViewController alloc] init];
+//                    [self.navigationController pushViewController:vc animated:YES];
+                }
+
         }
             break;
             case 1:
         {
-            SafeViewController *vc = [[SafeViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            NSUserDefaults *userdef = [NSUserDefaults standardUserDefaults];
+            if ([[NSString stringWithFormat:@"%@", [userdef objectForKey:CredentialsidentifyStatus]] integerValue] == 1) {
+                SafeViewController *vc = [[SafeViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+                    //dianpu
+                    if ([[NSString stringWithFormat:@"%@", [userdef objectForKey:CredentialsidentifyStatus]] integerValue] == 2) {
+                        
+                        CaoCertificationingViewController *vc =[[CaoCertificationingViewController  alloc] init];
+                        [self presentViewController:vc animated:YES completion:nil];
+                    }else {
+                        NowCertificationViewController *vc = [[NowCertificationViewController alloc] initWithNibName:@"NowCertificationViewController" bundle:nil];
+                        vc.clanceID = @"0";
+                        [self presentViewController:vc animated:YES completion:nil];
+                        return;
+                    }
+
+                }else {
+                    //jishi
+                    SafeViewController *vc = [[SafeViewController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }
         }
             break;
             case 2:
         {
-            CallMeViewController *vc =[[CallMeViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+//            NSUserDefaults *userdef = [NSUserDefaults standardUserDefaults];
+//            if ([[NSString stringWithFormat:@"%@", [userdef objectForKey:CredentialsidentifyStatus]] integerValue] == 1) {
+                CallMeViewController *vc =[[CallMeViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+//            }else {
+//                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//                if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+//                    //dianpu
+//                    if ([[NSString stringWithFormat:@"%@", [userdef objectForKey:CredentialsidentifyStatus]] integerValue] == 2) {
+//                        
+//                        CaoCertificationingViewController *vc =[[CaoCertificationingViewController  alloc] init];
+//                        [self presentViewController:vc animated:YES completion:nil];
+//                    }else {
+//                        NowCertificationViewController *vc = [[NowCertificationViewController alloc] initWithNibName:@"NowCertificationViewController" bundle:nil];
+//                        vc.clanceID = @"0";
+//                        [self presentViewController:vc animated:YES completion:nil];
+//                        return;
+//                    }
+//
+//                    
+//                }else {
+//                    //jishi
+//                }
+//            }
+
+
         }
             break;
         case 3: {
-//            CertificationViewController *vc = [[CertificationViewController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-            NSUserDefaults *renzheng = [NSUserDefaults standardUserDefaults];
-            switch ([[renzheng objectForKey:CredentialsidentifyStatus] integerValue]) {
-                case 0:
-                {
-                    NoCertificationViewController *vc = [[NoCertificationViewController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                
-                case 1:
-                {
-                    AlreadyCertificationViewController *vc = [[AlreadyCertificationViewController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case -1:
-                {
-                    NoCertificationViewController *vc = [[NoCertificationViewController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case 2:
-                {
-                    CertificationIngViewController *vc = [[CertificationIngViewController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                default:
-                    break;
-            }
+            [self requestPersonMessageData];
+            
         }
             break;
         default:
@@ -190,19 +255,71 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0;
 }
-- (void) uibuttonceshi {
-//    ZheXianViewController *vc = [[ZheXianViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    NewPasswordViewController *vc = [[NewPasswordViewController alloc] initWithNibName:@"NewPasswordViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:vc animated:YES];
+#pragma mark - 个人认证信息
+- (void)requestPersonMessageData {
+    NSMutableDictionary *dict = [self makeDict];
+    [dict setObject:@"store_personal_set" forKey:@"logView"];
+    [WTNewRequest postWithURLString:[self createRequestUrl:Credentials] parameters:dict success:^(NSDictionary *data) {
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                switch ([[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]] objectForKey:@"identifyStatus"]] integerValue]) {
+                    case 0:
+                    {
+                        NoCertificationViewController *vc = [[NoCertificationViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                        
+                    case 1:
+                    {
+                        AlreadyCertificationViewController *vc = [[AlreadyCertificationViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case -1:
+                    {
+                        NoCertificationViewController *vc = [[NoCertificationViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case 2:
+                    {
+                        CertificationIngViewController *vc = [[CertificationIngViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    default:
+                        break;
+                }
+                NSUserDefaults *renzheng = [NSUserDefaults standardUserDefaults];
+                [renzheng setObject:[NSString stringWithFormat:@"%@", [[WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]] objectForKey:@"identifyStatus"]] forKey:@"identifyStatus"];
+                [renzheng synchronize];
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+        [CMMUtility showFailureWith:@"服务器故障"];
+    }];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self showTabBar];
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [super viewWillDisappear:animated];
+}
+- (void)viewDidDisappear:(BOOL)animated {
+//    [self hideTabBar];
+    [super viewDidDisappear:animated];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

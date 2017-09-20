@@ -13,7 +13,7 @@ static NSString *cellid = @"bindingcell";
 @interface BindingViewController ()<UITableViewDataSource, UITableViewDelegate> {
     UITableView *listTV;
 }
-@property (nonatomic, assign) NSInteger *index;
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
@@ -76,18 +76,26 @@ static NSString *cellid = @"bindingcell";
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:TeacherList] parameters:outDict success:^(NSDictionary *data) {
         [listTV.mj_footer endRefreshing];
-        NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
-        for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
-            TeacherBindingModel *model = [[TeacherBindingModel alloc] init];
-            [model setValuesForKeysWithDictionary:dict];
-            [self.dataSource addObject:model];
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                NSLog(@"%@", [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    TeacherBindingModel *model = [[TeacherBindingModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [self.dataSource addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [listTV reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [listTV reloadData];
-        });
-        NSLog(@"%@", data);
     } failure:^(NSError *error) {
         [listTV.mj_header endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
     
 }
@@ -115,23 +123,31 @@ static NSString *cellid = @"bindingcell";
     NSMutableDictionary *outDict = [self makeDict];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
     [dict setObject:@"0" forKey:@"bindingStatus"];
+    [dict setObject:@"" forKey:@"currentPage"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:TeacherList] parameters:outDict success:^(NSDictionary *data) {
         [listTV.mj_header endRefreshing];
-        NSLog(@"%@", [data objectForKey:@"resDate"]);
-                if ([[data objectForKey:@"resCode"] integerValue] == 100) {
-                    for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
-                        NSLog(@"%@-%@", dict, [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
-                        TeacherBindingModel *model = [[TeacherBindingModel alloc] init];
-                        [model setValuesForKeysWithDictionary:dict];
-                        [_dataSource addObject:model];
-                    }
-                  dispatch_async(dispatch_get_main_queue(), ^{
-                      [listTV reloadData];
-                  });
+        if ([[data objectForKey:@"resCode"] integerValue] == 100) {
+            if ([[data objectForKey:@"resDate"] integerValue] == 100) {
+                
+            }else {
+                for (NSDictionary *dict in [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]) {
+                    NSLog(@"%@-%@", dict, [WTCJson dictionaryWithJsonString:[data objectForKey:@"resDate"]]);
+                    TeacherBindingModel *model = [[TeacherBindingModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    [_dataSource addObject:model];
+                    self.index = model.currentPage.integerValue;
                 }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [listTV reloadData];
+                });
+            }
+        }else {
+            [CMMUtility showFailureWith:[NSString stringWithFormat:@"%@", [data objectForKey:@"resMsg"]]];
+        }
     } failure:^(NSError *error) {
         [listTV.mj_header endRefreshing];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 }
 #pragma mark - UITableViewDelegate , UITableViewDataSource
@@ -145,7 +161,24 @@ static NSString *cellid = @"bindingcell";
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"BindingTableViewCell" owner:nil options:nil] lastObject];
         }
-        cell.nameLable.text = model.nickName;
+        cell.nameLable.text = [NSString stringWithFormat:@"%@", model.nickName];
+        if (model.serverNamer == nil) {
+            cell.numberLable.text = @"";
+        }else {
+            cell.numberLable.text = [NSString stringWithFormat:@"%@号", model.serverNamer];
+        }
+        [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.headPortrait]]];
+//        switch ([[NSString stringWithFormat:@"%@", model.six] integerValue]) {
+//            case 0:
+//            {
+//                
+//            }
+//                break;
+//                
+//            default:
+//                break;
+//        }
+        cell.ageLable.text = [NSString stringWithFormat:@"%@", model.age];
         cell.mainkey = model.bindingId;
         cell.agreeButton.layer.masksToBounds = YES;
         cell.agreeButton.layer.cornerRadius = 2;
@@ -154,6 +187,8 @@ static NSString *cellid = @"bindingcell";
         [cell.agreeButton setTitle:@"已同意" forState:UIControlStateNormal];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.agreeButton.userInteractionEnabled = NO;
+        cell.iconImage.layer.masksToBounds = YES;
+        cell.iconImage.layer.cornerRadius = 3;
         return cell;
     }
     BindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
@@ -161,10 +196,28 @@ static NSString *cellid = @"bindingcell";
         cell = [[[NSBundle mainBundle] loadNibNamed:@"BindingTableViewCell" owner:nil options:nil] lastObject];
     }
     cell.nameLable.text = model.nickName;
+    if (model.serverNamer == nil) {
+        cell.numberLable.text = @"";
+    }else {
+        cell.numberLable.text = [NSString stringWithFormat:@"%@号", model.serverNamer];
+    }    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", model.headPortrait]]];
+    //        switch ([[NSString stringWithFormat:@"%@", model.six] integerValue]) {
+    //            case 0:
+    //            {
+    //
+    //            }
+    //                break;
+    //
+    //            default:
+    //                break;
+    //        }
+    cell.ageLable.text = [NSString stringWithFormat:@"%@", model.age];
     cell.mainkey = model.bindingId;
     cell.agreeButton.layer.masksToBounds = YES;
     cell.agreeButton.layer.cornerRadius = 2;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.iconImage.layer.masksToBounds = YES;
+    cell.iconImage.layer.cornerRadius = 3;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

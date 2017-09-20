@@ -19,6 +19,7 @@ static NSString *const reUse = @"reUse";
 @property (nonatomic, copy) NSArray <ALAssetsGroup *>*assetGroups;
 @property (nonatomic, copy) NSArray <PHAssetCollection *>*assetCollections;
 @property (nonatomic, assign) BOOL pushToCollectionPage;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -36,15 +37,29 @@ static NSString *const reUse = @"reUse";
     }
     return self;
 }
-
+#warning mark - pop
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[LLImageSelectHandler instance] removeAllAssets];
+    [self buildingUI];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.    
+    // Do any additional setup after loading the view.
+    // 获取当前应用对照片的访问授权状态
+    if ([PHPhotoLibrary authorizationStatus] != PHAuthorizationStatusAuthorized)
+    {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(observeAuthrizationStatusChange:) userInfo:nil repeats:YES];
+    }
+}
+- (void)observeAuthrizationStatusChange:(NSTimer *)timer {
+    /** 当用户已授权 */
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+        [timer invalidate];
+        self.timer = nil;
+        [self loadingPhotos];
+    }
 }
 #warning mark - UI再次创建防止POP无按钮
 - (void)viewWillAppear:(BOOL)animated {

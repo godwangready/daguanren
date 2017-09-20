@@ -144,6 +144,10 @@
         [CMMUtility showFailureWith:@"请填写手机号"];
         return;
     }
+    if (phoneNumber.text.length != 11) {
+        [CMMUtility showFailureWith:@"请正确输入手机号码"];
+        return;
+    }
     [self getRegistandphone:[NSString stringWithFormat:@"%@", phoneNumber.text]];
     /*
      计时器
@@ -188,6 +192,14 @@
 }
 //获取短信验证
 - (void)getRegistandphone:(NSString *)phone {
+    if (phoneNumber.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入手机号码"];
+        return;
+    }
+    if (phoneNumber.text.length != 11) {
+        [CMMUtility showFailureWith:@"请正确输入手机号码"];
+        return;
+    }
     manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -209,7 +221,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [CMMUtility showFailureWith:@""];
+        [CMMUtility showFailureWith:@"服务器故障"];
     }];
 }
 - (NSString *)createRequestUrl:(NSString *)urls {
@@ -264,7 +276,7 @@
     [self.navigationController pushViewController:login animated:YES];
 
 }
-#warning mark - 店家标识 MD5加密
+#pragma mark - 店家标识 MD5加密
 //[dict setObject:[WTMD5 MD5toup32bate:passward] forKey:@"pwd"]
 - (void) goSetMessage {
     if (mesageNumber.text.length == 0) {
@@ -273,6 +285,23 @@
     }
     if (passwordNumber.text.length == 0) {
         [CMMUtility showFailureWith:@"请设置密码"];
+        return;
+    }
+    if (phoneNumber.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入手机号码"];
+        return;
+    }
+    if (phoneNumber.text.length != 11) {
+        [CMMUtility showFailureWith:@"请正确填写手机号"];
+        return;
+    }
+    //6-12位数字和字母组成
+    NSString *regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([pred evaluateWithObject:passwordNumber.text]) {
+        
+    }else {
+        [CMMUtility showFailureWith:@"密码必须是6到12位字母与数字组成"];
         return;
     }
 //    [[UIDevice currentDevice].identifierForVendor UUIDString]
@@ -294,6 +323,7 @@
     regist.userInteractionEnabled = YES;
     if (recode.integerValue == 100) {
 //        NSDictionary *dataDict = [WTCJson dictionaryWithJsonString:[dict objectForKey:@"resDate"]];
+        //保存用户状态参数
         NSUserDefaults *userID = [NSUserDefaults standardUserDefaults];
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"userId"]] forKey:@"userid"];
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"appToken"]] forKey:@"apptoken"];
@@ -301,6 +331,11 @@
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"identifyStatus"]] forKey:CredentialsidentifyStatus];
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"nickName"]] forKey:@"nickname"];
         [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"headPortrait"]] forKey:@"headimage"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"roleId"]] forKey:@"roleId"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"sex"]] forKey:@"sex"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"userName"]] forKey:@"userName"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"telephone"]] forKey:@"telephone"];
+        [userID setObject:[NSString stringWithFormat:@"%@", [dict objectForKey:@"age"]] forKey:@"age"];
         [userID synchronize];
         
         if (_identityID.integerValue == 2) {
@@ -324,7 +359,10 @@
              */
             TeacherTabBarController *teacher = [[TeacherTabBarController alloc] init];
             teacher.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [teacher.tabBar setTintColor:[UIColor orangeColor]];
+            [teacher.tabBar setTintColor:[UIColor colorWithHexString:@"ff8042"]];
+            [teacher.tabBar setBarTintColor:[UIColor whiteColor]];
+            teacher.view.backgroundColor = [UIColor whiteColor];
+//            [UITabBar appearance].translucent = NO;
             [self presentViewController:teacher animated:YES completion:nil];
         }
     }else {

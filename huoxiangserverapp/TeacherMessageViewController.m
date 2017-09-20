@@ -14,6 +14,7 @@
 #import "FriendsterPictureTableViewCell.h"
 #import "FriendPictureModel.h"
 #import "FriendPictureFrameModel.h"
+#import "FriendCellModel.h"
 
 static NSString *cellpicture = @"picturecell";
 
@@ -30,36 +31,6 @@ static NSString *cellpicture = @"picturecell";
 //    [self showColumnView];
     // Do any additional setup after loading the view.
     
-    for (int i = 0; i < 4; i++) {
-        FriendPictureModel *model = [[FriendPictureModel alloc] init];
-        FriendPictureFrameModel *frameModel = [[FriendPictureFrameModel alloc] init];
-        model.contentString = @"";
-        //手动计算
-        NSString *messageString = model.contentString;
-        CGSize messagesize = [messageString boundingRectWithSize:CGSizeMake(KscreeWidth - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-        model.cellHeight = messagesize.height;
-        frameModel.iconFrame = CGRectMake(20, 20, 100, 100);
-        frameModel.nameFrame = CGRectMake(140, 20, 100, 30);
-        frameModel.contentFrame = CGRectMake(140, frameModel.nameFrame.origin.y + 10, KscreeWidth - 160, messagesize.height);
-        frameModel.arrimage = CGRectMake(140, frameModel.contentFrame.origin.y + frameModel.contentFrame.size.height + 20, 150, 150);
-        [self.dataSource addObject:model];
-        [self.frameDatasource addObject:frameModel];
-    }
-    for (int j = 0; j < 4; j++) {
-        FriendPictureModel *model1 = [[FriendPictureModel alloc] init];
-        FriendPictureFrameModel *frameModel1 = [[FriendPictureFrameModel alloc] init];
-        model1.contentString = @"尊敬的各位领导，各位来宾，女士们，先生们大家下午好！很高兴能够在这个生机勃勃的春天里，和大家相约在唐山创造力沙龙成立唐山创造力沙龙成立仪式暨第三届房地产业界营销精英论坛，本次活动由共青团唐山市委和唐山市文化广播电视新闻出版局主办，唐山电台，唐山电视台，唐山广播电视报社联合承办的。";
-        //手动计算
-        NSString *messageString1 = @"尊敬的各位领导，各位来宾，女士们，先生们大家下午好！很高兴能够在这个生机勃勃的春天里，和大家相约在唐山创造力沙龙成立唐山创造力沙龙成立仪式暨第三届房地产业界营销精英论坛，本次活动由共青团唐山市委和唐山市文化广播电视新闻出版局主办，唐山电台，唐山电视台，唐山广播电视报社联合承办的。";
-        CGSize messagesize1 = [messageString1 boundingRectWithSize:CGSizeMake(KscreeWidth - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-        model1.cellHeight = messagesize1.height;
-        frameModel1.iconFrame = CGRectMake(20, 20, 100, 100);
-        frameModel1.nameFrame = CGRectMake(140, 20, 100, 30);
-        frameModel1.contentFrame = CGRectMake(140, frameModel1.nameFrame.origin.y + 10, KscreeWidth - 160, messagesize1.height);
-        frameModel1.arrimage = CGRectMake(140, frameModel1.contentFrame.origin.y + frameModel1.contentFrame.size.height + 20, 150, 150);
-        [self.dataSource addObject:model1];
-        [self.frameDatasource addObject:frameModel1];
-    }
     [self.view addSubview:self.friendTV];
 }
 - (NSMutableArray *)dataSource {
@@ -98,7 +69,8 @@ static NSString *cellpicture = @"picturecell";
     FriendPictureModel *model = self.dataSource[indexPath.row];
     FriendPictureFrameModel *frameModel = self.frameDatasource[indexPath.row];
     cell.cellFrame = frameModel;
-    cell.contentLablel.text = model.contentString;
+//    cell.contentLablel.text = model.contentString;
+    cell.model = model;
     return cell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -106,7 +78,7 @@ static NSString *cellpicture = @"picturecell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     FriendPictureFrameModel *model = self.frameDatasource[indexPath.row];
-    return model.arrimage.origin.y + model.arrimage.size.height + 20;
+    return 10;//model.arrimage.origin.y + model.arrimage.size.height + 20 + 200;
 }
 
 //柱状图

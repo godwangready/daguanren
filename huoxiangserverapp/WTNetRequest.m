@@ -34,6 +34,7 @@
     [dict setObject:checkCode forKey:@"appCode"];
     [dict setObject:maccode forKey:@"telMac"];
     [dict setObject:roleId forKey:@"roleId"];
+    [dict setObject:@"0" forKey:@"sex"];
     /*
      MD5
      */

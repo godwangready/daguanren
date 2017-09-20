@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "ManageDetailModel.h"
 
 @interface ManageModel : BaseModel
 @property (nonatomic, strong) NSString *productId;
@@ -14,4 +15,6 @@
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *productPicture;
 @property (nonatomic, strong) NSString *productDetails;
+@property (nonatomic, strong) NSString *productIntro;
+@property (nonatomic, strong) ManageDetailModel *detailModle;
 @end

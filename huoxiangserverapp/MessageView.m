@@ -36,21 +36,21 @@ static CustomAnimationMode mode;
         _oneline = [[UIView alloc] initWithFrame:CGRectMake(20, _titleLabel.frame.origin.y + LabelHeight + [self hLocation:TwoEmpty], frame.size.width - 40, 1)];
         _oneline.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"];
         [self addSubview:_oneline];
-        
-        
-        
         _messageLabel = [[UILabel alloc] init];
         _messageLabel.textColor = [UIColor colorWithHexString:@"666666"];
         _messageLabel.font = [UIFont systemFontOfSize:14];
-        NSString *messageString = @"尊敬的各位领导，各位来宾，女士们，先生们大家下午好！很高兴能够在这个生机勃勃的春天里，和大家相约在唐山创造力沙龙成立唐山创造力沙龙成立仪式暨第三届房地产业界营销精英论坛，本次活动由共青团唐山市委和唐山市文化广播电视新闻出版局主办，唐山电台，唐山电视台，唐山广播电视报社联合承办的。";
-        CGSize messagesize = [messageString boundingRectWithSize:CGSizeMake(frame.size.width - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-        _messageLabel.text = @"尊敬的各位领导，各位来宾，女士们，先生们大家下午好！很高兴能够在这个生机勃勃的春天里，和大家相约在唐山创造力沙龙成立唐山创造力沙龙成立仪式暨第三届房地产业界营销精英论坛，本次活动由共青团唐山市委和唐山市文化广播电视新闻出版局主办，唐山电台，唐山电视台，唐山广播电视报社联合承办的。";
+
+        _messageLabel.text = @"";
         _messageLabel.numberOfLines = 0;
-        _messageLabel.frame = CGRectMake(20, _oneline.frame.origin.y + 20, frame.size.width - 40, messagesize.height);
         [self addSubview:_messageLabel];
         
     }
     return self;
+}
+- (void)layoutSubviews {
+    NSString *messageString = [NSString stringWithFormat:@"%@", self.messageLabel.text];
+    CGSize messagesize = [messageString boundingRectWithSize:CGSizeMake(self.frame.size.width - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+    _messageLabel.frame = CGRectMake(20, _oneline.frame.origin.y + 20, self.frame.size.width - 40, messagesize.height);
 }
 -(void)showInWindowWithMode:(CustomAnimationMode)animationMode{
     mode = animationMode;

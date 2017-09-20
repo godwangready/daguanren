@@ -21,5 +21,6 @@
 @property (nonatomic, weak) id<PKRecordShortVideoDelegate> delegate;
 
 - (instancetype)initWithOutputFilePath:(NSString *)outputFilePath outputSize:(CGSize)outputSize themeColor:(UIColor *)themeColor;
-
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *overturnButton;
 @end

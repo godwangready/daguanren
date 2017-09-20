@@ -61,7 +61,7 @@
     [self.view addSubview:downView];
     _nameTF = [[UITextField alloc] initWithFrame:CGRectMake(20, 10, KscreeWidth - 40, 30)];
     NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
-    _nameTF.text = [userinfo objectForKey:@"nickname"];
+    _nameTF.text = [userinfo objectForKey:@"nickName"];
     _nameTF.clearButtonMode = UITextFieldViewModeAlways;
     _nameTF.borderStyle = UITextBorderStyleNone;
     _nameTF.textColor = [UIColor colorWithHexString:@"333333"];
@@ -76,15 +76,22 @@
     NSMutableDictionary *outDict = [self makeDict];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
     [dict setObject:[NSString stringWithFormat:@"%@", _nameTF.text] forKey:@"nickName"];
-    [dict setObject:@"2" forKey:@"roleId"];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([[NSString stringWithFormat:@"%@", [userDefaults objectForKey:@"roleId"]] integerValue] == 2) {
+        [dict setObject:@"2" forKey:@"roleId"];
+    }else {
+        [dict setObject:@"3" forKey:@"roleId"];
+    }
     [dict setObject:@"" forKey:@"birthday"];
+    [dict setObject:@"" forKey:@"signature"];
+    [dict setObject:@"0" forKey:@"sex"];
     [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
     [WTNewRequest postWithURLString:[self createRequestUrl:Changenickname] parameters:outDict success:^(NSDictionary *data) {
         rightButton.userInteractionEnabled = YES;
         if (([[data objectForKey:@"resCode"] integerValue] == 100)) {
             [CMMUtility showSucessWith:@"修改成功"];
             NSUserDefaults *userionfo = [NSUserDefaults standardUserDefaults];
-            [userionfo setObject:[NSString stringWithFormat:@"%@", _nameTF.text] forKey:@"nickname"];
+            [userionfo setObject:[NSString stringWithFormat:@"%@", _nameTF.text] forKey:@"nickName"];
             [userionfo synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:NsNotficationRefreshName object:nil];
             [self.navigationController popViewControllerAnimated:YES];

@@ -41,5 +41,5 @@
 @property (nonatomic, strong) NSString *start;
 @property (nonatomic, strong) NSString *storeId;
 @property (nonatomic, strong) NSString *total;
-
+@property (nonatomic, strong) NSString *serverNamer;
 @end

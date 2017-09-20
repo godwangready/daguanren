@@ -190,6 +190,7 @@ static NSString *cellid = @"locationcell";
     [dict setValue:[NSString stringWithFormat:@"%@", model.latitudestr] forKey:@"lat"];
     [dict setValue:[NSString stringWithFormat:@"%@", model.longitudestr] forKey:@"long"];
     [dict setValue:[NSString stringWithFormat:@"%@", model.locationstr] forKey:@"addressLablel"];
+    [dict setObject:[NSString stringWithFormat:@"%@", model.adcode] forKey:@"adcode"];
     self.location(dict);
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -266,6 +267,7 @@ static NSString *cellid = @"locationcell";
         model.locationstr = poi.address;
         model.province = poi.province;
         model.city = poi.city;
+        model.adcode = poi.adcode;
         model.district = poi.district;
         AMapGeoPoint *location = poi.location;
         model.latitudestr = [NSString stringWithFormat:@"%lf", location.latitude];

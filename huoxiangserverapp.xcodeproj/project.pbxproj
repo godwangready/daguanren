@@ -13,8 +13,27 @@
 		4C0E98D31F304A07006484E7 /* ChangeRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E98D11F304A07006484E7 /* ChangeRegistViewController.m */; };
 		4C0E98D41F304A07006484E7 /* ChangeRegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E98D21F304A07006484E7 /* ChangeRegistViewController.xib */; };
 		4C0EA4D61F419CE0008D6C8D /* FriendsterPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0EA4D51F419CE0008D6C8D /* FriendsterPictureTableViewCell.m */; };
-		4C0EA4D91F419CF5008D6C8D /* FriendsterVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0EA4D81F419CF5008D6C8D /* FriendsterVideoTableViewCell.m */; };
 		4C0EA4DC1F41AABE008D6C8D /* FriendPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0EA4DB1F41AABE008D6C8D /* FriendPictureModel.m */; };
+		4C14AF641F71FB6A00991F34 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C14AF621F71FB6A00991F34 /* AlipaySDK.bundle */; };
+		4C14AF651F71FB6A00991F34 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF631F71FB6A00991F34 /* AlipaySDK.framework */; };
+		4C14AF671F71FBC500991F34 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF661F71FBC500991F34 /* libc++.tbd */; };
+		4C14AF691F71FBCE00991F34 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF681F71FBCE00991F34 /* libz.tbd */; };
+		4C14AF6B1F71FBD900991F34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF6A1F71FBD900991F34 /* SystemConfiguration.framework */; };
+		4C14AF6D1F71FBE200991F34 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF6C1F71FBE200991F34 /* CoreTelephony.framework */; };
+		4C14AF6F1F71FBEF00991F34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF6E1F71FBEF00991F34 /* QuartzCore.framework */; };
+		4C14AF711F71FBF800991F34 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF701F71FBF800991F34 /* CoreText.framework */; };
+		4C14AF731F71FC0200991F34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF721F71FC0200991F34 /* CoreGraphics.framework */; };
+		4C14AF751F71FC0A00991F34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF741F71FC0A00991F34 /* UIKit.framework */; };
+		4C14AF771F71FC1600991F34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF761F71FC1600991F34 /* Foundation.framework */; };
+		4C14AF791F71FC2000991F34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF781F71FC2000991F34 /* CFNetwork.framework */; };
+		4C14AF7B1F71FC2B00991F34 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C14AF7A1F71FC2B00991F34 /* CoreMotion.framework */; };
+		4C1BE9351F54097C000066C8 /* CertificationStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BE9331F54097C000066C8 /* CertificationStatusViewController.m */; };
+		4C1BE9361F54097C000066C8 /* CertificationStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C1BE9341F54097C000066C8 /* CertificationStatusViewController.xib */; };
+		4C246F8A1F53A7CA0099E25D /* ClientCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C246F891F53A7CA0099E25D /* ClientCommentViewController.m */; };
+		4C246F8E1F53A87C0099E25D /* ClientCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C246F8C1F53A87C0099E25D /* ClientCommentTableViewCell.m */; };
+		4C246F8F1F53A87C0099E25D /* ClientCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C246F8D1F53A87C0099E25D /* ClientCommentTableViewCell.xib */; };
+		4C246F931F53EC650099E25D /* TeacherBindedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C246F911F53EC650099E25D /* TeacherBindedViewController.m */; };
+		4C246F941F53EC650099E25D /* TeacherBindedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C246F921F53EC650099E25D /* TeacherBindedViewController.xib */; };
 		4C302B141F3AD9F80098B253 /* TeacherBindingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C302B131F3AD9F80098B253 /* TeacherBindingModel.m */; };
 		4C302B181F3AEA9F0098B253 /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C302B161F3AEA9F0098B253 /* LocationTableViewCell.m */; };
 		4C302B191F3AEAA00098B253 /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C302B171F3AEA9F0098B253 /* LocationTableViewCell.xib */; };
@@ -23,6 +42,8 @@
 		4C37D35C1F305E0A00BBAD7F /* StoreManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C37D35A1F305E0A00BBAD7F /* StoreManagementViewController.m */; };
 		4C37D35D1F305E0A00BBAD7F /* StoreManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C37D35B1F305E0A00BBAD7F /* StoreManagementViewController.xib */; };
 		4C37D3601F305E3300BBAD7F /* PostStoreManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C37D35F1F305E3300BBAD7F /* PostStoreManageViewController.m */; };
+		4C3937D41F4EC81A00B86EDA /* TeacherVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3937D31F4EC81A00B86EDA /* TeacherVideoViewController.m */; };
+		4C3CC8081F70AECC00A32D0A /* ServerCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3CC8071F70AECC00A32D0A /* ServerCommentModel.m */; };
 		4C3F281C1F21F071009AD25B /* NewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F281A1F21F071009AD25B /* NewPasswordViewController.m */; };
 		4C3F281D1F21F071009AD25B /* NewPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3F281B1F21F071009AD25B /* NewPasswordViewController.xib */; };
 		4C3F28251F21F0C3009AD25B /* GetMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F28241F21F0C3009AD25B /* GetMessageViewController.m */; };
@@ -55,6 +76,10 @@
 		4C4097A71F1F3AD100B5C7A5 /* ZheXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4097A61F1F3AD100B5C7A5 /* ZheXianViewController.m */; };
 		4C4097AA1F1F3F2300B5C7A5 /* ZheXianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4097A91F1F3F2300B5C7A5 /* ZheXianView.m */; };
 		4C4097AD1F1F561B00B5C7A5 /* WTZheXian.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4097AC1F1F561B00B5C7A5 /* WTZheXian.m */; };
+		4C4217D71F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4217D51F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.m */; };
+		4C4217D81F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4217D61F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.xib */; };
+		4C4217DD1F4C0C4B0080E5CA /* HAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4217DA1F4C0C4B0080E5CA /* HAVPlayer.m */; };
+		4C4217DE1F4C0C4B0080E5CA /* HProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4217DC1F4C0C4B0080E5CA /* HProgressView.m */; };
 		4C439B0D1F28837D00132932 /* WTCJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C439B0C1F28837D00132932 /* WTCJson.m */; };
 		4C439B6F1F28957900132932 /* dadadadadad.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C439B6E1F28957900132932 /* dadadadadad.m */; };
 		4C4718BC1F29B28200544E37 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4718BA1F29B28200544E37 /* MessageTableViewCell.m */; };
@@ -137,7 +162,15 @@
 		4C4B8BD71F27240100A958AF /* NowCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4B8BD51F27240100A958AF /* NowCertificationViewController.xib */; };
 		4C4B8BDA1F273BE600A958AF /* CertificationIngViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B8BD91F273BE600A958AF /* CertificationIngViewController.m */; };
 		4C4B8BDD1F273CFA00A958AF /* AlreadyCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B8BDC1F273CFA00A958AF /* AlreadyCertificationViewController.m */; };
+		4C4EB8C51F4A6D2B0097D1BF /* TeacherBindingStoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4EB8C41F4A6D2B0097D1BF /* TeacherBindingStoreModel.m */; };
+		4C4EB8C81F4A7C740097D1BF /* TeacherFriendsterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4EB8C71F4A7C740097D1BF /* TeacherFriendsterViewController.m */; };
+		4C4EB8CB1F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4EB8CA1F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.m */; };
+		4C5020831F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5020811F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.m */; };
+		4C5020841F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5020821F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.xib */; };
+		4C5020871F4FEB0200A36A24 /* TeacherVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5020861F4FEB0200A36A24 /* TeacherVideoModel.m */; };
+		4C50208A1F500C0300A36A24 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5020891F500C0300A36A24 /* VPImageCropperViewController.m */; };
 		4C54D74A1F39568200132BEF /* StoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C54D7491F39568200132BEF /* StoreDataViewController.m */; };
+		4C54E1011F5EA920003F2CDE /* CaoCertificationingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C54E1001F5EA920003F2CDE /* CaoCertificationingViewController.m */; };
 		4C5535101F2ACCC700535117 /* TimeGet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C55350F1F2ACCC700535117 /* TimeGet.m */; };
 		4C5535131F2AD04D00535117 /* WTBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5535121F2AD04D00535117 /* WTBase64.m */; };
 		4C5535161F2B35D700535117 /* WTNewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5535151F2B35D700535117 /* WTNewRequest.m */; };
@@ -166,11 +199,15 @@
 		4C700C8D1F429CFB006784A2 /* CommentFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C700C8C1F429CFB006784A2 /* CommentFrameModel.m */; };
 		4C700C901F429E7E006784A2 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C700C8F1F429E7E006784A2 /* CommentTableViewCell.m */; };
 		4C700C941F42E47F006784A2 /* AddServicesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C700C931F42E47F006784A2 /* AddServicesModel.m */; };
+		4C8152611F45A7D8002011F8 /* CommentCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C81525F1F45A7D8002011F8 /* CommentCaoTableViewCell.m */; };
+		4C8152621F45A7D8002011F8 /* CommentCaoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8152601F45A7D8002011F8 /* CommentCaoTableViewCell.xib */; };
 		4C8A9F401F31B1800041C7F4 /* DetailCommityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A9F3E1F31B1800041C7F4 /* DetailCommityViewController.m */; };
 		4C8A9F411F31B1800041C7F4 /* DetailCommityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A9F3F1F31B1800041C7F4 /* DetailCommityViewController.xib */; };
 		4CA2ACB31F20763800BE2C4A /* CMMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2ACB21F20763800BE2C4A /* CMMUtility.m */; };
 		4CA2ACB61F2076C800BE2C4A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2ACB51F2076C800BE2C4A /* UIColor+Hex.m */; };
 		4CA2ACB91F20AB2200BE2C4A /* WTSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2ACB81F20AB2200BE2C4A /* WTSafe.m */; };
+		4CAE23AB1F6B671900373F1B /* SetServerNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE23AA1F6B671900373F1B /* SetServerNameViewController.m */; };
+		4CC8C4341F564D0600007444 /* ManageDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8C4331F564D0600007444 /* ManageDetailModel.m */; };
 		4CCC3ABE1F3D92000079EE0A /* UIImage+PKShortVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC3A971F3D92000079EE0A /* UIImage+PKShortVideoPlayer.m */; };
 		4CCC3ABF1F3D92000079EE0A /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC3A9A1F3D92000079EE0A /* GLProgram.m */; };
 		4CCC3AC01F3D92000079EE0A /* GPUImageContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC3A9C1F3D92000079EE0A /* GPUImageContext.m */; };
@@ -203,6 +240,19 @@
 		4CCC3AF71F3D9EF30079EE0A /* JHTableChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC3AE81F3D9EF30079EE0A /* JHTableChart.m */; };
 		4CCC3AF81F3D9EF30079EE0A /* JHTableDataRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC3AEA1F3D9EF30079EE0A /* JHTableDataRowModel.m */; };
 		4CCC3AF91F3D9EF30079EE0A /* JHWaveChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCC3AEC1F3D9EF30079EE0A /* JHWaveChart.m */; };
+		4CCEAAE91F43EE0D000D68D7 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEAAE81F43EE0D000D68D7 /* MessageModel.m */; };
+		4CCEAAEC1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEAAEB1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.m */; };
+		4CCEAAEF1F443E5F000D68D7 /* FriendCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEAAEE1F443E5F000D68D7 /* FriendCellModel.m */; };
+		4CCEAAF21F444123000D68D7 /* FriendCellFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEAAF11F444122000D68D7 /* FriendCellFrameModel.m */; };
+		4CCEAAF81F445427000D68D7 /* CommentCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEAAF71F445427000D68D7 /* CommentCellModel.m */; };
+		4CCEAAFB1F44543B000D68D7 /* CommentCellFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEAAFA1F44543B000D68D7 /* CommentCellFrameModel.m */; };
+		4CD19D8E1F46B96000FEC74E /* WTProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD19D8D1F46B96000FEC74E /* WTProgress.m */; };
+		4CD19D911F46BF3500FEC74E /* WTAnimoationProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD19D901F46BF3500FEC74E /* WTAnimoationProgress.m */; };
+		4CD19D971F46C40200FEC74E /* TeacherBindingStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD19D961F46C40200FEC74E /* TeacherBindingStoreViewController.m */; };
+		4CD19D9D1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD19D9B1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.m */; };
+		4CD19D9E1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD19D9C1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.xib */; };
+		4CD19DA21F46D38A00FEC74E /* TeacherDetailBindingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD19DA01F46D38A00FEC74E /* TeacherDetailBindingViewController.m */; };
+		4CD19DA31F46D38A00FEC74E /* TeacherDetailBindingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD19DA11F46D38A00FEC74E /* TeacherDetailBindingViewController.xib */; };
 		4CD230A71F34528E00A6F70E /* ManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD230A61F34528E00A6F70E /* ManageModel.m */; };
 		4CE8B7571F2EBCAD00FDEB89 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE8B7561F2EBCAD00FDEB89 /* CommentViewController.m */; };
 		4CE8B7A71F2EC47E00FDEB89 /* StoreCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE8B7A51F2EC47E00FDEB89 /* StoreCommentTableViewCell.m */; };
@@ -250,10 +300,32 @@
 		4C0E98D21F304A07006484E7 /* ChangeRegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeRegistViewController.xib; sourceTree = "<group>"; };
 		4C0EA4D41F419CE0008D6C8D /* FriendsterPictureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsterPictureTableViewCell.h; sourceTree = "<group>"; };
 		4C0EA4D51F419CE0008D6C8D /* FriendsterPictureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsterPictureTableViewCell.m; sourceTree = "<group>"; };
-		4C0EA4D71F419CF5008D6C8D /* FriendsterVideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsterVideoTableViewCell.h; sourceTree = "<group>"; };
-		4C0EA4D81F419CF5008D6C8D /* FriendsterVideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsterVideoTableViewCell.m; sourceTree = "<group>"; };
 		4C0EA4DA1F41AABE008D6C8D /* FriendPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPictureModel.h; sourceTree = "<group>"; };
 		4C0EA4DB1F41AABE008D6C8D /* FriendPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendPictureModel.m; sourceTree = "<group>"; };
+		4C14AF621F71FB6A00991F34 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		4C14AF631F71FB6A00991F34 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		4C14AF661F71FBC500991F34 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4C14AF681F71FBCE00991F34 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4C14AF6A1F71FBD900991F34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4C14AF6C1F71FBE200991F34 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4C14AF6E1F71FBEF00991F34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4C14AF701F71FBF800991F34 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		4C14AF721F71FC0200991F34 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4C14AF741F71FC0A00991F34 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4C14AF761F71FC1600991F34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4C14AF781F71FC2000991F34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4C14AF7A1F71FC2B00991F34 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		4C1BE9321F54097C000066C8 /* CertificationStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationStatusViewController.h; sourceTree = "<group>"; };
+		4C1BE9331F54097C000066C8 /* CertificationStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationStatusViewController.m; sourceTree = "<group>"; };
+		4C1BE9341F54097C000066C8 /* CertificationStatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificationStatusViewController.xib; sourceTree = "<group>"; };
+		4C246F881F53A7CA0099E25D /* ClientCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientCommentViewController.h; sourceTree = "<group>"; };
+		4C246F891F53A7CA0099E25D /* ClientCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientCommentViewController.m; sourceTree = "<group>"; };
+		4C246F8B1F53A87C0099E25D /* ClientCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientCommentTableViewCell.h; sourceTree = "<group>"; };
+		4C246F8C1F53A87C0099E25D /* ClientCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientCommentTableViewCell.m; sourceTree = "<group>"; };
+		4C246F8D1F53A87C0099E25D /* ClientCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientCommentTableViewCell.xib; sourceTree = "<group>"; };
+		4C246F901F53EC650099E25D /* TeacherBindedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherBindedViewController.h; sourceTree = "<group>"; };
+		4C246F911F53EC650099E25D /* TeacherBindedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherBindedViewController.m; sourceTree = "<group>"; };
+		4C246F921F53EC650099E25D /* TeacherBindedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherBindedViewController.xib; sourceTree = "<group>"; };
 		4C302B121F3AD9F80098B253 /* TeacherBindingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherBindingModel.h; sourceTree = "<group>"; };
 		4C302B131F3AD9F80098B253 /* TeacherBindingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherBindingModel.m; sourceTree = "<group>"; };
 		4C302B151F3AEA9F0098B253 /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
@@ -268,6 +340,10 @@
 		4C37D35B1F305E0A00BBAD7F /* StoreManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreManagementViewController.xib; sourceTree = "<group>"; };
 		4C37D35E1F305E3300BBAD7F /* PostStoreManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostStoreManageViewController.h; sourceTree = "<group>"; };
 		4C37D35F1F305E3300BBAD7F /* PostStoreManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostStoreManageViewController.m; sourceTree = "<group>"; };
+		4C3937D21F4EC81900B86EDA /* TeacherVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherVideoViewController.h; sourceTree = "<group>"; };
+		4C3937D31F4EC81A00B86EDA /* TeacherVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherVideoViewController.m; sourceTree = "<group>"; };
+		4C3CC8061F70AECC00A32D0A /* ServerCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCommentModel.h; sourceTree = "<group>"; };
+		4C3CC8071F70AECC00A32D0A /* ServerCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCommentModel.m; sourceTree = "<group>"; };
 		4C3F28191F21F071009AD25B /* NewPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPasswordViewController.h; sourceTree = "<group>"; };
 		4C3F281A1F21F071009AD25B /* NewPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPasswordViewController.m; sourceTree = "<group>"; };
 		4C3F281B1F21F071009AD25B /* NewPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewPasswordViewController.xib; sourceTree = "<group>"; };
@@ -327,6 +403,13 @@
 		4C4097A91F1F3F2300B5C7A5 /* ZheXianView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZheXianView.m; sourceTree = "<group>"; };
 		4C4097AB1F1F561B00B5C7A5 /* WTZheXian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTZheXian.h; sourceTree = "<group>"; };
 		4C4097AC1F1F561B00B5C7A5 /* WTZheXian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTZheXian.m; sourceTree = "<group>"; };
+		4C4217D41F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTeacherFriendsterCollectionViewCell.h; sourceTree = "<group>"; };
+		4C4217D51F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTeacherFriendsterCollectionViewCell.m; sourceTree = "<group>"; };
+		4C4217D61F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTeacherFriendsterCollectionViewCell.xib; sourceTree = "<group>"; };
+		4C4217D91F4C0C4B0080E5CA /* HAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAVPlayer.h; sourceTree = "<group>"; };
+		4C4217DA1F4C0C4B0080E5CA /* HAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAVPlayer.m; sourceTree = "<group>"; };
+		4C4217DB1F4C0C4B0080E5CA /* HProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HProgressView.h; sourceTree = "<group>"; };
+		4C4217DC1F4C0C4B0080E5CA /* HProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HProgressView.m; sourceTree = "<group>"; };
 		4C439B0B1F28837D00132932 /* WTCJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTCJson.h; sourceTree = "<group>"; };
 		4C439B0C1F28837D00132932 /* WTCJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTCJson.m; sourceTree = "<group>"; };
 		4C439B6D1F28957900132932 /* dadadadadad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dadadadadad.h; sourceTree = "<group>"; };
@@ -473,8 +556,23 @@
 		4C4B8BD91F273BE600A958AF /* CertificationIngViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationIngViewController.m; sourceTree = "<group>"; };
 		4C4B8BDB1F273CFA00A958AF /* AlreadyCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyCertificationViewController.h; sourceTree = "<group>"; };
 		4C4B8BDC1F273CFA00A958AF /* AlreadyCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyCertificationViewController.m; sourceTree = "<group>"; };
+		4C4EB8C31F4A6D2B0097D1BF /* TeacherBindingStoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherBindingStoreModel.h; sourceTree = "<group>"; };
+		4C4EB8C41F4A6D2B0097D1BF /* TeacherBindingStoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherBindingStoreModel.m; sourceTree = "<group>"; };
+		4C4EB8C61F4A7C740097D1BF /* TeacherFriendsterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherFriendsterViewController.h; sourceTree = "<group>"; };
+		4C4EB8C71F4A7C740097D1BF /* TeacherFriendsterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherFriendsterViewController.m; sourceTree = "<group>"; };
+		4C4EB8C91F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTeacherFriendsterViewController.h; sourceTree = "<group>"; };
+		4C4EB8CA1F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTeacherFriendsterViewController.m; sourceTree = "<group>"; };
+		4C5020801F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherVideoCollectionViewCell.h; sourceTree = "<group>"; };
+		4C5020811F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherVideoCollectionViewCell.m; sourceTree = "<group>"; };
+		4C5020821F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherVideoCollectionViewCell.xib; sourceTree = "<group>"; };
+		4C5020851F4FEB0200A36A24 /* TeacherVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherVideoModel.h; sourceTree = "<group>"; };
+		4C5020861F4FEB0200A36A24 /* TeacherVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherVideoModel.m; sourceTree = "<group>"; };
+		4C5020881F500C0300A36A24 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		4C5020891F500C0300A36A24 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		4C54D7481F39568200132BEF /* StoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDataViewController.h; sourceTree = "<group>"; };
 		4C54D7491F39568200132BEF /* StoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDataViewController.m; sourceTree = "<group>"; };
+		4C54E0FF1F5EA920003F2CDE /* CaoCertificationingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaoCertificationingViewController.h; sourceTree = "<group>"; };
+		4C54E1001F5EA920003F2CDE /* CaoCertificationingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaoCertificationingViewController.m; sourceTree = "<group>"; };
 		4C55350E1F2ACCC700535117 /* TimeGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeGet.h; sourceTree = "<group>"; };
 		4C55350F1F2ACCC700535117 /* TimeGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeGet.m; sourceTree = "<group>"; };
 		4C5535111F2AD04D00535117 /* WTBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTBase64.h; sourceTree = "<group>"; };
@@ -528,6 +626,9 @@
 		4C700C8F1F429E7E006784A2 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
 		4C700C921F42E47F006784A2 /* AddServicesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddServicesModel.h; sourceTree = "<group>"; };
 		4C700C931F42E47F006784A2 /* AddServicesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddServicesModel.m; sourceTree = "<group>"; };
+		4C81525E1F45A7D8002011F8 /* CommentCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCaoTableViewCell.h; sourceTree = "<group>"; };
+		4C81525F1F45A7D8002011F8 /* CommentCaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCaoTableViewCell.m; sourceTree = "<group>"; };
+		4C8152601F45A7D8002011F8 /* CommentCaoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCaoTableViewCell.xib; sourceTree = "<group>"; };
 		4C8A9F3D1F31B1800041C7F4 /* DetailCommityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCommityViewController.h; sourceTree = "<group>"; };
 		4C8A9F3E1F31B1800041C7F4 /* DetailCommityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCommityViewController.m; sourceTree = "<group>"; };
 		4C8A9F3F1F31B1800041C7F4 /* DetailCommityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCommityViewController.xib; sourceTree = "<group>"; };
@@ -537,6 +638,10 @@
 		4CA2ACB51F2076C800BE2C4A /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		4CA2ACB71F20AB2200BE2C4A /* WTSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTSafe.h; sourceTree = "<group>"; };
 		4CA2ACB81F20AB2200BE2C4A /* WTSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTSafe.m; sourceTree = "<group>"; };
+		4CAE23A91F6B671900373F1B /* SetServerNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetServerNameViewController.h; sourceTree = "<group>"; };
+		4CAE23AA1F6B671900373F1B /* SetServerNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetServerNameViewController.m; sourceTree = "<group>"; };
+		4CC8C4321F564D0600007444 /* ManageDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageDetailModel.h; sourceTree = "<group>"; };
+		4CC8C4331F564D0600007444 /* ManageDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageDetailModel.m; sourceTree = "<group>"; };
 		4CCC3A961F3D92000079EE0A /* UIImage+PKShortVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PKShortVideoPlayer.h"; sourceTree = "<group>"; };
 		4CCC3A971F3D92000079EE0A /* UIImage+PKShortVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PKShortVideoPlayer.m"; sourceTree = "<group>"; };
 		4CCC3A991F3D92000079EE0A /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
@@ -600,6 +705,30 @@
 		4CCC3AEA1F3D9EF30079EE0A /* JHTableDataRowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTableDataRowModel.m; sourceTree = "<group>"; };
 		4CCC3AEB1F3D9EF30079EE0A /* JHWaveChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHWaveChart.h; sourceTree = "<group>"; };
 		4CCC3AEC1F3D9EF30079EE0A /* JHWaveChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHWaveChart.m; sourceTree = "<group>"; };
+		4CCEAAE71F43EE0D000D68D7 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		4CCEAAE81F43EE0D000D68D7 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		4CCEAAEA1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJKeyboardShowHiddenNotificationCenter.h; sourceTree = "<group>"; };
+		4CCEAAEB1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJKeyboardShowHiddenNotificationCenter.m; sourceTree = "<group>"; };
+		4CCEAAED1F443E5F000D68D7 /* FriendCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCellModel.h; sourceTree = "<group>"; };
+		4CCEAAEE1F443E5F000D68D7 /* FriendCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCellModel.m; sourceTree = "<group>"; };
+		4CCEAAF01F444122000D68D7 /* FriendCellFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCellFrameModel.h; sourceTree = "<group>"; };
+		4CCEAAF11F444122000D68D7 /* FriendCellFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCellFrameModel.m; sourceTree = "<group>"; };
+		4CCEAAF61F445427000D68D7 /* CommentCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCellModel.h; sourceTree = "<group>"; };
+		4CCEAAF71F445427000D68D7 /* CommentCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCellModel.m; sourceTree = "<group>"; };
+		4CCEAAF91F44543B000D68D7 /* CommentCellFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCellFrameModel.h; sourceTree = "<group>"; };
+		4CCEAAFA1F44543B000D68D7 /* CommentCellFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCellFrameModel.m; sourceTree = "<group>"; };
+		4CD19D8C1F46B96000FEC74E /* WTProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProgress.h; sourceTree = "<group>"; };
+		4CD19D8D1F46B96000FEC74E /* WTProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProgress.m; sourceTree = "<group>"; };
+		4CD19D8F1F46BF3500FEC74E /* WTAnimoationProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTAnimoationProgress.h; sourceTree = "<group>"; };
+		4CD19D901F46BF3500FEC74E /* WTAnimoationProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTAnimoationProgress.m; sourceTree = "<group>"; };
+		4CD19D951F46C40200FEC74E /* TeacherBindingStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherBindingStoreViewController.h; sourceTree = "<group>"; };
+		4CD19D961F46C40200FEC74E /* TeacherBindingStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherBindingStoreViewController.m; sourceTree = "<group>"; };
+		4CD19D9A1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherBindingStoreTableViewCell.h; sourceTree = "<group>"; };
+		4CD19D9B1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherBindingStoreTableViewCell.m; sourceTree = "<group>"; };
+		4CD19D9C1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherBindingStoreTableViewCell.xib; sourceTree = "<group>"; };
+		4CD19D9F1F46D38A00FEC74E /* TeacherDetailBindingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherDetailBindingViewController.h; sourceTree = "<group>"; };
+		4CD19DA01F46D38A00FEC74E /* TeacherDetailBindingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherDetailBindingViewController.m; sourceTree = "<group>"; };
+		4CD19DA11F46D38A00FEC74E /* TeacherDetailBindingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherDetailBindingViewController.xib; sourceTree = "<group>"; };
 		4CD230A51F34528E00A6F70E /* ManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageModel.h; sourceTree = "<group>"; };
 		4CD230A61F34528E00A6F70E /* ManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageModel.m; sourceTree = "<group>"; };
 		4CE7EEBB72F3C6F20703B87A /* Pods-huoxiangserverappUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huoxiangserverappUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-huoxiangserverappUITests/Pods-huoxiangserverappUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -628,7 +757,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C14AF7B1F71FC2B00991F34 /* CoreMotion.framework in Frameworks */,
+				4C14AF791F71FC2000991F34 /* CFNetwork.framework in Frameworks */,
+				4C14AF771F71FC1600991F34 /* Foundation.framework in Frameworks */,
+				4C14AF751F71FC0A00991F34 /* UIKit.framework in Frameworks */,
+				4C14AF731F71FC0200991F34 /* CoreGraphics.framework in Frameworks */,
+				4C14AF711F71FBF800991F34 /* CoreText.framework in Frameworks */,
+				4C14AF6F1F71FBEF00991F34 /* QuartzCore.framework in Frameworks */,
+				4C14AF6D1F71FBE200991F34 /* CoreTelephony.framework in Frameworks */,
+				4C14AF6B1F71FBD900991F34 /* SystemConfiguration.framework in Frameworks */,
+				4C14AF691F71FBCE00991F34 /* libz.tbd in Frameworks */,
+				4C14AF671F71FBC500991F34 /* libc++.tbd in Frameworks */,
 				DDA176BCA3D5E42A4B1A2079 /* libPods-huoxiangserverapp.a in Frameworks */,
+				4C14AF651F71FB6A00991F34 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +808,17 @@
 		3170AA328FE0A802A1536848 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C14AF7A1F71FC2B00991F34 /* CoreMotion.framework */,
+				4C14AF781F71FC2000991F34 /* CFNetwork.framework */,
+				4C14AF761F71FC1600991F34 /* Foundation.framework */,
+				4C14AF741F71FC0A00991F34 /* UIKit.framework */,
+				4C14AF721F71FC0200991F34 /* CoreGraphics.framework */,
+				4C14AF701F71FBF800991F34 /* CoreText.framework */,
+				4C14AF6E1F71FBEF00991F34 /* QuartzCore.framework */,
+				4C14AF6C1F71FBE200991F34 /* CoreTelephony.framework */,
+				4C14AF6A1F71FBD900991F34 /* SystemConfiguration.framework */,
+				4C14AF681F71FBCE00991F34 /* libz.tbd */,
+				4C14AF661F71FBC500991F34 /* libc++.tbd */,
 				F930711B97BC90DC2CB9BA8C /* libPods-huoxiangserverapp.a */,
 				2F0DE2A5BA78BEA7EB1FA72E /* libPods-huoxiangserverappTests.a */,
 				1AD5AB86621F4D05B81F3496 /* libPods-huoxiangserverappUITests.a */,
@@ -681,6 +833,15 @@
 				4C0E98CE1F302AEB006484E7 /* CertificationModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		4C14AF611F71FB5100991F34 /* AliPay */ = {
+			isa = PBXGroup;
+			children = (
+				4C14AF621F71FB6A00991F34 /* AlipaySDK.bundle */,
+				4C14AF631F71FB6A00991F34 /* AlipaySDK.framework */,
+			);
+			name = AliPay;
 			sourceTree = "<group>";
 		};
 		4C302B111F3AD9D60098B253 /* Model */ = {
@@ -719,6 +880,20 @@
 				4C4B0D4D1F3162970035CF47 /* StoreManageViewController.m */,
 			);
 			name = StoreManagement;
+			sourceTree = "<group>";
+		};
+		4C3937CE1F4EC7B000B86EDA /* TeacherMain */ = {
+			isa = PBXGroup;
+			children = (
+				4C3937D21F4EC81900B86EDA /* TeacherVideoViewController.h */,
+				4C3937D31F4EC81A00B86EDA /* TeacherVideoViewController.m */,
+				4C5020801F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.h */,
+				4C5020811F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.m */,
+				4C5020821F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.xib */,
+				4C5020851F4FEB0200A36A24 /* TeacherVideoModel.h */,
+				4C5020861F4FEB0200A36A24 /* TeacherVideoModel.m */,
+			);
+			name = TeacherMain;
 			sourceTree = "<group>";
 		};
 		4C4097291F1EF06800B5C7A5 = {
@@ -823,6 +998,10 @@
 				4C0EA4DB1F41AABE008D6C8D /* FriendPictureModel.m */,
 				4C700C841F42901A006784A2 /* FriendPictureFrameModel.h */,
 				4C700C851F42901A006784A2 /* FriendPictureFrameModel.m */,
+				4CCEAAED1F443E5F000D68D7 /* FriendCellModel.h */,
+				4CCEAAEE1F443E5F000D68D7 /* FriendCellModel.m */,
+				4CCEAAF01F444122000D68D7 /* FriendCellFrameModel.h */,
+				4CCEAAF11F444122000D68D7 /* FriendCellFrameModel.m */,
 			);
 			name = Moder;
 			sourceTree = "<group>";
@@ -832,8 +1011,6 @@
 			children = (
 				4C0EA4D41F419CE0008D6C8D /* FriendsterPictureTableViewCell.h */,
 				4C0EA4D51F419CE0008D6C8D /* FriendsterPictureTableViewCell.m */,
-				4C0EA4D71F419CF5008D6C8D /* FriendsterVideoTableViewCell.h */,
-				4C0EA4D81F419CF5008D6C8D /* FriendsterVideoTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -841,6 +1018,10 @@
 		4C40976F1F1EF19E00B5C7A5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4C3937CE1F4EC7B000B86EDA /* TeacherMain */,
+				4CD19D941F46C35400FEC74E /* TeacherPerson */,
+				4CD19D931F46C34700FEC74E /* TeacherMessage */,
+				4CD19D921F46C32500FEC74E /* TeacherHome */,
 				4C4097941F1F280600B5C7A5 /* TeacherTabBarController.h */,
 				4C4097951F1F280600B5C7A5 /* TeacherTabBarController.m */,
 				4C4097971F1F282C00B5C7A5 /* TeacherHomeViewController.h */,
@@ -856,6 +1037,8 @@
 		4C4097701F1EF1AE00B5C7A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4CCEAAE71F43EE0D000D68D7 /* MessageModel.h */,
+				4CCEAAE81F43EE0D000D68D7 /* MessageModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -902,6 +1085,7 @@
 		4C4097901F1F02E400B5C7A5 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				4C14AF611F71FB5100991F34 /* AliPay */,
 				4CCC3AD11F3D9EF30079EE0A /* JHChart */,
 				4CCC3A941F3D92000079EE0A /* PKShortVideo */,
 				4C4B0D401F3161A80035CF47 /* WSDaePickerView */,
@@ -932,6 +1116,18 @@
 				4C55350F1F2ACCC700535117 /* TimeGet.m */,
 				4C5535111F2AD04D00535117 /* WTBase64.h */,
 				4C5535121F2AD04D00535117 /* WTBase64.m */,
+				4CCEAAEA1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.h */,
+				4CCEAAEB1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.m */,
+				4CD19D8C1F46B96000FEC74E /* WTProgress.h */,
+				4CD19D8D1F46B96000FEC74E /* WTProgress.m */,
+				4CD19D8F1F46BF3500FEC74E /* WTAnimoationProgress.h */,
+				4CD19D901F46BF3500FEC74E /* WTAnimoationProgress.m */,
+				4C4217D91F4C0C4B0080E5CA /* HAVPlayer.h */,
+				4C4217DA1F4C0C4B0080E5CA /* HAVPlayer.m */,
+				4C4217DB1F4C0C4B0080E5CA /* HProgressView.h */,
+				4C4217DC1F4C0C4B0080E5CA /* HProgressView.m */,
+				4C5020881F500C0300A36A24 /* VPImageCropperViewController.h */,
+				4C5020891F500C0300A36A24 /* VPImageCropperViewController.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1027,6 +1223,9 @@
 				4CE8B7AB1F2ECD4D00FDEB89 /* StoreListTableViewCell.xib */,
 				4C700C8E1F429E7E006784A2 /* CommentTableViewCell.h */,
 				4C700C8F1F429E7E006784A2 /* CommentTableViewCell.m */,
+				4C81525E1F45A7D8002011F8 /* CommentCaoTableViewCell.h */,
+				4C81525F1F45A7D8002011F8 /* CommentCaoTableViewCell.m */,
+				4C8152601F45A7D8002011F8 /* CommentCaoTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1318,6 +1517,8 @@
 				4C6E210E1F25E5550010557A /* SetViewController.m */,
 				4C01F26B1F34675A0072DB71 /* SetNameViewController.h */,
 				4C01F26C1F34675A0072DB71 /* SetNameViewController.m */,
+				4CAE23A91F6B671900373F1B /* SetServerNameViewController.h */,
+				4CAE23AA1F6B671900373F1B /* SetServerNameViewController.m */,
 				4C40978B1F1EF80A00B5C7A5 /* SetPersentMessageViewController.h */,
 				4C40978C1F1EF80A00B5C7A5 /* SetPersentMessageViewController.m */,
 				4C40978D1F1EF80A00B5C7A5 /* SetPersentMessageViewController.xib */,
@@ -1332,6 +1533,8 @@
 				4C4B8BD51F27240100A958AF /* NowCertificationViewController.xib */,
 				4C4B8BD81F273BE600A958AF /* CertificationIngViewController.h */,
 				4C4B8BD91F273BE600A958AF /* CertificationIngViewController.m */,
+				4C54E0FF1F5EA920003F2CDE /* CaoCertificationingViewController.h */,
+				4C54E1001F5EA920003F2CDE /* CaoCertificationingViewController.m */,
 				4C4B8BDB1F273CFA00A958AF /* AlreadyCertificationViewController.h */,
 				4C4B8BDC1F273CFA00A958AF /* AlreadyCertificationViewController.m */,
 			);
@@ -1360,6 +1563,9 @@
 				4C4097791F1EF26F00B5C7A5 /* LoginViewController.h */,
 				4C40977A1F1EF26F00B5C7A5 /* LoginViewController.m */,
 				4C40977B1F1EF26F00B5C7A5 /* LoginViewController.xib */,
+				4C1BE9321F54097C000066C8 /* CertificationStatusViewController.h */,
+				4C1BE9331F54097C000066C8 /* CertificationStatusViewController.m */,
+				4C1BE9341F54097C000066C8 /* CertificationStatusViewController.xib */,
 			);
 			name = LoginRegist;
 			sourceTree = "<group>";
@@ -1424,6 +1630,10 @@
 				4C700C891F429CED006784A2 /* CommentModel.m */,
 				4C700C8B1F429CFB006784A2 /* CommentFrameModel.h */,
 				4C700C8C1F429CFB006784A2 /* CommentFrameModel.m */,
+				4CCEAAF61F445427000D68D7 /* CommentCellModel.h */,
+				4CCEAAF71F445427000D68D7 /* CommentCellModel.m */,
+				4CCEAAF91F44543B000D68D7 /* CommentCellFrameModel.h */,
+				4CCEAAFA1F44543B000D68D7 /* CommentCellFrameModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1554,11 +1764,77 @@
 			path = JHChart;
 			sourceTree = "<group>";
 		};
+		4CD19D921F46C32500FEC74E /* TeacherHome */ = {
+			isa = PBXGroup;
+			children = (
+				4CD19D991F46C41800FEC74E /* Model */,
+				4CD19D981F46C41000FEC74E /* View */,
+				4CD19D951F46C40200FEC74E /* TeacherBindingStoreViewController.h */,
+				4CD19D961F46C40200FEC74E /* TeacherBindingStoreViewController.m */,
+				4C246F901F53EC650099E25D /* TeacherBindedViewController.h */,
+				4C246F911F53EC650099E25D /* TeacherBindedViewController.m */,
+				4C246F921F53EC650099E25D /* TeacherBindedViewController.xib */,
+				4CD19D9F1F46D38A00FEC74E /* TeacherDetailBindingViewController.h */,
+				4CD19DA01F46D38A00FEC74E /* TeacherDetailBindingViewController.m */,
+				4CD19DA11F46D38A00FEC74E /* TeacherDetailBindingViewController.xib */,
+				4C4EB8C61F4A7C740097D1BF /* TeacherFriendsterViewController.h */,
+				4C4EB8C71F4A7C740097D1BF /* TeacherFriendsterViewController.m */,
+				4C4EB8C91F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.h */,
+				4C4EB8CA1F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.m */,
+				4C246F881F53A7CA0099E25D /* ClientCommentViewController.h */,
+				4C246F891F53A7CA0099E25D /* ClientCommentViewController.m */,
+			);
+			name = TeacherHome;
+			sourceTree = "<group>";
+		};
+		4CD19D931F46C34700FEC74E /* TeacherMessage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TeacherMessage;
+			sourceTree = "<group>";
+		};
+		4CD19D941F46C35400FEC74E /* TeacherPerson */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TeacherPerson;
+			sourceTree = "<group>";
+		};
+		4CD19D981F46C41000FEC74E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4CD19D9A1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.h */,
+				4CD19D9B1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.m */,
+				4CD19D9C1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.xib */,
+				4C4217D41F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.h */,
+				4C4217D51F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.m */,
+				4C4217D61F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.xib */,
+				4C246F8B1F53A87C0099E25D /* ClientCommentTableViewCell.h */,
+				4C246F8C1F53A87C0099E25D /* ClientCommentTableViewCell.m */,
+				4C246F8D1F53A87C0099E25D /* ClientCommentTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4CD19D991F46C41800FEC74E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C4EB8C31F4A6D2B0097D1BF /* TeacherBindingStoreModel.h */,
+				4C4EB8C41F4A6D2B0097D1BF /* TeacherBindingStoreModel.m */,
+				4C3CC8061F70AECC00A32D0A /* ServerCommentModel.h */,
+				4C3CC8071F70AECC00A32D0A /* ServerCommentModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4CD230A41F34526E00A6F70E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				4CD230A51F34528E00A6F70E /* ManageModel.h */,
 				4CD230A61F34528E00A6F70E /* ManageModel.m */,
+				4CC8C4321F564D0600007444 /* ManageDetailModel.h */,
+				4CC8C4331F564D0600007444 /* ManageDetailModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1639,7 +1915,7 @@
 				TargetAttributes = {
 					4C4097311F1EF06800B5C7A5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BHZ8AS8JE8;
+						DevelopmentTeam = KY6RP7SUU9;
 						ProvisioningStyle = Automatic;
 					};
 					4C40974D1F1EF06800B5C7A5 = {
@@ -1684,8 +1960,10 @@
 				4C4097A31F1F29AD00B5C7A5 /* two.png in Resources */,
 				4C61B5541F41403000D74301 /* AddServicesTableViewCell.xib in Resources */,
 				4C492B921F2F1B8A00411CE0 /* BindingTableViewCell.xib in Resources */,
+				4C4217D81F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.xib in Resources */,
 				4C302B191F3AEAA00098B253 /* LocationTableViewCell.xib in Resources */,
 				4C37D35D1F305E0A00BBAD7F /* StoreManagementViewController.xib in Resources */,
+				4CD19DA31F46D38A00FEC74E /* TeacherDetailBindingViewController.xib in Resources */,
 				4C4B0E791F3174B40035CF47 /* unSelect@2x.png in Resources */,
 				4C4718BD1F29B28200544E37 /* MessageTableViewCell.xib in Resources */,
 				4C4B8BC61F26E2F200A958AF /* CallMeTableViewCell.xib in Resources */,
@@ -1699,16 +1977,21 @@
 				4C4B8BBF1F26D9C900A958AF /* PingFang Light.ttf in Resources */,
 				4C4B0E751F3174B40035CF47 /* select@3x.png in Resources */,
 				4C4097481F1EF06800B5C7A5 /* LaunchScreen.storyboard in Resources */,
+				4C246F941F53EC650099E25D /* TeacherBindedViewController.xib in Resources */,
+				4C246F8F1F53A87C0099E25D /* ClientCommentTableViewCell.xib in Resources */,
 				4C4B0E731F3174B40035CF47 /* flashlampOn@3x.png in Resources */,
 				4C4B0E771F3174B40035CF47 /* turnCamera@2x.png in Resources */,
+				4C5020841F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.xib in Resources */,
 				4C4B0E8C1F3192100035CF47 /* ImagePickTableViewCell.xib in Resources */,
 				4C492B8D1F2F1B2500411CE0 /* JiShiListTableViewCell.xib in Resources */,
+				4C1BE9361F54097C000066C8 /* CertificationStatusViewController.xib in Resources */,
 				4C4097451F1EF06800B5C7A5 /* Assets.xcassets in Resources */,
 				4C4B0E721F3174B40035CF47 /* flashlampOn@2x.png in Resources */,
 				4C4B0E701F3174B40035CF47 /* flashlampOff@2x.png in Resources */,
 				4C4B8BCF1F27149800A958AF /* ChangePassWordViewController.xib in Resources */,
 				4C4B8BC11F26D9C900A958AF /* PingFang Regular.ttf in Resources */,
 				4C4B0E7A1F3174B40035CF47 /* unSelect@3x.png in Resources */,
+				4CD19D9E1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.xib in Resources */,
 				4C4B0E711F3174B40035CF47 /* flashlampOff@3x.png in Resources */,
 				4C4097A41F1F29AD00B5C7A5 /* one.png in Resources */,
 				4CCC3AC31F3D92000079EE0A /* PK_Camera_Turn@2x.png in Resources */,
@@ -1717,7 +2000,9 @@
 				4C4097401F1EF06800B5C7A5 /* Main.storyboard in Resources */,
 				4C0E98D41F304A07006484E7 /* ChangeRegistViewController.xib in Resources */,
 				4C4B0E7B1F3174B40035CF47 /* LICENSE in Resources */,
+				4C8152621F45A7D8002011F8 /* CommentCaoTableViewCell.xib in Resources */,
 				4CCC3AC51F3D92000079EE0A /* PK_Play@2x.png in Resources */,
+				4C14AF641F71FB6A00991F34 /* AlipaySDK.bundle in Resources */,
 				4CE8B7A81F2EC47E00FDEB89 /* StoreCommentTableViewCell.xib in Resources */,
 				4CE8B7AD1F2ECD4D00FDEB89 /* StoreListTableViewCell.xib in Resources */,
 				4C4B0E6E1F3174B40035CF47 /* flashlamp@2x.png in Resources */,
@@ -1889,6 +2174,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD19DA21F46D38A00FEC74E /* TeacherDetailBindingViewController.m in Sources */,
+				4C1BE9351F54097C000066C8 /* CertificationStatusViewController.m in Sources */,
 				4C0EA4D61F419CE0008D6C8D /* FriendsterPictureTableViewCell.m in Sources */,
 				4C4B0E581F3174B40035CF47 /* LLImageHandler.m in Sources */,
 				4C595B9B1F282F1F00AE1C13 /* WTMD5.m in Sources */,
@@ -1897,6 +2184,8 @@
 				4C492B911F2F1B8A00411CE0 /* BindingTableViewCell.m in Sources */,
 				4C4B0E6A1F3174B40035CF47 /* UIScrollView+LLAdd.m in Sources */,
 				4C492B8C1F2F1B2500411CE0 /* JiShiListTableViewCell.m in Sources */,
+				4C54E1011F5EA920003F2CDE /* CaoCertificationingViewController.m in Sources */,
+				4C3937D41F4EC81A00B86EDA /* TeacherVideoViewController.m in Sources */,
 				4C4B0E631F3174B40035CF47 /* LLImageBrowserController.m in Sources */,
 				4C4B0E681F3174B40035CF47 /* UIImage+LLAdd.m in Sources */,
 				4C4B0E571F3174B40035CF47 /* LLBaseViewController.m in Sources */,
@@ -1913,9 +2202,11 @@
 				4C4B0E811F3174B40035CF47 /* MASViewConstraint.m in Sources */,
 				4C4B0E641F3174B40035CF47 /* LLImageCollectionController.m in Sources */,
 				4C5535101F2ACCC700535117 /* TimeGet.m in Sources */,
-				4C0EA4D91F419CF5008D6C8D /* FriendsterVideoTableViewCell.m in Sources */,
+				4C5020831F4FCAAF00A36A24 /* TeacherVideoCollectionViewCell.m in Sources */,
 				4C4B0E651F3174B40035CF47 /* LLImageGroupController.m in Sources */,
+				4C3CC8081F70AECC00A32D0A /* ServerCommentModel.m in Sources */,
 				4C40973D1F1EF06800B5C7A5 /* ViewController.m in Sources */,
+				4CCEAAF81F445427000D68D7 /* CommentCellModel.m in Sources */,
 				4C439B6F1F28957900132932 /* dadadadadad.m in Sources */,
 				4C4097751F1EF23D00B5C7A5 /* BaseViewController.m in Sources */,
 				4C595BAE1F28612500AE1C13 /* ManagementTableViewCell.m in Sources */,
@@ -1926,6 +2217,7 @@
 				4C4B0E7F1F3174B40035CF47 /* MASLayoutConstraint.m in Sources */,
 				4C4B0E7C1F3174B40035CF47 /* MASCompositeConstraint.m in Sources */,
 				4C59FDC71F29DFD5005B3776 /* NSString+QT.m in Sources */,
+				4C4EB8C51F4A6D2B0097D1BF /* TeacherBindingStoreModel.m in Sources */,
 				4C4097781F1EF25800B5C7A5 /* RegistViewController.m in Sources */,
 				4CA2ACB31F20763800BE2C4A /* CMMUtility.m in Sources */,
 				4C4B0E5F1F3174B40035CF47 /* LLBrowserScrollView.m in Sources */,
@@ -1942,11 +2234,14 @@
 				4C40978E1F1EF80A00B5C7A5 /* SetPersentMessageViewController.m in Sources */,
 				4C492B7A1F2F0EC200411CE0 /* BindingViewController.m in Sources */,
 				4C595BA21F2838C700AE1C13 /* WTNetRequest.m in Sources */,
+				4CCEAAE91F43EE0D000D68D7 /* MessageModel.m in Sources */,
 				4C4B0E5A1F3174B40035CF47 /* LLBrowserCollectionCell.m in Sources */,
+				4CD19D8E1F46B96000FEC74E /* WTProgress.m in Sources */,
 				4C6E210C1F25E54A0010557A /* SafeViewController.m in Sources */,
 				4C700C901F429E7E006784A2 /* CommentTableViewCell.m in Sources */,
 				4CCC3AF31F3D9EF30079EE0A /* JHRadarChart.m in Sources */,
 				4C4B0D4A1F3161A80035CF47 /* WSDatePickerView.m in Sources */,
+				4CAE23AB1F6B671900373F1B /* SetServerNameViewController.m in Sources */,
 				4C4B8BCA1F26F09800A958AF /* CertificationViewController.m in Sources */,
 				4C4097801F1EF29600B5C7A5 /* MainViewController.m in Sources */,
 				4CCC3ACF1F3D92000079EE0A /* PKShortVideoRecorder.m in Sources */,
@@ -1958,6 +2253,7 @@
 				4C4B0E5C1F3174B40035CF47 /* LLImageGroupCell.m in Sources */,
 				4C492B7D1F2F0EDD00411CE0 /* RecordViewController.m in Sources */,
 				4C4B0E831F3174B40035CF47 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				4CCEAAF21F444123000D68D7 /* FriendCellFrameModel.m in Sources */,
 				4C3F28251F21F0C3009AD25B /* GetMessageViewController.m in Sources */,
 				4C4B0E601F3174B40035CF47 /* LLSelectButton.m in Sources */,
 				4CCC3ABF1F3D92000079EE0A /* GLProgram.m in Sources */,
@@ -1966,10 +2262,12 @@
 				4C595B9F1F28386F00AE1C13 /* RSAEncryptor.m in Sources */,
 				4CCC3AED1F3D9EF30079EE0A /* JHChart.m in Sources */,
 				4CCC3AF21F3D9EF30079EE0A /* JHPieItemsView.m in Sources */,
+				4C4EB8CB1F4A7C8D0097D1BF /* PostTeacherFriendsterViewController.m in Sources */,
 				4C4B0E6D1F3174B40035CF47 /* Utils.m in Sources */,
 				4C492B871F2F148700411CE0 /* RecordTableViewCell.m in Sources */,
 				4C01F26D1F34675A0072DB71 /* SetNameViewController.m in Sources */,
 				4C4B0E591F3174B40035CF47 /* LLImageSelectHandler.m in Sources */,
+				4CCEAAEC1F44271A000D68D7 /* LMJKeyboardShowHiddenNotificationCenter.m in Sources */,
 				4CCC3AF11F3D9EF30079EE0A /* JHPieForeBGView.m in Sources */,
 				4C37D35C1F305E0A00BBAD7F /* StoreManagementViewController.m in Sources */,
 				4C4B0E7E1F3174B40035CF47 /* MASConstraintMaker.m in Sources */,
@@ -1979,6 +2277,7 @@
 				4C492B801F2F0EEE00411CE0 /* JishiListViewController.m in Sources */,
 				4C0E98CF1F302AEB006484E7 /* CertificationModel.m in Sources */,
 				4C37D3601F305E3300BBAD7F /* PostStoreManageViewController.m in Sources */,
+				4CCEAAFB1F44543B000D68D7 /* CommentCellFrameModel.m in Sources */,
 				4CE8B7571F2EBCAD00FDEB89 /* CommentViewController.m in Sources */,
 				4C4097AA1F1F3F2300B5C7A5 /* ZheXianView.m in Sources */,
 				4CCC3ACB1F3D92000079EE0A /* PKPlayerView.m in Sources */,
@@ -2005,12 +2304,19 @@
 				4C700C861F42901A006784A2 /* FriendPictureFrameModel.m in Sources */,
 				4C0E98CB1F302A4F006484E7 /* BaseModel.m in Sources */,
 				4C4097831F1EF2C000B5C7A5 /* HomeViewController.m in Sources */,
+				4C4217DE1F4C0C4B0080E5CA /* HProgressView.m in Sources */,
+				4C8152611F45A7D8002011F8 /* CommentCaoTableViewCell.m in Sources */,
+				4C246F8E1F53A87C0099E25D /* ClientCommentTableViewCell.m in Sources */,
 				4C4097861F1EF2D400B5C7A5 /* MessageViewController.m in Sources */,
+				4C4EB8C81F4A7C740097D1BF /* TeacherFriendsterViewController.m in Sources */,
 				4C5535131F2AD04D00535117 /* WTBase64.m in Sources */,
+				4CD19D9D1F46C44000FEC74E /* TeacherBindingStoreTableViewCell.m in Sources */,
 				4C6E21121F25E56E0010557A /* CallMeViewController.m in Sources */,
 				4C54D74A1F39568200132BEF /* StoreDataViewController.m in Sources */,
+				4CC8C4341F564D0600007444 /* ManageDetailModel.m in Sources */,
 				4CCC3ACA1F3D92000079EE0A /* PKPlayerManager.m in Sources */,
 				4C4B0E661F3174B40035CF47 /* LLImagePickerController.m in Sources */,
+				4CD19D911F46BF3500FEC74E /* WTAnimoationProgress.m in Sources */,
 				4C40979C1F1F283B00B5C7A5 /* TeacherMessageViewController.m in Sources */,
 				4CCC3AF61F3D9EF30079EE0A /* JHShowInfoView.m in Sources */,
 				4C4B0E8B1F3192100035CF47 /* ImagePickTableViewCell.m in Sources */,
@@ -2024,7 +2330,9 @@
 				4C492B771F2F0EA200411CE0 /* JishiViewController.m in Sources */,
 				4CCC3AF01F3D9EF30079EE0A /* JHPieChart.m in Sources */,
 				4CCC3AF81F3D9EF30079EE0A /* JHTableDataRowModel.m in Sources */,
+				4C4217D71F4BFF160080E5CA /* PostTeacherFriendsterCollectionViewCell.m in Sources */,
 				4CCC3AC71F3D92000079EE0A /* PKColorConversion.m in Sources */,
+				4C246F931F53EC650099E25D /* TeacherBindedViewController.m in Sources */,
 				4C3F281C1F21F071009AD25B /* NewPasswordViewController.m in Sources */,
 				4C0EA4DC1F41AABE008D6C8D /* FriendPictureModel.m in Sources */,
 				4C0E98D31F304A07006484E7 /* ChangeRegistViewController.m in Sources */,
@@ -2033,18 +2341,24 @@
 				4C595BA91F2843E700AE1C13 /* AddCommityViewController.m in Sources */,
 				4CE8B7B31F2EF2C500FDEB89 /* StoreCommentViewController.m in Sources */,
 				4C4097371F1EF06800B5C7A5 /* main.m in Sources */,
+				4CD19D971F46C40200FEC74E /* TeacherBindingStoreViewController.m in Sources */,
 				4CCC3AF51F3D9EF30079EE0A /* JHScatterChart.m in Sources */,
 				4C4097991F1F282C00B5C7A5 /* TeacherHomeViewController.m in Sources */,
 				4C4B0E621F3174B40035CF47 /* LLCameraViewController.m in Sources */,
+				4C4217DD1F4C0C4B0080E5CA /* HAVPlayer.m in Sources */,
 				4CCC3AC01F3D92000079EE0A /* GPUImageContext.m in Sources */,
 				4C302B201F3AF6DF0098B253 /* TeacherListModel.m in Sources */,
 				4CCC3ACD1F3D92000079EE0A /* PKRecordShortVideoViewController.m in Sources */,
+				4CCEAAEF1F443E5F000D68D7 /* FriendCellModel.m in Sources */,
 				4C6A55051F384EB9006605BF /* AnotherJishiListTableViewCell.m in Sources */,
+				4C50208A1F500C0300A36A24 /* VPImageCropperViewController.m in Sources */,
 				4CA2ACB61F2076C800BE2C4A /* UIColor+Hex.m in Sources */,
 				4C4097891F1EF2EF00B5C7A5 /* PersonCenterViewController.m in Sources */,
 				4C4B0E5B1F3174B40035CF47 /* LLImageCollectionCell.m in Sources */,
 				4C4097931F1F065800B5C7A5 /* LaunchIntroductionView.m in Sources */,
+				4C246F8A1F53A7CA0099E25D /* ClientCommentViewController.m in Sources */,
 				4C4B0D4E1F3162970035CF47 /* StoreManageViewController.m in Sources */,
+				4C5020871F4FEB0200A36A24 /* TeacherVideoModel.m in Sources */,
 				4CCC3ACE1F3D92000079EE0A /* PKShortVideoProgressBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2121,9 +2435,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: hangzhouhuoxiang network technology Co.,ltd. (KY6RP7SUU9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hangzhouhuoxiang network technology Co.,ltd. (KY6RP7SUU9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = KY6RP7SUU9;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2143,6 +2459,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "fc2f2d6c-3f35-4c76-a84f-80610b05dfb6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2168,9 +2485,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: hangzhouhuoxiang network technology Co.,ltd. (KY6RP7SUU9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hangzhouhuoxiang network technology Co.,ltd. (KY6RP7SUU9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = KY6RP7SUU9;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2183,6 +2502,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "fc2f2d6c-3f35-4c76-a84f-80610b05dfb6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2193,8 +2513,13 @@
 			baseConfigurationReference = CC91B51093FCD0728565458E /* Pods-huoxiangserverapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BHZ8AS8JE8;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = KY6RP7SUU9;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/huoxiangserverapp",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = huoxiangserverapp/PrefixHeader.pch;
 				INFOPLIST_FILE = huoxiangserverapp/Info.plist;
@@ -2202,6 +2527,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = huoxiangkeji.com.huoxiangserverapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2210,8 +2536,13 @@
 			baseConfigurationReference = 8C4C1D2929AB4BB6AC73469C /* Pods-huoxiangserverapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BHZ8AS8JE8;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = KY6RP7SUU9;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/huoxiangserverapp",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = huoxiangserverapp/PrefixHeader.pch;
 				INFOPLIST_FILE = huoxiangserverapp/Info.plist;
@@ -2219,6 +2550,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = huoxiangkeji.com.huoxiangserverapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -53,6 +53,7 @@ static NSString *cellid = @"pickcell";
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *lat;
 @property (nonatomic, strong) NSString *longlat;
+@property (nonatomic, strong) NSString *qubianma;
 
 @property (nonatomic, assign) NSInteger index;
 @end
@@ -61,9 +62,23 @@ static NSString *cellid = @"pickcell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    NSLog(@"%ld", self.storepictureArray.count);
+//    if (self.storepictureArray.count != 0) {
+//        [self.dataArray removeAllObjects];
+//    }else {
+        //没图
+//    }
+    if (self.lats.length != 0) {
+        self.lat = self.lats;
+    }
+    if (self.lngs.length != 0) {
+        self.longlat = self.lngs;
+    }
+    if (self.adcodes.length != 0) {
+        self.qubianma = self.adcodes;
+    }
     _index = 0;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithHexString:@"f0f2f8"];
     [self wtTopViewWithBackString:@"返回-" andTitlestring:@"门店信息"];
     [self setlayOut];
@@ -77,6 +92,12 @@ static NSString *cellid = @"pickcell";
     dispatch_async(dispatch_get_main_queue(), ^{
         [imageTV reloadData];
     });
+}
+- (NSMutableArray *)storepictureArray {
+    if (!_storepictureArray) {
+        _storepictureArray = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _storepictureArray;
 }
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
@@ -95,7 +116,11 @@ static NSString *cellid = @"pickcell";
     nameLabel.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:16];
     [downView addSubview:nameLabel];
     nameTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, KscreeWidth - 140, 30)];
-    nameTF.placeholder = @"天天足浴";
+    if (self.storenamels.length != 0) {
+        nameTF.text = self.storenamels;
+    }else {
+        nameTF.placeholder = @"天天足浴";
+    }
     nameTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
     [downView addSubview:nameTF];
     oneview = [[UIView alloc] initWithFrame:CGRectMake(0, 50, KscreeWidth, 1)];
@@ -106,7 +131,11 @@ static NSString *cellid = @"pickcell";
     phoneLable.text = @"联系电话";
     [downView addSubview:phoneLable];
     phoneTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 60, KscreeWidth - 140, 30)];
-    phoneTF.placeholder = @"请输入电话号码";
+    if (self.storephones.length != 0) {
+        phoneTF.text = self.storephones;
+    }else {
+        phoneTF.placeholder = @"请输入电话号码";
+    }
     phoneTF.keyboardType =  UIKeyboardTypePhonePad;
     phoneTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
     [downView addSubview:phoneTF];
@@ -121,7 +150,13 @@ static NSString *cellid = @"pickcell";
 //    [locationLable addGestureRecognizer:tap];
     [downView addSubview:locationLable];
     _tapMapLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 110, KscreeWidth - 140, 30)];
-    _tapMapLabel.text = @"点我选择地址";
+    if (self.storeadress.length != 0) {
+        _tapMapLabel.text = self.storeadress;
+        self.address =  _tapMapLabel.text;
+    }else {
+        _tapMapLabel.text = @"点我选择地址";
+
+    }
     _tapMapLabel.font = [UIFont systemFontOfSize:14];
     _tapMapLabel.textColor = [UIColor colorWithHexString:@"666666"];
     _tapMapLabel.userInteractionEnabled = YES;
@@ -143,7 +178,11 @@ static NSString *cellid = @"pickcell";
     noteLable.text =@"店铺公告";
     [downView addSubview:noteLable];
     noteTF = [[UITextField alloc] initWithFrame:CGRectMake(120, 210, KscreeWidth - 140, 30)];
-    noteTF.placeholder = @"全场半价";
+    if (self.storenotes.length != 0) {
+        noteTF.text = self.storenotes;
+    }else {
+        noteTF.placeholder = @"全场半价";
+    }
     noteTF.font = [UIFont fontWithName:@"PingFang Medium.ttf" size:14];
     [downView addSubview:noteTF];
     
@@ -200,14 +239,19 @@ static NSString *cellid = @"pickcell";
         return;
     }
     sendbutton.userInteractionEnabled = NO;
-    for (int i = 0; i < _dataArray.count - 1; i++) {
+    for (int i = 0; i < self.dataArray.count - 1; i++) {
 //        UIImage *image = [UIImage imageNamed:@"one.png"];
-        NSData *data = UIImagePNGRepresentation([_dataArray objectAtIndex:i + 1]);
+//        NSData *data = UIImagePNGRepresentation([_dataArray objectAtIndex:i + 1]);
+//        UIImageView *sdsdsd = [[UIImageView alloc] initWithFrame:CGRectMake(0, 100, KscreeWidth, 100)];
+//        sdsdsd.image = self.dataArray[0];
+//        [self.view addSubview:sdsdsd];
+//        return;
+        NSData *data = UIImageJPEGRepresentation([self.dataArray objectAtIndex:i], 0.5);
         AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
             manage.responseSerializer = [AFHTTPResponseSerializer serializer];
             manage.requestSerializer = [AFHTTPRequestSerializer serializer];
 //        NSString *url = @"http://192.168.0.100:8080/statics/uploadresource";
-        [manage POST:ALIpullImageAndVideo parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [manage POST:ALIpullImageAndVideo47 parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:data name:@"file" fileName:@"store.png" mimeType:@"png"];
             NSLog(@"%@", _dataArray);
         } progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -287,7 +331,9 @@ static NSString *cellid = @"pickcell";
         [dict setObject:[NSString stringWithFormat:@"%@", _longlat] forKey:@"longitude"];
         [dict setObject:[NSString stringWithFormat:@"%@", _lat] forKey:@"latitude"];
         [dict setObject:[NSString stringWithFormat:@"%@", noteTF.text] forKey:@"storeNotice"];
+        [dict setObject:[NSString stringWithFormat:@"%@", self.qubianma] forKey:@"areaId"];
         [outDict setObject:[WTCJson dictionaryToJson:dict] forKey:@"postDate"];
+        [outDict setObject:@"store_manage" forKey:@"logView"];
         [WTNewRequest postWithURLString:[self createRequestUrl:Alterstore] parameters:outDict success:^(NSDictionary *data) {
             sendbutton.userInteractionEnabled = YES;
             if ([[data objectForKey:@"resCode"] integerValue] == 100) {
@@ -328,24 +374,28 @@ static NSString *cellid = @"pickcell";
         weakSelf.longlat = [NSString stringWithFormat:@"%@", [dict objectForKey:@"long"]];
         weakSelf.address = [NSString stringWithFormat:@"%@", [dict objectForKey:@"address"]];
         weakSelf.tapMapLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:@"addressLablel"]];
+        weakSelf.qubianma = [NSString stringWithFormat:@"%@", [dict objectForKey:@"adcode"]];
     };
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (self.dataArray.count == 1) {
-        return self.dataArray.count;
+//    if (self.storepictureArray.count != 0) {
+//        return self.storepictureArray.count;
 //    }else {
-//        return self.dataArray.count + 1;
+        return self.dataArray.count;
 //    }
-    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ImagePickTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ImagePickTableViewCell" owner:nil options:nil] lastObject];
     }
+//    if (self.storepictureArray.count != 0) {
+//            [cell.pickImage sd_setImageWithURL:[NSURL URLWithString:[self.storepictureArray objectAtIndex:indexPath.row]]];
+//    }else {
         cell.pickImage.image = self.dataArray[indexPath.row];
+//    }
         cell.contentView.transform = CGAffineTransformMakeRotation(M_PI_2);
     if (indexPath.row == _dataArray.count - 1) {
         cell.deletButton.hidden = YES;
@@ -363,13 +413,17 @@ static NSString *cellid = @"pickcell";
     return 1;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_dataArray.count >5) {
         [CMMUtility showFailureWith:@"最多上传四张"];
         return;
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ((indexPath.row + 1) == _dataArray.count) {
-        [self presentViewController:alert animated:YES completion:nil];
+//    if (self.storepictureArray.count != 0) {
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }else {
+        if ((indexPath.row + 1) == _dataArray.count) {
+            [self presentViewController:alert animated:YES completion:nil];
+//        }
     }
 }
 #pragma mark - 获取相册
@@ -490,14 +544,15 @@ static NSString *cellid = @"pickcell";
 //    [imageTV reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-#warning mark -
+#pragma mark - 获取图片回调
 - (void) imagePickAction {
     LLImagePickerController *navigationController = [[LLImagePickerController alloc] init];
-    navigationController.autoJumpToPhotoSelectPage = NO;
+    navigationController.autoJumpToPhotoSelectPage = YES;
     navigationController.allowSelectReturnType = NO;
     navigationController.maxSelectedCount = 4;
     if (iOS8Upwards) {
         [navigationController getSelectedPHAssetsWithBlock:^(NSArray<UIImage *> *imageArray, NSArray<PHAsset *> *assetsArray) {
+//            [self.storepictureArray removeAllObjects];
             if (_dataArray.count <= 0) {
                 [_dataArray removeAllObjects];
                 [_dataArray addObjectsFromArray:[NSArray arrayWithArray:imageArray]];
@@ -520,6 +575,7 @@ static NSString *cellid = @"pickcell";
         }];
     } else {
         [navigationController getSelectedALAssetsWithBlock:^(NSArray<UIImage *> *imageArray, NSArray<ALAsset *> *assetsArray) {
+//            [self.storepictureArray removeAllObjects];
             self.dataArray = (NSMutableArray *)[NSArray arrayWithArray:imageArray];
             [imageTV reloadData];
 //            [self imagePiCK];
@@ -584,7 +640,7 @@ static NSString *cellid = @"pickcell";
     [super viewWillAppear:animated];
 }
 - (void) viewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self showTabBar];
     [super viewWillDisappear:animated];
 }

@@ -46,18 +46,40 @@
 }
 //登录
 - (IBAction)loginAction:(UIButton *)sender {
-    if (_phoneTF.text.length != 0 && _passWordTF.text.length != 0) {
-        if (_passWordTF.text.length >= 8 && _passWordTF.text.length <= 16) {
-            //请求
-        }else {
-            [CMMUtility showFailureWith:@"请正确填写信息"];
-        }
+    if (_passWordTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入密码"];
+        return;
+    }
+    if (_phoneTF.text.length == 0) {
+        [CMMUtility showFailureWith:@"请输入账户名"];
+        return;
+    }
+    if (_phoneTF.text.length != 11) {
+        [CMMUtility showFailureWith:@"请正确输入账号"];
+        return;
+    }
+    //6-12位数字和字母组成
+    NSString *regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([pred evaluateWithObject:self.passWordTF.text]) {
+
     }else {
-        [CMMUtility showNote:@"请完整填写信息"];
+        [CMMUtility showFailureWith:@"密码必须是6到12位字母与数字组成"];
+        return;
     }
     [self postLoginandphone:[NSString stringWithFormat:@"%@", _phoneTF.text] andpw:[NSString stringWithFormat:@"%@", _passWordTF.text]];
 }
-#warning mark - 永远登录
+//-(BOOL)checkPassWord
+//{
+//    //6-20位数字和字母组成
+//    NSString *regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$";
+//    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+//    if ([pred evaluateWithObject:self]) {
+//        return YES ;
+//    }else
+//        return NO;
+//}
+#pragma mark - 永远登录
 //login
 - (void)postLoginandphone:(NSString *)phone andpw:(NSString *)passward {
     
@@ -87,25 +109,30 @@
     NSString *postdatajson = [WTCJson dictionaryToJson:dict];
     //[WTBase64 stringTobase64encode:postdatajson]
     [outDict setObject:postdatajson forKey:@"postDate"];
+//    [outDict setObject:@"customer_index" forKey:@"logView"];
+
     [manager POST:[self createRequestUrl:LoginUrl] parameters:outDict progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         _loginButton.userInteractionEnabled = YES;
         NSString *body = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSDictionary *dict = [WTCJson dictionaryWithJsonString:body];
-        NSLog(@"---%@", dict);
         if ([[dict objectForKey:@"resCode"] integerValue] == 100) {
             NSDictionary *dataDict = [WTCJson dictionaryWithJsonString:[dict objectForKey:@"resDate"]];
+            NSLog(@"---%@", dataDict);
             NSUserDefaults *userID = [NSUserDefaults standardUserDefaults];
-//            NSUserDefaults *renzheng = [NSUserDefaults standardUserDefaults];
-            [userID setObject:_phoneTF.text forKey:@"telephone"];
             //保存用户状态参数
-            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"identifyStatus"]] forKey:CredentialsidentifyStatus];
-//            [renzheng setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"identifyStatus"]] forKey:CredentialsidentifyStatus];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"identifyStatus"]] forKey:@"identifyStatus"];
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"userId"]] forKey:@"userid"];
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"appToken"]] forKey:@"apptoken"];
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"nickName"]] forKey:@"nickname"];
             [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"headPortrait"]] forKey:@"headimage"];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"roleId"]]
+                       forKey:@"roleId"];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"sex"]] forKey:@"sex"];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"userName"]] forKey:@"userName"];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"telephone"]] forKey:@"telephone"];
+            [userID setObject:[NSString stringWithFormat:@"%@", [dataDict objectForKey:@"age"]] forKey:@"age"];
             [userID synchronize];
             if ([[dataDict objectForKey:@"roleId"] integerValue] == 2) {
                 /*
@@ -114,21 +141,33 @@
                 [_phoneTF resignFirstResponder];
                 [_passWordTF resignFirstResponder];
                 MainViewController *mainVC = [[MainViewController alloc] init];
+                UINavigationController *navigation = [[SGLNavigationViewController alloc] initWithRootViewController:mainVC];
                 mainVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;//渐入
                 //UIModalTransitionStyleFlipHorizontal  旋转
                 //UIModalTransitionStyleCoverVertical   从下往上默认
                 [mainVC.tabBar setTintColor:[UIColor colorWithHexString:@"ff8042"]];
                 [mainVC.tabBar setBarTintColor:[UIColor whiteColor]];
-                [self presentViewController:mainVC animated:YES completion:nil];
+                navigation.navigationBar.hidden = YES;
+                navigation.navigationBarHidden = YES;
+                navigation.navigationController.navigationBarHidden = YES;
+                navigation.navigationController.navigationBar.hidden = YES;
+                [self presentViewController:navigation animated:YES completion:nil];
             }
             if ([[dataDict objectForKey:@"roleId"] integerValue] == 3) {
                 /*
                  跳转技师页面
                  */
                     TeacherTabBarController *teacher = [[TeacherTabBarController alloc] init];
+                UINavigationController *navigation = [[SGLNavigationViewController alloc] initWithRootViewController:teacher];
                     teacher.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
                     [teacher.tabBar setTintColor:[UIColor colorWithHexString:@"ff8042"]];
-                    [self presentViewController:teacher animated:YES completion:nil];
+                    [teacher.tabBar setBarTintColor:[UIColor whiteColor]];
+//                    teacher.view.backgroundColor = [UIColor whiteColor];
+                navigation.navigationBar.hidden = YES;
+                navigation.navigationBarHidden = YES;
+                navigation.navigationController.navigationBarHidden = YES;
+                navigation.navigationController.navigationBar.hidden = YES;
+                    [self presentViewController:navigation animated:YES completion:nil];
             }
         }else {//resMeg
             [CMMUtility showFailureWith:[dict objectForKey:@"resMsg"]];

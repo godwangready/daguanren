@@ -33,6 +33,15 @@
         [CMMUtility showFailureWith:@"请输入手机号"];
         return;
     }
+    //6-12位数字和字母组成
+    NSString *regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([pred evaluateWithObject:self.passwordTF.text]) {
+        
+    }else {
+        [CMMUtility showFailureWith:@"密码必须是6到12位字母与数字组成"];
+        return;
+    }
     GetMessageViewController *getVC = [[GetMessageViewController alloc] init];
     getVC.woshishei = _passwordTF.text;
     getVC.phones = _phoneTF.text;

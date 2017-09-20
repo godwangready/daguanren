@@ -149,6 +149,7 @@ static NSString *cellid = @"locationcell";
         model.province = poi.province;
         model.city = poi.city;
         model.district = poi.district;
+        model.adcode = poi.adcode;
         AMapGeoPoint *location = poi.location;
         model.latitudestr = [NSString stringWithFormat:@"%lf", location.latitude];
         model.longitudestr = [NSString stringWithFormat:@"%lf", location.longitude];
@@ -197,10 +198,13 @@ static NSString *cellid = @"locationcell";
         if ([temVC isKindOfClass:[StoreManageViewController class]])
         {
             LocationModel *model = _datasource[indexPath.row];
+            NSLog(@"%@", model.adcode);
+
             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@%@%@", model.province, model.city, model.district, model.locationstr] forKey:@"address"];
             [dict setValue:[NSString stringWithFormat:@"%@", model.latitudestr] forKey:@"lat"];
             [dict setValue:[NSString stringWithFormat:@"%@", model.longitudestr] forKey:@"long"];
             [dict setValue:[NSString stringWithFormat:@"%@", model.locationstr] forKey:@"addressLablel"];
+            [dict setObject:[NSString stringWithFormat:@"%@", model.adcode] forKey:@"adcode"];
             [[NSNotificationCenter defaultCenter] postNotificationName:NsnotificationDetailAddress object:nil userInfo:dict];
             [self.navigationController popToViewController:temVC animated:YES];
         }
